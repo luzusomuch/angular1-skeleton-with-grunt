@@ -1,0 +1,42 @@
+{
+  "name": "measureup",
+  "version": "1.0.0",
+  "description": "MeasureUp API",
+  "main": "server.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "NODE_ENV=test node --harmony ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha  --verbose",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://hoanguyen@git.siliconprime.com/kelvin/measureup-api-web.git"
+  },
+  "author": "hoa nguyen",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "istanbul": "^1.1.0-alpha.1",
+    "mocha": "^2.5.3",
+    "sinon": "^4.4.8"
+  },
+  "dependencies": {
+    "bcrypt": "^1.0.3",
+    "connect-mongo": "^2.0.1",
+    "cors": "^2.8.4",
+    "debug": "^3.1.0",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.3",
+    "express-pino-logger": "^3.0.1",
+    "joi": "^13.1.2",
+    "joi-objectid": "^2.0.0",
+    "jsonwebtoken": "^8.2.0",
+    "kraken-js": "^2.2.0",
+    "mongoose": "^5.0.11",
+    "nconf": "^0.10.0",
+    "pino": "^4.15.0",
+    "supertest": "^3.0.0"
+  }
+}

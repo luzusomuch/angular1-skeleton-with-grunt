@@ -1,0 +1,59 @@
+{
+
+  "specialization": {},
+  "middleware": {
+    "session": {
+      "priority": 100,
+      "module": {
+        "name": "path:./middlewares/mongo-session",
+        "arguments": [{
+          "secret": "hd4gf12kdF#FSDS",
+          "cookie": {
+              "path": "/",
+              "httpOnly": true,
+              "maxAge": null
+          },
+          "resave": true,
+          "saveUninitialized": true,
+          "store": null
+        }]
+      }
+    },
+    "appsec": {
+      "priority": 110,
+      "module": {
+        "name": "lusca",
+        "arguments": [{
+          "csrf": false,
+          "xframe": false,
+          "p3p": false,
+          "csp": false
+        }]
+      }
+    },
+    "static": {
+      "module": {
+        "name": "serve-static",
+        "arguments": ["path:./.build"]
+      },
+      "route": "/files"
+    },
+    "assetStatic": {
+      "module": {
+        "name": "serve-static",
+        "arguments": ["path:./assets"]
+      },
+      "route": "/files"
+    },
+    "router": {
+      "module": {
+        "arguments": [{
+          "directory": "path:./controllers"
+        }]
+      }
+    },
+    "logger": {
+      "enabled": false
+    }
+  }
+}
