@@ -26,6 +26,7 @@
     "nconf": true,
     "request": true,
     "mongoose": true,
+    "moment": true,
     "log": true,
     "expect": true,
     "db": true,

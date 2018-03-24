@@ -55,7 +55,7 @@ module.exports = {
         $set: {
           lastActivity: new Date()
         }
-      }).then(() => `Bearer ${token}`);
+      }).then(() => ({ token: `Bearer ${token}` }));
     });
   }
 };

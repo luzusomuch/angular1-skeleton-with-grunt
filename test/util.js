@@ -1,13 +1,20 @@
 const express = require('express');
 
 module.exports = (request) => ({
-  hookRoute: (path) => {
+  hookRoute(path) {
     const router = express.Router();
     require(path)(router);
     return router;
   },
+  generateText(maxLength) {
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 ";
 
-  registerAndLoginPartner: (uid, password) => {
+    for (var i = 0; i < maxLength; i++)
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+    return text;
+  },
+  registerAndLoginPartner(uid, password) {
     return request.post('/auth/register').send({
       uid,
       firstName: 'test first name',
@@ -30,7 +37,7 @@ module.exports = (request) => ({
     .then(res =>  Promise.resolve(res.body.token))
     .catch(err => Promise.reject(err)),
 
-  makeWebRequest: (verb, url, token, body, expectationCode, responseField) => {
+  makeAuthRequest(verb, url, token, body, expectationCode, responseField) {
     const newVerb = verb.toLowerCase();
     let req = request[verb](url);
     if (token) {
@@ -43,5 +50,18 @@ module.exports = (request) => ({
     return req.send(body || {})
     .expect(expectationCode || 200)
     .then(res => res.body);
+  },
+  newChallenge(options, token) {
+    options = options || {};
+    return testUtil.makeAuthRequest('post', '/api/challenges', token, {
+      title: options.title || this.generateText(101),
+      expiresAt: moment().add(2, 'days').toDate(),
+      videos: options.videos || [{
+        url: this.generateText(101)
+      }],
+      prizes: options.prizes || [{
+        title: this.generateText(101)
+      }],
+    });
   }
 });

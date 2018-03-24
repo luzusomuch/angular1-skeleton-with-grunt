@@ -15,18 +15,17 @@ const schema = new Schema(
       type: String,
       required: true
     },
-    videoUrls: [{
+    videos: [{
       url: String,
       thumbnail: String
     }],
     prizes: [{
       title: String
     }],
-    // status for org administration, managed by admin
     status: {
       type: String,
       enum: ['open', 'close'],
-      default: 'opem'
+      default: 'open'
     },
     numberOfSubmissions: {
       type: Number,

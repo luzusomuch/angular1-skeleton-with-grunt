@@ -14,6 +14,7 @@ nconf
 
 global.Constants = require('../constants');
 global.request = require('supertest')(app);
+global.moment = require('moment');
 global.testUtil = require('./util')(global.request);
 global.Joi = require('joi');
 global.log = require('../lib/log').logger;
@@ -25,6 +26,7 @@ before(async() => {
   await require('../lib/mongoose')();
   // // remove collections
   await db.Account.remove({});
+  await db.Challenge.remove({});
   app.use(require('kraken-js/middleware/multipart')({
     uploadDir: __dirname+ '/assets'
   }));  
@@ -34,7 +36,9 @@ before(async() => {
   }));
   app.use('/api/*', Middlewares.Policy.is.authenticated);
   app.use('/auth', testUtil.hookRoute(`${__dirname}/../controllers/auth`));
+  app.use('/api/challenges', testUtil.hookRoute(`${__dirname}/../controllers/api/challenges`));
   app.use(Middlewares.ErrorHandler);
 });
 require('./controllers/AccountController');
 require('./controllers/AuthenticationController');
+require('./controllers/ChallengeController');

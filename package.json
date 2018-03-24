@@ -34,6 +34,7 @@
     "joi-objectid": "^2.0.0",
     "jsonwebtoken": "^8.2.0",
     "kraken-js": "^2.2.0",
+    "moment": "^2.21.0",
     "mongoose": "^5.0.11",
     "nconf": "^0.10.0",
     "pino": "^4.15.0",

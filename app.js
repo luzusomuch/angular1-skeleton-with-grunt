@@ -15,7 +15,7 @@ global.Joi = Joi;
 global.log = Log.logger;
 global.nconf = nconf;
 global.ObjectId = require('mongodb').ObjectID;
-
+global.moment = require('moment');
 server.start = function(callback) {
   let options;
   // Setup global utils

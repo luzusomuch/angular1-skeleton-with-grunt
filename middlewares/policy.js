@@ -14,7 +14,7 @@ const authenticate = (req) => {
       if (err) {
         return reject(err);
       }
-      return db.User.findOneAndUpdate({
+      return db.Account.findOneAndUpdate({
         _id: payload._id
       }, {
         $set: {
