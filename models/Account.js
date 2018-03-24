@@ -5,9 +5,10 @@ const schema = new Schema(
   {
     password: {
       type: String,
+      required: true,
       select: false
     },
-    email: {
+    uid: {
       type: String,
       required: true,
       unique: true
@@ -32,7 +33,8 @@ const schema = new Schema(
     },
     role: {
       type: String,
-      enum: ['user', 'admin']
+      enum: ['partner', 'admin', 'sdk'],
+      default: 'partner'
     }
   },
   {

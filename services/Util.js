@@ -11,7 +11,7 @@ const Util = {
   }),
   comparePassword: (pw1, pw2) => {
     return new Promise((resolve, reject) => {
-      bcrypt.compare(pw1, pw2, function (err, isMatch) {
+      bcrypt.compare(pw1, pw2, (err, isMatch) => {
         if (err) {
           return reject(err);
         }

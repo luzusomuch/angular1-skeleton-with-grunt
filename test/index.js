@@ -34,6 +34,7 @@ before(async() => {
   }));
   app.use('/api/*', Middlewares.Policy.is.authenticated);
   app.use('/auth', testUtil.hookRoute(`${__dirname}/../controllers/auth`));
+  app.use(Middlewares.ErrorHandler);
 });
 require('./controllers/AccountController');
 require('./controllers/AuthenticationController');
