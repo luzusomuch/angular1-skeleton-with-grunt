@@ -1,12 +1,17 @@
 'use strict';
 const ChallengeController = {
-  /**
-   * Create new challenge
-   * @param {Object} req            Express request object
-   * @param {String} req.name       Full name
-   * @param {String} req.email      Email
-   * @param {String} req.password   Password
-   * @param {Object} res            Express response object
+   /**
+   * @apiGroup Challenge
+   * @apiVersion 1.0.0
+   * @api {post} /api/challenges Create a challenge
+   * @apiDescription Create a new challenge.
+   * @apiParam {String}     title               Title of the challenge.
+   * @apiParam {Date}       expiresAt           When the challenge will be closed after.
+   * @apiParam {Object[]}   [prizes]            Array of available prizes.
+   * @apiParam {String}     prizes.title        Title of the prize.
+   * @apiParam {Object}     [video]             Video for this challenge.
+   * @apiParam {String}     video.originalUrl   The original url of the video.
+   * @apiParam {String[]}   video.thumbnails    Array of thumbnails of the video.
    */
   create(req, res, next) {
     const options = req.body;
@@ -14,13 +19,13 @@ const ChallengeController = {
       .then(result => res.status(200).send(result))
       .catch(next);
   },
+   
   /**
-   * Find a challenge by id
-   * @param {Object} req            Express request object
-   * @param {String} req.name       Full name
-   * @param {String} req.email      Email
-   * @param {String} req.password   Password
-   * @param {Object} res            Express response object
+   * @apiGroup Challenge
+   * @apiVersion 1.0.0
+   * @api {get} /api/challenges/:challengeId Get a challenge.
+   * @apiDescription Get a challenge by its id.
+   * @apiParam {String} challengeId   Id of desired challenge to get.
    */
   findOne(req, res, next) {
     const options = req.params;
@@ -28,13 +33,13 @@ const ChallengeController = {
       .then(result => res.status(200).send(result))
       .catch(next);
   },
+   
   /**
-   * Find a challenge by id
-   * @param {Object} req            Express request object
-   * @param {String} req.name       Full name
-   * @param {String} req.email      Email
-   * @param {String} req.password   Password
-   * @param {Object} res            Express response object
+   * @apiGroup Challenge
+   * @apiVersion 1.0.0
+   * @api {post} /api/challenge Join a challenge.
+   * @apiDescription Join a challenge. If user has joined before, nothing happens.
+   * @apiParam {String} challengeId   Id of desired challenge to join.
    */
   join(req, res, next) {
     const options = Object.assign({}, req.params, req.body);

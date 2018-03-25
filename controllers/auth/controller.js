@@ -2,6 +2,7 @@
 const AuthController = {
   /**
    * @apiGroup Authentication
+   * @apiVersion 1.0.0
    * @api {post} /auth/login Login
    * @apiDescription Login. 
    * @apiParam {String}   uid           Email
@@ -16,6 +17,7 @@ const AuthController = {
   
   /**
    * @apiGroup Authentication
+   * @apiVersion 1.0.0
    * @api {post} /auth/register Register a partner
    * @apiDescription Register a new partner. 
    * @apiParam {String}   uid           Email
@@ -32,6 +34,7 @@ const AuthController = {
 
   /**
    * @apiGroup Authentication
+   * @apiVersion 1.0.0
    * @api {post} /auth/registerSdk Register a SDK
    * @apiDescription Register a new sdk. 
    * @apiParam {String}   uid           Email
