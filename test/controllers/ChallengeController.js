@@ -37,4 +37,19 @@ describe('Testing challenge controller', () => {
     expect(challenge.video).to.deep.include(newChallenge.video);
     expect(challenge.submissions.length).to.equal(Constants.ITEMS_PER_PAGE);
   });
+  it('should not join a challenge more than 1 time', async() => {
+    let challenge = await testUtil.newChallenge(newChallenge, token);
+    await Promise.all([
+      await testUtil.joinChallenge({
+        challengeId: challenge._id,
+        userIds: ['id', 'id']
+      }, token),
+      await testUtil.joinChallenge({
+        challengeId: challenge._id,
+        userIds: ['id2', 'id', 'id3']
+      }, token)
+    ]);
+    challenge = await testUtil.makeAuthRequest('get', `/api/challenges/${challenge._id}`, token);
+    expect(challenge.submissions.length).to.equal(3);
+  });
 });

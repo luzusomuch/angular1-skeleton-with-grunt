@@ -31,26 +31,30 @@ module.exports = {
       return Promise.reject(result.error);
     }
     return db.Challenge.findOne({
-      _id: options.challengeId
-    }).lean()
-    .then((challenge) => {
-      // get some submission
-      const query = {
-        challenge: challenge._id
-      };
-      if ([true, 'true'].indexOf(options.hasVideo) >= 0) {
-        query.video = {
-          $exists: true
+        _id: options.challengeId
+      }).lean()
+      .then((challenge) => {
+        // get some submission
+        const query = {
+          challenge: challenge._id
         };
-      }
-      return db.Submission.find(query, { 'video.likes': { $slice: Constants.ITEMS_PER_PAGE } })
-      .limit(Constants.ITEMS_PER_PAGE)
-      .lean()
-      .then((submissions) => {
-        challenge.submissions = submissions;
-        return challenge;
+        if ([true, 'true'].indexOf(options.hasVideo) >= 0) {
+          query.video = {
+            $exists: true
+          };
+        }
+        return db.Submission.find(query, {
+            'video.likes': {
+              $slice: Constants.ITEMS_PER_PAGE
+            }
+          })
+          .limit(Constants.ITEMS_PER_PAGE)
+          .lean()
+          .then((submissions) => {
+            challenge.submissions = submissions;
+            return challenge;
+          });
       });
-    });
   },
   join(options) {
     let schema = Joi.object().keys({
@@ -67,11 +71,19 @@ module.exports = {
     if (result.error) {
       return Promise.reject(result.error);
     }
-    const newSubmission = Object.assign({}, {
-      user: options.user,
-      video: options.video,
+    return db.Submission.findOne({
+      'user.id': options.user.id,
       challenge: options.challengeId
+    }).lean().then((submission) => {
+      if (submission) {
+        return submission;
+      }
+      const newSubmission = Object.assign({}, {
+        user: options.user,
+        video: options.video,
+        challenge: options.challengeId
+      });
+      return db.Submission.create(newSubmission);
     });
-    return db.Submission.create(newSubmission);
   }
 };
