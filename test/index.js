@@ -43,3 +43,4 @@ before(async() => {
 require('./controllers/AccountController');
 require('./controllers/AuthenticationController');
 require('./controllers/ChallengeController');
+require('./controllers/SubmissionController');

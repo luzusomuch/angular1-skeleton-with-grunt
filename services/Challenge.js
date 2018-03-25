@@ -43,7 +43,7 @@ module.exports = {
           $exists: true
         };
       }
-      return db.Submission.find(query)
+      return db.Submission.find(query, { 'video.likes': { $slice: Constants.ITEMS_PER_PAGE } })
       .limit(Constants.ITEMS_PER_PAGE)
       .lean()
       .then((submissions) => {

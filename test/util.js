@@ -85,4 +85,33 @@ module.exports = (request) => ({
       });
     }, Promise.resolve());
   },
+  joinChallengeWithVideo(options, token) {
+    options = options || {};
+    const userIds = [].concat(options.userIds || 'testid');
+    return userIds.reduce((promise, userId) => {
+      return promise.then(() => {
+        return testUtil.makeAuthRequest('post', `/api/challenges/${options.challengeId}/join`, token, {
+          user: {
+            id: userId
+          },
+          video: {
+            originalUrl: this.generateText(101)
+          }
+        });
+      });
+    }, Promise.resolve());
+  },
+  likeSubmission(options, token) {
+    options = options || {};
+    const userIds = [].concat(options.userIds || 'testid');
+    return userIds.reduce((promise, userId) => {
+      return promise.then(() => {
+        return testUtil.makeAuthRequest('post', `/api/challenges/${options.challengeId}/submissions/${options.submissionId}/like`, token, {
+          user: {
+            id: userId
+          }
+        });
+      });
+    }, Promise.resolve());
+  }
 });

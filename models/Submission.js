@@ -22,7 +22,9 @@ const schema = new Schema({
       default: 0
     },
     // likes is array of string of user
-    likes: [String]
+    likes: [{
+      id: String
+    }]
   }
 }, {
   collection: 'submissions',

@@ -41,7 +41,6 @@ server.start = function(callback) {
     }
   };
   app.use(kraken(options));
- 
   app.use('/api/*', Middlewares.Policy.is.authenticated);
   app.use(Log.expressLogger);
   var whitelist = nconf.get('appConfig:whitelist') || '';
