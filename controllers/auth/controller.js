@@ -37,8 +37,8 @@ const AuthController = {
    * @apiVersion 1.0.0
    * @api {post} /auth/registerSdk Register a SDK
    * @apiDescription Register a new sdk. 
-   * @apiParam {String}   uid           Email
-   * @apiParam {String}   password      Password
+   * @apiParam {String}   uid           API key
+   * @apiParam {String}   password      Secret key
    */
   createSdk(req, res, next) {
     const options = Object.assign({ role: 'sdk' }, req.body);
