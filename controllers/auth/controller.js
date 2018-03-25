@@ -5,8 +5,8 @@ const AuthController = {
    * @apiVersion 1.0.0
    * @api {post} /auth/login Login
    * @apiDescription Login. 
-   * @apiParam {String}   uid           Email
-   * @apiParam {String}   password      Password
+   * @apiParam {String}   uid           Email or API key
+   * @apiParam {String}   password      Password or Secret key
    */
   login(req, res, next) {
     const options = Object.assign({}, req.body);
