@@ -71,6 +71,8 @@ module.exports = {
     if (result.error) {
       return Promise.reject(result.error);
     }
+    // although we have db lock
+    // better check if user has joined this challenge before
     return db.Submission.findOne({
       'user.id': options.user.id,
       challenge: options.challengeId
@@ -83,7 +85,18 @@ module.exports = {
         video: options.video,
         challenge: options.challengeId
       });
-      return db.Submission.create(newSubmission);
+      // create submission for this user.
+      return db.Submission.create(newSubmission)
+      .then(() => {
+        // increase the number of submissions for this challenge
+        return db.Challenge.update({
+          _id: options.challengeId
+        }, {
+          $inc: {
+            numberOfSubmissions: 1
+          }
+        });
+      });
     });
   }
 };

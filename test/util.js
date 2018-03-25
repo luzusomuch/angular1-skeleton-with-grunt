@@ -52,6 +52,7 @@ module.exports = (request) => ({
       .then(res => res.body);
   },
   newChallenge(options, token) {
+    log.debug('creating new challenge');
     options = options || {};
     return testUtil.makeAuthRequest('post', '/api/challenges', token, {
       title: options.title || this.generateText(101),
@@ -75,6 +76,7 @@ module.exports = (request) => ({
   joinChallenge(options, token) {
     options = options || {};
     const userIds = [].concat(options.userIds || 'testid');
+    log.debug(`joining challenge without submitting video for ${userIds.length} user(s) in challenge ${options.challengeId}`);
     return userIds.reduce((promise, userId) => {
       return promise.then(() => {
         return testUtil.makeAuthRequest('post', `/api/challenges/${options.challengeId}/join`, token, {
@@ -88,6 +90,7 @@ module.exports = (request) => ({
   joinChallengeWithVideo(options, token) {
     options = options || {};
     const userIds = [].concat(options.userIds || 'testid');
+    log.debug(`joining challenge and submitting video for ${userIds.length} user(s) in challenge ${options.challengeId}`);
     return userIds.reduce((promise, userId) => {
       return promise.then(() => {
         return testUtil.makeAuthRequest('post', `/api/challenges/${options.challengeId}/join`, token, {
@@ -104,6 +107,7 @@ module.exports = (request) => ({
   likeSubmission(options, token) {
     options = options || {};
     const userIds = [].concat(options.userIds || 'testid');
+    log.debug(`${userIds.length} user(s) is(are) voting for submission ${options.submissionId} of challenge ${options.challengeId}`);
     return userIds.reduce((promise, userId) => {
       return promise.then(() => {
         return testUtil.makeAuthRequest('post', `/api/challenges/${options.challengeId}/submissions/${options.submissionId}/like`, token, {

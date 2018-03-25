@@ -42,6 +42,7 @@ describe('Testing submission controller', () => {
     expect(challenge.video).to.deep.include(newChallenge.video);
     expect(challenge.submissions.length).to.equal(Constants.ITEMS_PER_PAGE);
     expect(challenge.submissions[0].video.likes.length).to.equal(Constants.ITEMS_PER_PAGE);
+    expect(challenge.submissions[0].video.numberOfLikes).to.equal(200);
   });
   it('should not like a submission more than 1 time', async() => {
     let challenge = await testUtil.newChallenge(newChallenge, token);
@@ -64,5 +65,6 @@ describe('Testing submission controller', () => {
     ]);
     challenge = await testUtil.makeAuthRequest('get', `/api/challenges/${challenge._id}`, token);
     expect(challenge.submissions[0].video.likes.length).to.equal(2);
+    expect(challenge.submissions[0].video.numberOfLikes).to.equal(2);
   });
 });

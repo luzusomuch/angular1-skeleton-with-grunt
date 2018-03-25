@@ -16,10 +16,16 @@ module.exports = {
       _id: options.submissionId,
       'video.originalUrl': {
         $exists: true
+      },
+      'video.likes': {
+        $nin: [options.user]
       }
     }, {
       $addToSet: {
         'video.likes': options.user
+      },
+      $inc: {
+        'video.numberOfLikes': 1
       }
     }, {
       new: true
