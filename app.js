@@ -28,6 +28,7 @@ server.start = function(callback) {
   global.Middlewares = require('./middlewares');
 
   let app = express();
+  app.use(express.static('apidoc'));
   let httpServer = http.createServer(app);
 
   options = {
