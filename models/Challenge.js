@@ -4,8 +4,7 @@ const Schema = mongoose.Schema;
 const schema = new Schema(
   {
     title: {
-      type: String,
-      select: false
+      type: String
     },
     startsAt: {
       type: Date,

@@ -19,4 +19,11 @@ describe('Testing challenge controller', () => {
     expect(challenge.prizes[0]).to.deep.include(newChallenge.prizes[0]);
     expect(challenge.videos[0]).to.deep.include(newChallenge.videos[0]);
   });
+  it('should get a challenge', async() => {
+    let challenge = await testUtil.newChallenge(newChallenge, token);
+    challenge = await testUtil.makeAuthRequest('get', `/api/challenges/${challenge._id}`, token);
+    expect(challenge.title).to.be.equal(newChallenge.title);
+    expect(challenge.prizes[0]).to.deep.include(newChallenge.prizes[0]);
+    expect(challenge.videos[0]).to.deep.include(newChallenge.videos[0]);
+  });
 });

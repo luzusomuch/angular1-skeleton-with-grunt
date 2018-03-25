@@ -16,7 +16,21 @@ module.exports = {
       return Promise.reject(result.error);
     }
     return db.Challenge.create(
-      Object.assign({ creator: user._id }, options)
+      Object.assign({
+        creator: user._id
+      }, options)
     );
   },
+  findOne(options) {
+    let schema = Joi.object().keys({
+      challengeId: Joi.objectId().required()
+    });
+    let result = Joi.validate(options, schema);
+    if (result.error) {
+      return Promise.reject(result.error);
+    }
+    return db.Challenge.findOne({
+      _id: options.challengeId
+    }).lean();
+  }
 };

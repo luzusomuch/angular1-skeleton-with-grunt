@@ -4,4 +4,7 @@ module.exports = function (router) {
   router.post('/',
     ChallengeController.create
   );
+  router.get('/:challengeId',
+    ChallengeController.findOne
+  );
 };

@@ -17,6 +17,7 @@ global.request = require('supertest')(app);
 global.moment = require('moment');
 global.testUtil = require('./util')(global.request);
 global.Joi = require('joi');
+Joi.objectId = require('joi-objectid')(Joi);
 global.log = require('../lib/log').logger;
 global.expect = require('chai').expect;
 global.ObjectId = require('mongodb').ObjectID;
