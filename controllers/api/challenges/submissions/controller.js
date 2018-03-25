@@ -28,5 +28,26 @@ const SubmissionController = {
       .then(result => res.status(200).send(result))
       .catch(next);
   },
+  /**
+   * @apiGroup Submission
+   * @apiVersion 1.0.0
+   * @api {get} /api/challenges/:challengeId/submissions?page=:page&limit=:limit Get submissions list
+   * @apiDescription Get list of submissions from a challenge.
+   * @apiParam {String}   challengeId        Id of the challenge from which the list of submissions is.
+   * @apiParam {Number}   [page=0]           Page number
+   * @apiParam {Number}   [limit=50]         Number of submissions
+   */
+  find(req, res, next) {
+    const options = Object.assign({}, req.params, req.query);
+    return Services.Submission.find(options)
+      .then((submissions) => {
+        return {
+          total: res.locals.challenge.numberOfSubmissions,
+          items: submissions
+        };
+      })
+      .then(result => res.status(200).send(result))
+      .catch(next);
+  }
 };
 module.exports = SubmissionController;

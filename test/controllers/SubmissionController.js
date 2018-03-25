@@ -67,4 +67,17 @@ describe('Testing submission controller', () => {
     expect(challenge.submissions[0].video.likes.length).to.equal(2);
     expect(challenge.submissions[0].video.numberOfLikes).to.equal(2);
   });
+  it('should get list of submissions', async() => {
+    let challenge = await testUtil.newChallenge(newChallenge, token);
+    await testUtil.joinChallengeWithVideo({
+      challengeId: challenge._id,
+      userIds: [...Array(58).keys()].map(i => `testid-${i}`)
+    }, token);
+    let list = await testUtil.makeAuthRequest('get', `/api/challenges/${challenge._id}/submissions?page=0&limit=20`, token);
+    expect(list.total).to.equal(58);
+    expect(list.items.length).to.equal(20);
+    list = await testUtil.makeAuthRequest('get', `/api/challenges/${challenge._id}/submissions?page=1&limit=50`, token);
+    expect(list.total).to.equal(58);
+    expect(list.items.length).to.equal(8);
+  });
 });

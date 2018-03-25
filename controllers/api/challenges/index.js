@@ -1,6 +1,7 @@
 'use strict';
 const ChallengeController = require('./controller');
 module.exports = function (router) {
+  router.use('/:challengeId', Middlewares.Parsers.challenge);
   require('./submissions')(router);
   router.post('/',
     ChallengeController.create

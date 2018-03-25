@@ -21,41 +21,6 @@ module.exports = {
       }, options)
     );
   },
-  findOne(options) {
-    let schema = Joi.object().keys({
-      challengeId: Joi.objectId().required(),
-      hasVideo: Joi.boolean().optional(),
-    });
-    let result = Joi.validate(options, schema);
-    if (result.error) {
-      return Promise.reject(result.error);
-    }
-    return db.Challenge.findOne({
-        _id: options.challengeId
-      }).lean()
-      .then((challenge) => {
-        // get some submission
-        const query = {
-          challenge: challenge._id
-        };
-        if ([true, 'true'].indexOf(options.hasVideo) >= 0) {
-          query.video = {
-            $exists: true
-          };
-        }
-        return db.Submission.find(query, {
-            'video.likes': {
-              $slice: Constants.ITEMS_PER_PAGE
-            }
-          })
-          .limit(Constants.ITEMS_PER_PAGE)
-          .lean()
-          .then((submissions) => {
-            challenge.submissions = submissions;
-            return challenge;
-          });
-      });
-  },
   join(options) {
     let schema = Joi.object().keys({
       challengeId: Joi.objectId().required(),
@@ -87,16 +52,16 @@ module.exports = {
       });
       // create submission for this user.
       return db.Submission.create(newSubmission)
-      .then(() => {
-        // increase the number of submissions for this challenge
-        return db.Challenge.update({
-          _id: options.challengeId
-        }, {
-          $inc: {
-            numberOfSubmissions: 1
-          }
+        .then(() => {
+          // increase the number of submissions for this challenge
+          return db.Challenge.update({
+            _id: options.challengeId
+          }, {
+            $inc: {
+              numberOfSubmissions: 1
+            }
+          });
         });
-      });
     });
   }
 };

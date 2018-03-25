@@ -1,6 +1,6 @@
 'use strict';
 const ChallengeController = {
-   /**
+  /**
    * @apiGroup Challenge
    * @apiVersion 1.0.0
    * @api {post} /api/challenges Create a challenge
@@ -19,7 +19,7 @@ const ChallengeController = {
       .then(result => res.status(200).send(result))
       .catch(next);
   },
-   
+
   /**
    * @apiGroup Challenge
    * @apiVersion 1.0.0
@@ -28,12 +28,18 @@ const ChallengeController = {
    * @apiParam {String} challengeId   Id of desired challenge to get.
    */
   findOne(req, res, next) {
-    const options = req.params;
-    return Services.Challenge.findOne(options)
-      .then(result => res.status(200).send(result))
-      .catch(next);
+    const challenge = res.locals.challenge;
+    return Services.Submission.find({
+      challengeId: req.params.challengeId
+    })
+    .then((submissions) => {
+      challenge.submissions = submissions;
+      return challenge;
+    })
+    .then(result => res.status(200).send(result))
+    .catch(next);
   },
-   
+
   /**
    * @apiGroup Challenge
    * @apiVersion 1.0.0

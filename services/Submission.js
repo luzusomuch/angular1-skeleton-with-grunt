@@ -55,4 +55,34 @@ module.exports = {
       return submission;
     });
   },
+  find(options) {
+    let schema = Joi.object().keys({
+      challengeId: Joi.objectId().required(),
+      page: Joi.number().optional(),
+      limit: Joi.number().optional(),
+      hasVideo: Joi.boolean().optional()
+    });
+    let result = Joi.validate(options, schema);
+    if (result.error) {
+      return Promise.reject(result.error);
+    }
+    // get some submissions
+    const query = {
+      challenge: options.challengeId
+    };
+    if ([true, 'true'].indexOf(options.hasVideo) >= 0) {
+      query.video = {
+        $exists: true
+      };
+    }
+    const page = parseInt(options.page) || 0;
+    const limit = parseInt(options.limit) || Constants.ITEMS_PER_PAGE;
+    return db.Submission.find(query, { 'video.likes': { $slice: Constants.ITEMS_PER_PAGE }})
+    .sort({
+      'video.numberOfLikes': -1
+    })
+    .skip(page * limit)
+    .limit(limit)
+    .lean();
+  }
 };

@@ -7,4 +7,7 @@ module.exports = function (router) {
   router.get('/:challengeId/submissions/:submissionId',
     SubmissionController.findOne
   );
+  router.get('/:challengeId/submissions',
+    SubmissionController.find
+  );
 };
