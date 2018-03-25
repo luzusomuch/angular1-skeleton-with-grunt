@@ -7,4 +7,7 @@ module.exports = function (router) {
   router.get('/:challengeId',
     ChallengeController.findOne
   );
+  router.post('/:challengeId/join',
+    ChallengeController.join
+  );
 };

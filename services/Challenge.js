@@ -32,5 +32,27 @@ module.exports = {
     return db.Challenge.findOne({
       _id: options.challengeId
     }).lean();
+  },
+  join(options) {
+    let schema = Joi.object().keys({
+      challengeId: Joi.objectId().required(),
+      user: Joi.object({
+        id: Joi.string().required(),
+      }).required(),
+      video: Joi.object({
+        originalUrl: Joi.string().required(),
+        thumbnails: Joi.array().items(Joi.string().optional())
+      }).optional()
+    });
+    let result = Joi.validate(options, schema);
+    if (result.error) {
+      return Promise.reject(result.error);
+    }
+    const newSubmission = Object.assign({}, {
+      user: options.user,
+      video: options.video,
+      challenge: options.challengeId
+    });
+    return db.Submission.create(newSubmission);
   }
 };

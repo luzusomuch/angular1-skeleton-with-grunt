@@ -26,4 +26,12 @@ describe('Testing challenge controller', () => {
     expect(challenge.prizes[0]).to.deep.include(newChallenge.prizes[0]);
     expect(challenge.video).to.deep.include(newChallenge.video);
   });
+  it('should join a challenge', async() => {
+    let challenge = await testUtil.newChallenge(newChallenge, token);
+    await testUtil.makeAuthRequest('post', `/api/challenges/${challenge._id}/join`, token, {
+      user: {
+        id: 'test id'
+      }
+    });
+  });
 });
