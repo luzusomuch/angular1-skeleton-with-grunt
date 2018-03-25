@@ -33,7 +33,7 @@ const schema = new Schema(
     },
     role: {
       type: String,
-      enum: ['partner', 'admin', 'sdk'],
+      enum: Constants.ROLES,
       default: 'partner'
     }
   },
