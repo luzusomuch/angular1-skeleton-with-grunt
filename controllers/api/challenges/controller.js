@@ -39,9 +39,8 @@ const ChallengeController = {
   join(req, res, next) {
     const options = Object.assign({}, req.params, req.body);
     return Services.Challenge.join(options)
-    .then(result => res.status(200).send(result))
-    .catch(err => console.log(err))
-    .catch(next);
+      .then(result => res.status(200).send(result))
+      .catch(next);
   },
 };
 module.exports = ChallengeController;

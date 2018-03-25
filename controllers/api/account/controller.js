@@ -4,4 +4,4 @@ const AccountController = {
     return res.status(200).send('ok');
   }
 };
-module.exports= AccountController;
+module.exports = AccountController;

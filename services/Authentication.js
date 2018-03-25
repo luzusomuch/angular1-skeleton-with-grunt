@@ -33,29 +33,38 @@ module.exports = {
       verified: true
     };
     return db.Account.findOne(body).select('+password')
-    .lean()
-    .then((account) => {
-      if (!account) {
-        return Promise.reject({ message: 'Login failed' });
-      }
-      return Services.Util.comparePassword(options.password, account.password)
-      .then((match) => {
-        if (!match) {
-          return Promise.reject({ message: 'Login failed' });
+      .lean()
+      .then((account) => {
+        if (!account) {
+          return Promise.reject({
+            message: 'Login failed'
+          });
         }
-        return account;
+        return Services.Util.comparePassword(options.password, account.password)
+          .then((match) => {
+            if (!match) {
+              return Promise.reject({
+                message: 'Login failed'
+              });
+            }
+            return account;
+          });
+      })
+      .then((account) => {
+        // Create token
+        const token = jwt.sign({
+          _id: account._id,
+          roles: account.role
+        }, SESSION_SECRET, {
+          expiresIn: '14d' // 2 weeks
+        });
+        return db.Account.update(body, {
+          $set: {
+            lastActivity: new Date()
+          }
+        }).then(() => ({
+          token: `Bearer ${token}`
+        }));
       });
-    })
-    .then((account) => {
-      // Create token
-      const token = jwt.sign({ _id: account._id, roles: account.role }, SESSION_SECRET, {
-        expiresIn: '14d' // 2 weeks
-      });
-      return db.Account.update(body, {
-        $set: {
-          lastActivity: new Date()
-        }
-      }).then(() => ({ token: `Bearer ${token}` }));
-    });
   }
 };

@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 
 const Util = {
-  hashPassword: password => new Promise ((resolve, reject) => {
+  hashPassword: password => new Promise((resolve, reject) => {
     bcrypt.hash(password, 10, (err, hash) => {
       if (err) {
         return reject(err);
