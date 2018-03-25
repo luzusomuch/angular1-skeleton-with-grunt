@@ -19,19 +19,22 @@ describe('Testing challenge controller', () => {
     expect(challenge.prizes[0]).to.deep.include(newChallenge.prizes[0]);
     expect(challenge.video).to.deep.include(newChallenge.video);
   });
-  it('should get a challenge', async() => {
+  it('should join a challenge', async() => {
     let challenge = await testUtil.newChallenge(newChallenge, token);
+    await testUtil.joinChallenge({
+      challengeId: challenge._id
+    }, token);
+  });
+  it('should get a challenge with submission', async() => {
+    let challenge = await testUtil.newChallenge(newChallenge, token);
+    await testUtil.joinChallenge({
+      challengeId: challenge._id,
+      userIds: [...Array(200).keys()].map(i => `testid-${i}`)
+    }, token);
     challenge = await testUtil.makeAuthRequest('get', `/api/challenges/${challenge._id}`, token);
     expect(challenge.title).to.be.equal(newChallenge.title);
     expect(challenge.prizes[0]).to.deep.include(newChallenge.prizes[0]);
     expect(challenge.video).to.deep.include(newChallenge.video);
-  });
-  it('should join a challenge', async() => {
-    let challenge = await testUtil.newChallenge(newChallenge, token);
-    await testUtil.makeAuthRequest('post', `/api/challenges/${challenge._id}/join`, token, {
-      user: {
-        id: 'test id'
-      }
-    });
+    expect(challenge.submissions.length).to.equal(Constants.ITEMS_PER_PAGE);
   });
 });

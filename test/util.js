@@ -16,25 +16,25 @@ module.exports = (request) => ({
   },
   registerAndLoginPartner(uid, password) {
     return request.post('/auth/register').send({
-      uid,
-      firstName: 'test first name',
-      lastName: 'test last name',
-      password,
-    })
-    .expect(200)
-    .then(() => request.post('/auth/login').send({
-      uid,
-      password: password
-    }).expect(200))
-    .then(res =>  Promise.resolve(res.body.token))
-    .catch(err => Promise.reject(err));
+        uid,
+        firstName: 'test first name',
+        lastName: 'test last name',
+        password,
+      })
+      .expect(200)
+      .then(() => request.post('/auth/login').send({
+        uid,
+        password: password
+      }).expect(200))
+      .then(res => Promise.resolve(res.body.token))
+      .catch(err => Promise.reject(err));
   },
   login: (email, password) =>
     request.post('/auth/login').send({
       email,
       password
     }).expect(200)
-    .then(res =>  Promise.resolve(res.body.token))
+    .then(res => Promise.resolve(res.body.token))
     .catch(err => Promise.reject(err)),
 
   makeAuthRequest(verb, url, token, body, expectationCode, responseField) {
@@ -45,11 +45,11 @@ module.exports = (request) => ({
     }
     if (newVerb === 'get') {
       return req.expect(expectationCode || 200)
-      .then(res => res[responseField || 'body']);
+        .then(res => res[responseField || 'body']);
     }
     return req.send(body || {})
-    .expect(expectationCode || 200)
-    .then(res => res.body);
+      .expect(expectationCode || 200)
+      .then(res => res.body);
   },
   newChallenge(options, token) {
     options = options || {};
@@ -64,5 +64,25 @@ module.exports = (request) => ({
         title: this.generateText(101)
       }],
     });
-  }
+  },
+  newChallenges(nunberOfChallenges, token) {
+    return Promise.all([...Array(nunberOfChallenges).keys]
+      .map(() => {
+        return this.newChallenge(null, token);
+      }))
+      .then(challenges => challenges.map(c => c._id));
+  },
+  joinChallenge(options, token) {
+    options = options || {};
+    const userIds = [].concat(options.userIds || 'testid');
+    return userIds.reduce((promise, userId) => {
+      return promise.then(() => {
+        return testUtil.makeAuthRequest('post', `/api/challenges/${options.challengeId}/join`, token, {
+          user: {
+            id: userId
+          }
+        });
+      });
+    }, Promise.resolve());
+  },
 });
