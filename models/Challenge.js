@@ -39,5 +39,5 @@ const schema = new Schema({
   timestamps: {},
   strict: true
 });
-
+schema.index({ createdAt: -1 });
 module.exports = mongoose.model('Challenge', schema);

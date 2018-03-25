@@ -15,7 +15,7 @@ const ChallengeController = {
    */
   create(req, res, next) {
     const options = req.body;
-    return Services.Challenge.create(options, req.user)
+    return Services.Challenge.create(options, req.account)
       .then(result => res.status(200).send(result))
       .catch(next);
   },
@@ -38,6 +38,20 @@ const ChallengeController = {
     })
     .then(result => res.status(200).send(result))
     .catch(next);
+  },
+  /**
+   * @apiGroup Challenge
+   * @apiVersion 1.0.0
+   * @api {get} /api/challenges?page=:page&limit=:limit Get challenge list
+   * @apiDescription Get list of challenges which were created by current account.
+   * @apiParam {Number}   [page=0]           Page number
+   * @apiParam {Number}   [limit=50]         Number of submissions
+   */
+  find(req, res, next) {
+    const options = Object.assign({ creator: req.account._id.toString() }, req.params, req.query);
+    return Services.Challenge.find(options)
+      .then(result => res.status(200).send(result))
+      .catch(next);
   },
 
   /**

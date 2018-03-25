@@ -21,6 +21,38 @@ module.exports = {
       }, options)
     );
   },
+  find(options) {
+    let schema = Joi.object().keys({
+      creator: Joi.objectId().optional(),
+      page: Joi.number().optional(),
+      limit: Joi.number().optional()
+    });
+    let result = Joi.validate(options, schema);
+    if (result.error) {
+      return Promise.reject(result.error);
+    }
+    const query = {};
+    if (options.creator) {
+      query.creator = options.creator;
+    }
+    const page = parseInt(options.page) || 0;
+    const limit = parseInt(options.limit) || Constants.ITEMS_PER_PAGE;
+    return Promise.all([
+      db.Challenge.count(query),
+      db.Challenge.find(query)
+      .sort({
+        createdAt: -1
+      })
+      .skip(page * limit)
+      .limit(limit)
+      .lean()
+    ]).then((results) => {
+      return {
+        total: results[0],
+        items: results[1]
+      };
+    })
+  },
   join(options) {
     let schema = Joi.object().keys({
       challengeId: Joi.objectId().required(),

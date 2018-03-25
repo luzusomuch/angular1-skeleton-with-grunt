@@ -54,4 +54,11 @@ describe('Testing challenge controller', () => {
     expect(challenge.submissions.length).to.equal(3);
     expect(challenge.numberOfSubmissions).to.equal(3);
   });
+  it('should create some challenge and get list', async() => {
+    const newToken = await testUtil.registerAndLoginPartner('partner+list@abc.com', '123456');
+    await testUtil.newChallenges(31, newToken);
+    let list = await testUtil.makeAuthRequest('get', `/api/challenges?page=0&limit=20`, newToken);
+    expect(list.total).to.equal(31);
+    expect(list.items.length).to.equal(20);
+  });
 });

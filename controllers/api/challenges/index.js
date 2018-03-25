@@ -9,6 +9,9 @@ module.exports = function (router) {
   router.get('/:challengeId',
     ChallengeController.findOne
   );
+  router.get('/',
+    ChallengeController.find
+  );
   router.post('/:challengeId/join',
     ChallengeController.join
   );

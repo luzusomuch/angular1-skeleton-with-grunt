@@ -22,13 +22,13 @@ const authenticate = (req) => {
         }
       }, {
         new: true
-      }).then((user) => {
-        if (!user) {
+      }).then((account) => {
+        if (!account) {
           return reject({ message: 'Unauthorized' });
         }
-        const newUser = user.toObject();
-        delete newUser.password;
-        return resolve(newUser);
+        const newAccount = account.toObject();
+        delete newAccount.password;
+        return resolve(newAccount);
       }).catch(reject);
     });
   });
@@ -36,15 +36,15 @@ const authenticate = (req) => {
 const policy = {};
 policy.is = {
   authenticated: (req, res, next) => {
-    return authenticate(req).then((user) => {
-      req.user = user;
+    return authenticate(req).then((account) => {
+      req.account = account;
       return next();
     }).catch(err => res.status(401).send(err));
   },
   roles: (req, res, next) => {
-    return authenticate(req).then((user) => {
-      if (roles.indexOf(user.role) >= 0) {
-        req.user = user;
+    return authenticate(req).then((account) => {
+      if (roles.indexOf(account.role) >= 0) {
+        req.account = account;
         return next();
       }
       return res.status(401).send({ message: 'Unauthorized' });

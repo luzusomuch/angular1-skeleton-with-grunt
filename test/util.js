@@ -52,7 +52,7 @@ module.exports = (request) => ({
       .then(res => res.body);
   },
   newChallenge(options, token) {
-    log.debug('creating new challenge');
+    log.debug('creating a new challenge');
     options = options || {};
     return testUtil.makeAuthRequest('post', '/api/challenges', token, {
       title: options.title || this.generateText(101),
@@ -66,8 +66,9 @@ module.exports = (request) => ({
       }],
     });
   },
-  newChallenges(nunberOfChallenges, token) {
-    return Promise.all([...Array(nunberOfChallenges).keys]
+  newChallenges(numberOfChallenges, token) {
+    log.debug(`creating ${numberOfChallenges} challenge(s)`);
+    return Promise.all([...Array(numberOfChallenges).keys()]
       .map(() => {
         return this.newChallenge(null, token);
       }))
