@@ -23,7 +23,7 @@ const ChallengeController = {
   /**
    * @apiGroup Challenge
    * @apiVersion 1.0.0
-   * @api {get} /api/challenges/:challengeId Get a challenge.
+   * @api {get} /api/challenges/:challengeId Get a challenge
    * @apiDescription Get a challenge by its id.
    * @apiParam {String} challengeId   Id of desired challenge to get.
    */
@@ -37,7 +37,7 @@ const ChallengeController = {
   /**
    * @apiGroup Challenge
    * @apiVersion 1.0.0
-   * @api {post} /api/challenge Join a challenge.
+   * @api {post} /api/challenges/:changellenId/join Join a challenge
    * @apiDescription Join a challenge. If user has joined before, nothing happens.
    * @apiParam {String} challengeId   Id of desired challenge to join.
    */

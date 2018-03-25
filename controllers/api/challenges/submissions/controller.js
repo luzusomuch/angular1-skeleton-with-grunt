@@ -3,7 +3,7 @@ const SubmissionController = {
  /**
    * @apiGroup Challenge
    * @apiVersion 1.0.0
-   * @api {post} /api/challenge/:challengeId/submission/:submissionId/like Like a submission.
+   * @api {post} /api/challenges/:challengeId/submissions/:submissionId/like Like a submission
    * @apiDescription Like a submission. 
    * @apiParam {String}   challengeId           Id of the submission to be liked.
    * @apiParam {String}   submissionId          Id of the challenge to which the submission belongs.
