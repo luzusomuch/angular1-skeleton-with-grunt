@@ -5,6 +5,11 @@ const SubmissionController = {
    * @apiVersion 1.0.0
    * @api {post} /api/challenges/:challengeId/submissions/:submissionId/like Like a submission
    * @apiDescription Like a submission. 
+   * @apiHeader {String}    Authorization       Authorization token
+   * @apiHeaderExample {json} Example:
+   *     {
+   *       "Authorization": "Bearer abcxyz1234"
+   *     }
    * @apiParam {String}   submissionId            Id of the submission to be liked.
    * @apiParam {String}   challengeId             Id of the challenge to which the submission belongs.
    */
@@ -18,7 +23,12 @@ const SubmissionController = {
    * @apiGroup Submission
    * @apiVersion 1.0.0
    * @api {get} /api/challenges/:challengeId/submissions/:submissionId Get a submission
-   * @apiDescription Get a submission by its id. 
+   * @apiDescription Get a submission by its id.
+   * @apiHeader {String}    Authorization       Authorization token
+   * @apiHeaderExample {json} Example:
+   *     {
+   *       "Authorization": "Bearer abcxyz1234"
+   *     }
    * @apiParam {String}   submissionId            Id of the submission to be retrieved.
    * @apiParam {String}   challengeId             Id of the challenge to which the submission belongs.
    */
@@ -33,6 +43,11 @@ const SubmissionController = {
    * @apiVersion 1.0.0
    * @api {get} /api/challenges/:challengeId/submissions?page=:page&limit=:limit Get submissions list
    * @apiDescription Get list of submissions from a challenge.
+   * @apiHeader {String}    Authorization       Authorization token
+   * @apiHeaderExample {json} Example:
+   *     {
+   *       "Authorization": "Bearer abcxyz1234"
+   *     }
    * @apiParam {String}   challengeId        Id of the challenge from which the list of submissions is.
    * @apiParam {Number}   [page=0]           Page number
    * @apiParam {Number}   [limit=50]         Number of submissions
