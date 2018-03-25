@@ -1,7 +1,7 @@
 'use strict';
 const SubmissionController = {
   /**
-   * Like a submission challenge
+   * Like a submission
    * @param {Object} req            Express request object
    * @param {String} req.name       Full name
    * @param {String} req.email      Email

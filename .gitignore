@@ -35,6 +35,7 @@ nbproject
 ################################################
 .sass-cache/
 .tmp/
+apidoc/
 .tmp/public/
 assets
 build

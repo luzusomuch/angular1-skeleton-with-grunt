@@ -1,11 +1,12 @@
 'use strict';
 const AuthController = {
   /**
-   * Login
-   * @param {Object} req            Express request object
-   * @param {String} req.email      Email
-   * @param {String} req.password   Password
-   * @param {Object} res            Express response object
+   * @api {post} /auth/register
+   * @apiDescription Register a new user as partner. The body must contains
+   * @apiParam {String}   uid           Email
+   * @apiParam {String}  password      Password
+   * @apiParam {String}   [firstName]   First name
+   * @apiParam {String}   [lastName]    Last name
    */
   login(req, res, next) {
     const options = Object.assign({}, req.body);
