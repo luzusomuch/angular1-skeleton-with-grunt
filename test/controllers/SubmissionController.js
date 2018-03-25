@@ -13,6 +13,17 @@ describe('Testing submission controller', () => {
   before(async() => {
     token = await testUtil.registerAndLoginPartner('partner1@abc.com', '123456');
   });
+  it('should get a submission', async() => {
+    let challenge = await testUtil.newChallenge(newChallenge, token);
+    await testUtil.joinChallengeWithVideo({
+      challengeId: challenge._id,
+      userIds: [...Array(53).keys()].map(i => `testid-${i}`)
+    }, token);
+    challenge = await testUtil.makeAuthRequest('get', `/api/challenges/${challenge._id}`, token);
+    const submission = await testUtil.makeAuthRequest('get', `/api/challenges/${challenge._id}/submissions/${challenge.submissions[0]._id}`, token);
+    expect(submission.challenge).to.equal(challenge._id);
+    expect(submission.user.id).to.equal('testid-0');
+  });
   it('should like a submission', async() => {
     let challenge = await testUtil.newChallenge(newChallenge, token);
     await testUtil.joinChallengeWithVideo({

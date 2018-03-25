@@ -28,32 +28,25 @@ module.exports = {
   findOne(options) {
     let schema = Joi.object().keys({
       challengeId: Joi.objectId().required(),
-      hasVideo: Joi.boolean().optional(),
+      submissionId: Joi.objectId().required(),
     });
     let result = Joi.validate(options, schema);
     if (result.error) {
       return Promise.reject(result.error);
     }
-    return db.Challenge.findOne({
-      _id: options.challengeId
-    }).lean()
-    .then((challenge) => {
-      // get some submission
-      const query = {
-        challenge: challenge._id
-      };
-      if ([true, 'true'].indexOf(options.hasVideo) >= 0) {
-        query.video = {
-          $exists: true
-        };
+    return db.Submission.findOne({
+      challenge: options.challengeId,
+      _id: options.submissionId
+    }, {
+      'video.likes': {
+        $slice: Constants.ITEMS_PER_PAGE
       }
-      return db.Submission.find(query, { 'video.likes': { $slice: Constants.ITEMS_PER_PAGE } })
-      .limit(Constants.ITEMS_PER_PAGE)
-      .lean()
-      .then((submissions) => {
-        challenge.submissions = submissions;
-        return challenge;
-      });
+    }).lean()
+    .then((submission) => {
+      if (!submission) {
+        return Promise.reject({ message: 'No submission' });
+      }
+      return submission;
     });
   },
 };
