@@ -6,10 +6,10 @@ module.exports = {
       prizes: Joi.array().items(Joi.object({
         title: Joi.string().required()
       })).optional(),
-      videos: Joi.array().items(Joi.object({
-        url: Joi.string().required(),
-        thumbnail: Joi.string().optional()
-      }).required()).optional()
+      video: Joi.object({
+        originalUrl: Joi.string().required(),
+        thumbnails: Joi.array().items(Joi.string().optional())
+      }).optional()
     });
     let result = Joi.validate(options, schema);
     if (result.error) {

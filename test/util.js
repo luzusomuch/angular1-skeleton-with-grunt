@@ -56,9 +56,10 @@ module.exports = (request) => ({
     return testUtil.makeAuthRequest('post', '/api/challenges', token, {
       title: options.title || this.generateText(101),
       expiresAt: moment().add(2, 'days').toDate(),
-      videos: options.videos || [{
-        url: this.generateText(101)
-      }],
+      video: options.video || {
+        originalUrl: this.generateText(101),
+        thumbnails: [this.generateText(101), this.generateText(101)]
+      },
       prizes: options.prizes || [{
         title: this.generateText(101)
       }],

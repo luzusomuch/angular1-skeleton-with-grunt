@@ -14,16 +14,17 @@ const schema = new Schema(
       type: String,
       required: true
     },
-    videos: [{
-      url: String,
-      thumbnail: String
-    }],
+    video: {
+      originalUrl: String,
+      thumbnails: [String]
+    },
     prizes: [{
-      title: String
+      title: String,
+      winner: String
     }],
     status: {
       type: String,
-      enum: ['open', 'close'],
+      enum: ['open', 'closed'],
       default: 'open'
     },
     numberOfSubmissions: {
