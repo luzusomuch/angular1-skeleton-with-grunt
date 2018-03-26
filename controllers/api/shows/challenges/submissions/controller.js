@@ -12,6 +12,7 @@ const SubmissionController = {
    *     }
    * @apiParam {String}   submissionId            Id of the submission to be liked.
    * @apiParam {String}   challengeId             Id of the challenge to which the submission belongs.
+   * @apiParam {String}   showId                  Id of the show which challenge belongs to
    */
   like(req, res, next) {
     const options = Object.assign({}, req.params, req.body);
@@ -31,6 +32,7 @@ const SubmissionController = {
    *     }
    * @apiParam {String}   submissionId            Id of the submission to be retrieved.
    * @apiParam {String}   challengeId             Id of the challenge to which the submission belongs.
+   * @apiParam {String}   showId                  Id of the show which challenge belongs to
    */
   findOne(req, res, next) {
     const options = Object.assign({}, req.params);
@@ -49,6 +51,7 @@ const SubmissionController = {
    *       "Authorization": "Bearer abcxyz1234"
    *     }
    * @apiParam {String}   challengeId        Id of the challenge from which the list of submissions is.
+   * @apiParam {String}   showId             Id of the show which challenge belongs to
    * @apiParam {Number}   [page=0]           Page number
    * @apiParam {Number}   [limit=50]         Number of submissions
    */

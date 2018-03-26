@@ -3,5 +3,5 @@
   "version": "0.1.0",
   "description": "API documentation for MeasureUp",
   "title": "MeasureUp API documentation",
-  "groups" : ["Authentication"]
+  "groups" : ["Authentication", "Show", "Challenge", "Submission"]
 }

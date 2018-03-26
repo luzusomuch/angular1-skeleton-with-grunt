@@ -24,7 +24,7 @@ const ShowController = {
   },
 
   /**
-   * @apiGroup show
+   * @apiGroup Show
    * @apiVersion 1.0.0
    * @api {get} /api/shows/:showId Get a show
    * @apiDescription Get a show by its id.
@@ -48,7 +48,7 @@ const ShowController = {
     .catch(next);
   },
   /**
-   * @apiGroup show
+   * @apiGroup Show
    * @apiVersion 1.0.0
    * @api {get} /api/shows?page=:page&limit=:limit Get show list
    * @apiDescription Get list of shows which were created by current account.
@@ -65,25 +65,6 @@ const ShowController = {
     return Services.Show.find(options)
       .then(result => res.status(200).send(result))
       .catch(next);
-  },
-
-  /**
-   * @apiGroup show
-   * @apiVersion 1.0.0
-   * @api {post} /api/shows/:changellenId/join Join a show
-   * @apiDescription Join a show. If user has joined before, nothing happens.
-   * @apiHeader {String}    Authorization       Authorization token
-   * @apiHeaderExample {json} Example:
-   *     {
-   *       "Authorization": "Bearer abcxyz1234"
-   *     }
-   * @apiParam {String} showId   Id of desired show to join.
-   */
-  join(req, res, next) {
-    const options = Object.assign({}, req.params, req.body);
-    return Services.Show.join(options)
-      .then(result => res.status(200).send(result))
-      .catch(next);
-  },
+  }
 };
 module.exports = ShowController;
