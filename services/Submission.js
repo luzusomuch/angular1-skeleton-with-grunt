@@ -6,6 +6,7 @@ module.exports = {
       }).required(),
       challengeId: Joi.objectId().required(),
       submissionId: Joi.objectId().required(),
+      showId: Joi.objectId().required(),
     });
     let result = Joi.validate(options, schema);
     if (result.error) {
@@ -35,6 +36,7 @@ module.exports = {
     let schema = Joi.object().keys({
       challengeId: Joi.objectId().required(),
       submissionId: Joi.objectId().required(),
+      showId: Joi.objectId().required(),
     });
     let result = Joi.validate(options, schema);
     if (result.error) {
@@ -58,6 +60,7 @@ module.exports = {
   find(options) {
     let schema = Joi.object().keys({
       challengeId: Joi.objectId().required(),
+      showId: Joi.objectId().required(),
       page: Joi.number().optional(),
       limit: Joi.number().optional(),
       hasVideo: Joi.boolean().optional()

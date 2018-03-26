@@ -37,10 +37,11 @@ before(async() => {
   }));
   app.use('/api/*', Middlewares.Policy.is.authenticated);
   app.use('/auth', testUtil.hookRoute(`${__dirname}/../controllers/auth`));
-  app.use('/api/challenges', testUtil.hookRoute(`${__dirname}/../controllers/api/challenges`));
+  app.use('/api/shows', testUtil.hookRoute(`${__dirname}/../controllers/api/shows`));
   app.use(Middlewares.ErrorHandler);
 });
 require('./controllers/AccountController');
 require('./controllers/AuthenticationController');
+require('./controllers/ShowController');
 require('./controllers/ChallengeController');
 require('./controllers/SubmissionController');

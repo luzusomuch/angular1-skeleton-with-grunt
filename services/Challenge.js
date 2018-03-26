@@ -6,10 +6,7 @@ module.exports = {
       prizes: Joi.array().items(Joi.object({
         title: Joi.string().required()
       })).optional(),
-      video: Joi.object({
-        originalUrl: Joi.string().required(),
-        thumbnails: Joi.array().items(Joi.string().optional())
-      }).optional()
+      showId: Joi.objectId().required()
     });
     let result = Joi.validate(options, schema);
     if (result.error) {
@@ -17,7 +14,8 @@ module.exports = {
     }
     return db.Challenge.create(
       Object.assign({
-        creator: user._id
+        creator: user._id,
+        show: options.showId
       }, options)
     );
   },
@@ -25,7 +23,8 @@ module.exports = {
     let schema = Joi.object().keys({
       creator: Joi.objectId().optional(),
       page: Joi.number().optional(),
-      limit: Joi.number().optional()
+      limit: Joi.number().optional(),
+      showId: Joi.objectId().required()
     });
     let result = Joi.validate(options, schema);
     if (result.error) {
@@ -51,7 +50,7 @@ module.exports = {
         total: results[0],
         items: results[1]
       };
-    })
+    });
   },
   join(options) {
     let schema = Joi.object().keys({
@@ -62,7 +61,8 @@ module.exports = {
       video: Joi.object({
         originalUrl: Joi.string().required(),
         thumbnails: Joi.array().items(Joi.string().optional())
-      }).optional()
+      }).optional(),
+      showId: Joi.objectId().required()
     });
     let result = Joi.validate(options, schema);
     if (result.error) {
@@ -87,7 +87,8 @@ module.exports = {
         .then(() => {
           // increase the number of submissions for this challenge
           return db.Challenge.update({
-            _id: options.challengeId
+            _id: options.challengeId,
+            show: options.showId
           }, {
             $inc: {
               numberOfSubmissions: 1

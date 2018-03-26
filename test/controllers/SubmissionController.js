@@ -1,5 +1,5 @@
 describe('Testing submission controller', () => {
-  let token;
+  let token, showId;
   const newChallenge = {
     title: 'title',
     prizes: [{
@@ -12,15 +12,19 @@ describe('Testing submission controller', () => {
   };
   before(async() => {
     token = await testUtil.registerAndLoginPartner('partner1@abc.com', '123456');
+    const show = await testUtil.newShow(null, token);
+    showId = show._id;
+    newChallenge.showId = showId;
   });
   it('should get a submission', async() => {
     let challenge = await testUtil.newChallenge(newChallenge, token);
     await testUtil.joinChallengeWithVideo({
       challengeId: challenge._id,
-      userIds: [...Array(53).keys()].map(i => `testid-${i}`)
+      userIds: [...Array(53).keys()].map(i => `testid-${i}`),
+      showId
     }, token);
-    challenge = await testUtil.makeAuthRequest('get', `/api/challenges/${challenge._id}`, token);
-    const submission = await testUtil.makeAuthRequest('get', `/api/challenges/${challenge._id}/submissions/${challenge.submissions[0]._id}`, token);
+    challenge = await testUtil.makeAuthRequest('get', `/api/shows/${showId}/challenges/${challenge._id}`, token);
+    const submission = await testUtil.makeAuthRequest('get', `/api/shows/${showId}/challenges/${challenge._id}/submissions/${challenge.submissions[0]._id}`, token);
     expect(submission.challenge).to.equal(challenge._id);
     expect(submission.user.id).to.equal('testid-0');
   });
@@ -28,18 +32,19 @@ describe('Testing submission controller', () => {
     let challenge = await testUtil.newChallenge(newChallenge, token);
     await testUtil.joinChallengeWithVideo({
       challengeId: challenge._id,
-      userIds: [...Array(200).keys()].map(i => `testid-${i}`)
+      userIds: [...Array(200).keys()].map(i => `testid-${i}`),
+      showId
     }, token);
-    challenge = await testUtil.makeAuthRequest('get', `/api/challenges/${challenge._id}`, token);
+    challenge = await testUtil.makeAuthRequest('get', `/api/shows/${showId}/challenges/${challenge._id}`, token);
     await testUtil.likeSubmission({
       challengeId: challenge._id,
       submissionId: challenge.submissions[0]._id,
-      userIds: [...Array(200).keys()].map(i => `testid-${i}`)
+      userIds: [...Array(200).keys()].map(i => `testid-${i}`),
+      showId
     }, token);
-    challenge = await testUtil.makeAuthRequest('get', `/api/challenges/${challenge._id}`, token);
+    challenge = await testUtil.makeAuthRequest('get', `/api/shows/${showId}/challenges/${challenge._id}`, token);
     expect(challenge.title).to.be.equal(newChallenge.title);
     expect(challenge.prizes[0]).to.deep.include(newChallenge.prizes[0]);
-    expect(challenge.video).to.deep.include(newChallenge.video);
     expect(challenge.submissions.length).to.equal(Constants.ITEMS_PER_PAGE);
     expect(challenge.submissions[0].video.likes.length).to.equal(Constants.ITEMS_PER_PAGE);
     expect(challenge.submissions[0].video.numberOfLikes).to.equal(200);
@@ -48,22 +53,25 @@ describe('Testing submission controller', () => {
     let challenge = await testUtil.newChallenge(newChallenge, token);
     await testUtil.joinChallengeWithVideo({
       challengeId: challenge._id,
-      userIds: ['joinid']
+      userIds: ['joinid'],
+      showId
     }, token);
-    challenge = await testUtil.makeAuthRequest('get', `/api/challenges/${challenge._id}`, token);
+    challenge = await testUtil.makeAuthRequest('get', `/api/shows/${showId}/challenges/${challenge._id}`, token);
     await Promise.all([
       testUtil.likeSubmission({
         challengeId: challenge._id,
         submissionId: challenge.submissions[0]._id,
-        userId: ['id', 'id']
+        userId: ['id', 'id'],
+        showId
       }, token),
       testUtil.likeSubmission({
         challengeId: challenge._id,
         submissionId: challenge.submissions[0]._id,
-        userId: ['id2', 'id']
+        userId: ['id2', 'id'],
+        showId
       }, token),
     ]);
-    challenge = await testUtil.makeAuthRequest('get', `/api/challenges/${challenge._id}`, token);
+    challenge = await testUtil.makeAuthRequest('get', `/api/shows/${showId}/challenges/${challenge._id}`, token);
     expect(challenge.submissions[0].video.likes.length).to.equal(2);
     expect(challenge.submissions[0].video.numberOfLikes).to.equal(2);
   });
@@ -71,12 +79,13 @@ describe('Testing submission controller', () => {
     let challenge = await testUtil.newChallenge(newChallenge, token);
     await testUtil.joinChallengeWithVideo({
       challengeId: challenge._id,
-      userIds: [...Array(58).keys()].map(i => `testid-${i}`)
+      userIds: [...Array(58).keys()].map(i => `testid-${i}`),
+      showId
     }, token);
-    let list = await testUtil.makeAuthRequest('get', `/api/challenges/${challenge._id}/submissions?page=0&limit=20`, token);
+    let list = await testUtil.makeAuthRequest('get', `/api/shows/${showId}/challenges/${challenge._id}/submissions?page=0&limit=20`, token);
     expect(list.total).to.equal(58);
     expect(list.items.length).to.equal(20);
-    list = await testUtil.makeAuthRequest('get', `/api/challenges/${challenge._id}/submissions?page=1&limit=50`, token);
+    list = await testUtil.makeAuthRequest('get', `/api/shows/${showId}/challenges/${challenge._id}/submissions?page=1&limit=50`, token);
     expect(list.total).to.equal(58);
     expect(list.items.length).to.equal(8);
   });

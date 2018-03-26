@@ -14,13 +14,9 @@ const ChallengeController = {
    * @apiParam {Date}       expiresAt           When the challenge will be closed after.
    * @apiParam {Object[]}   [prizes]            Array of available prizes.
    * @apiParam {String}     prizes.title        Title of the prize.
-   * @apiParam {Object}     [video]             Video for this challenge.
-   * @apiParam {String}     video.originalUrl   The original url of the video.
-   * @apiParam {String[]}   video.thumbnails    Array of thumbnails of the video.
-   * 
    */
   create(req, res, next) {
-    const options = req.body;
+    const options = Object.assign({}, req.body, req.params);
     return Services.Challenge.create(options, req.account)
       .then(result => res.status(200).send(result))
       .catch(next);
@@ -40,9 +36,7 @@ const ChallengeController = {
    */
   findOne(req, res, next) {
     const challenge = res.locals.challenge;
-    return Services.Submission.find({
-      challengeId: req.params.challengeId
-    })
+    return Services.Submission.find(req.params)
     .then((submissions) => {
       challenge.submissions = submissions;
       return challenge;

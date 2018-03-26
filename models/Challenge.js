@@ -13,10 +13,6 @@ const schema = new Schema({
     type: String,
     required: true
   },
-  video: {
-    originalUrl: String,
-    thumbnails: [String]
-  },
   prizes: [{
     title: String,
     winner: String
@@ -33,6 +29,11 @@ const schema = new Schema({
   creator: {
     type: Schema.Types.ObjectId,
     ref: 'Account'
+  },
+  show: {
+    type: Schema.Types.ObjectId,
+    ref: 'Show',
+    required: true
   }
 }, {
   collection: 'challenges',
