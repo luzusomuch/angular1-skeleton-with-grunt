@@ -31,6 +31,7 @@ module.exports = function (config) {
             'app/bower_components/json3/lib/json3.js',
             'app/bower_components/angular-ui-router/release/angular-ui-router.js',
             'app/bower_components/angular-growl-v2/build/angular-growl.js',
+            'app/bower_components/angular-file-upload/dist/angular-file-upload.min.js',
             'app/bower_components/angular-mocks/angular-mocks.js',
             'app/bower_components/livereload-js/dist/livereload.js',
             // endbower

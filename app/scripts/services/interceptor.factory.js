@@ -1,5 +1,6 @@
 'use strict';
-angular.module('measureApp').factory('httpRequestInterceptor', function ($cookies, $q) {
+angular.module('measureApp').factory('httpRequestInterceptor', function ($cookies, $q, $injector) {
+  var state;
   return {
     request: function (config) {
       config.headers = config.headers || {};

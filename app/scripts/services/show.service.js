@@ -25,20 +25,3 @@ angular.module('measureApp').factory('ShowService', function($resource, apiUrl){
     }
   });
 });
-// angular.module('measureApp').factory('ShowService', function($http, apiUrl, $cookies) {
-//   var api = apiUrl + '/api/shows';
-//   return {
-//     list: function(params) {
-//       return $http.get(api, {
-//         params: params,
-//         headers: {
-//           Authorization: $cookies.get('token'),
-//         }
-//       }).then(function(resp) {
-//         console.log(resp);
-//       }).catch(function(err) {
-//         console.log(err);
-//       });
-//     } 
-//   }
-// });

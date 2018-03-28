@@ -22,7 +22,7 @@ angular.module('measureApp', [
   growlProvider.globalTimeToLive(3000);
   growlProvider.globalDisableCountDown(true);
 })
-.run(function($rootScope, $cookies) {
+.run(function($rootScope, $cookies, $state) {
   $rootScope.$on('$stateChangeStart', function(event, next, nextParams) {
     if (next.isAuthenticate) {
       var token = $cookies.get('token');
