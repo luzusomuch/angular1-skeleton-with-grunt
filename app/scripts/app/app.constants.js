@@ -6,6 +6,6 @@ angular.module('measureApp')
 
 .constant('VERSION', '0.0.1')
 
-.constant('apiUrl', 'http://api-staging.measureup.co')
+.constant('apiUrl', 'https://api-staging.measureup.co')
 
 ;

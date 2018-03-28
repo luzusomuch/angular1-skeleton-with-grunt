@@ -8,7 +8,9 @@ $facebookBlue: #3b5998;
 $googleRed: #DC4E41;
 
 .header {
-  min-height: 60px;
+  &.navbar {
+    margin-bottom: 0px;
+  }
 }
 
 .content {
@@ -19,4 +21,10 @@ $googleRed: #DC4E41;
 .login-form {
   padding: 20px;
   border: 1px solid $black;
+}
+
+.add-new-challenge-button, .add-new-show-button {
+  margin-top: 35px;
+  text-align: right;
+  cursor: pointer;
 }

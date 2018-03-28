@@ -13,6 +13,14 @@ angular.module('measureApp').config(function ($stateProvider) {
     hideHeader: false,
     hideFooter: false,
     pageTitle: 'Challenges List'
+  }).state('app.challenge.create', {
+    url: '/create',
+    templateUrl: 'scripts/app/challenges/create/view.html',
+    controller: 'CreateChallengeController',
+    authenticate: true,
+    hideHeader: false,
+    hideFooter: false,
+    pageTitle: 'Create Challenge'
   }).state('app.challenge.update', {
     url: '/:id/update',
     templateUrl: 'scripts/app/challenges/update/view.html',

@@ -1,0 +1,24 @@
+<div class="content">
+  <h1>Create New Challenge</h1>
+  <form ng-submit="submit(form)" name="form" novalidate>
+    <div class="form-group">
+      <label>Title</label>
+      <input type="text" name="title" ng-model="data.title" required>
+    </div>
+    <div class="form-group">
+      <label>Announcement</label>
+      <input type="text" name="announcement" ng-model="data.announcement" required>
+    </div>
+    <div class="form-group">
+      <label>Close Date</label>
+      <input type="text" name="closeDate" ng-model="data.expiresAt" required>
+    </div>
+    
+    <div class="form-group">
+      <label>Upload Video</label>
+    </div>
+    <div class="form-group">
+      <label>Upload Thumbnail</label>
+    </div>
+  </form>
+</div>

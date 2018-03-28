@@ -3,7 +3,7 @@
   "env": "develop",
   "port": 3000,
   "hostname": "localhost",
-  "apiUrl": "http://api-staging.measureup.co",
+  "apiUrl": "https://api-staging.measureup.co",
   "cluster": {
     "workerCount": 1,
     "accessKey": "k3ad8ca3112ma01-03832",
