@@ -5,11 +5,9 @@ angular.module('measureApp').config(function ($stateProvider) {
     url: '/login',
     templateUrl: 'scripts/app/login/view.html',
     controller: 'LoginController',
-    data: {
-      hideHeader: true,
-      hideFooter: false,
-      pageTitle: 'Login'
-    }
+    hideHeader: true,
+    hideFooter: false,
+    pageTitle: 'Login'
   })
   .state('logout', {
     url: '/logout',
