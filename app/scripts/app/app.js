@@ -8,6 +8,7 @@ angular.module('measureApp', [
   'ui.router',
   'ngAnimate',
   'angular-growl',
+  'ngFileUpload'
 ])
 .config(function($urlRouterProvider, $locationProvider, $httpProvider, growlProvider, $stateProvider) {
   $stateProvider.state('app', {
