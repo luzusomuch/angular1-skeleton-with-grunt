@@ -1,5 +1,39 @@
-'use strict';
+var express = require('express');
+var app = express();
+var path = require('path');
+var config = require('./config/config.json');
+// Run the app by serving the static files
+// in the dist directory
+app.use(express.static(__dirname + '/build'));
 
-require('dotenv').config({ silent: true });
-var app = require('./app');
-app.start();
+// If an incoming request uses
+// a protocol other than HTTPS,
+// redirect that request to the
+// same url but with HTTPS
+var forceSSL = function() {
+  return function (req, res, next) {
+    if (req.headers['x-forwarded-proto'] !== 'https') {
+      return res.redirect(
+       ['https://', req.get('Host'), req.url].join('')
+      );
+    }
+    next();
+  }
+}
+// Instruct the app
+// to use the forceSSL
+// middleware
+app.use(forceSSL());
+
+app.get('/*', function(req, res) {
+  console.log(config.env)
+  if (config.env === 'production') {
+    res.sendFile(path.join(__dirname + '/build/index.html'));
+  } else if (config.env === 'develop') {
+    res.sendFile(path.join(__dirname + '/app/index.html'));
+  }
+});
+
+// Start the app by listening on the default
+// Heroku port
+app.listen(config.port || 3000);

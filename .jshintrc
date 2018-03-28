@@ -1,0 +1,68 @@
+{
+  "bitwise"       : true,     // If bitwise operators should not be allowed.
+  "camelcase"     : false,    // If identifiers should be required in camel case.
+  "curly"         : true,     // If curly braces around all blocks should be required.
+  "eqeqeq"        : true,   // If === should be required.
+  "es3"           : false,  // If ES3 syntax should be allowed.
+  "forin"         : true,   // If for in statements must filter.
+  "freeze"    : true,
+  "immed"       : true,   // If immediate invocations must be wrapped in parens.
+  "indent"    : 4,    // Tab width for your code.
+  "latedef"   : "nofunc", // Warn if the variable is used before its definition.
+  "newcap"    : true,   // If constructor names must be capitalized.
+  "noarg"       : true,   // If arguments.caller and arguments.callee should be disallowed.
+  "noempty"   : true,   // If empty blocks should be disallowed.
+  "nonbsp"    : true,
+  "nonew"       : true,   // If using `new` for side-effects should be disallowed.
+  "plusplus"    : false,  // If increment/decrement should not be allowed.
+  "quotmark"    : "single", // Enforce the consistency of quotation marks: 'single'|'double'|true.
+  "undef"       : true,   // If variables should be declared before used.
+  "unused"    : "false",  // Warn if variables are unused..
+  "strict"    : true,   // Require the "use strict"; pragma.
+  "maxparams"   : 100,    // {int} Maximum params per function.
+  "maxdepth"    : 5,    // {int} Maximum nested block depth per function.
+  "maxstatements" : 500,    // {int} Maximum statements per function.
+  "maxcomplexity" : 500,    // {int} Maximum cyclomatic complexity per function.
+  "maxlen"    : 2000,   // {int} maximum length of a line.
+
+  "asi"       : false,  // If automatic semicolon insertion should be tolerated.
+  "boss"        : false,  // If advanced usage of assignments should be allowed.
+  "debug"         : false,    // If debugger statements should be allowed.
+  "eqnull"    : true,   // If == null comparisons should be tolerated.
+  "esnext"        : false,    // If es.next specific syntax should be allowed.
+  "evil"          : false,    // If eval should be allowed.
+  "expr"          : false,    // If ExpressionStatement should be allowed as Programs.
+  "funcscope"     : false,    // If only function scope should be used for scope tests.
+  "globalstrict"  : false,  // If global "use strict"; should be allowed (also enables 'strict').
+  "iterator"      : false,    // If the `__iterator__` property should be allowed.
+  "lastsemic"     : false,    // If semicolons may be ommitted for the trailing statements inside of a one-line blocks.
+  "laxbreak"      : false,    // If line breaks should not be checked.
+  "laxcomma"      : false,    // If line breaks should not be checked around commas.
+  "loopfunc"    : true,   // If functions should be allowed to be defined within loops.
+  "maxerr"    : 0,    // {int} Maximum number of errors.
+  "moz"           : false,    // If mozilla specific syntax should be allowed.
+  "multistr"      : false,    // Allow multiline strings.
+  "notypeof"    : false,
+  "proto"         : false,    // If the `__proto__` property should be allowed.
+  "scripturl"     : false,    // If script-targeted URLs should be tolerated.
+  "shadow"        : false,    // If variable shadowing should be tolerated.
+  "sub"       : true,   // If all forms of subscript notation are tolerated.
+  "supernew"      : false,    // If `new function () { ... };` and `new Object;` should be tolerated.
+  "validthis"     : false,    // If 'this' inside a non-constructor function is valid. This is a function scoped option only..
+  "noyield"   : false,
+  "browser"   : true,   // If the standard browser globals should be predefined.
+  "node"        : true,   // If the Node.js environment globals should be predefined.
+
+  "globals"   : {
+    "angular"   : false,
+    "$"           : false,
+    "_"             : false,
+    "google"    : true,
+    "Chart"         : false,
+    "Datetimepicker": false,
+    "moment"        : false,
+    "slug"          : false
+  },
+  "passfail"    : false,  // If the scan should stop on first error.
+  "white"       : true    // If strict whitespace rules apply.
+}

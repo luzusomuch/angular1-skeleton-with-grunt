@@ -1,0 +1,24 @@
+<div class="content">
+  <div class="row">
+    <div class="col-sm-8 col-md-offset-2">
+      <div class="login-page">
+        <h1>Login</h1>
+        <form name="form" class="login-form" ng-submit="submit(form)" novalidate>
+          <div class="form-group" ng-class="{'has-error': form.email.$invalid && form.$submitted}">
+            <label>Email</label>
+            <input class="form-control" type="text" name="uid" ng-model="user.uid" required>
+            <p class="help-block" ng-if="form.email.$error.required && form.$submitted">Email is required</p>
+          </div>
+          <div class="form-group" ng-class="{'has-error': form.password.$invalid && form.$submitted}">
+            <label>Password</label>
+            <input class="form-control" type="password" name="password" ng-model="user.password" required>
+            <p class="help-block" ng-if="form.password.$error.required && form.$submitted">Password is required</p>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary">Login</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

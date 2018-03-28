@@ -1,59 +1,56 @@
 {
+  "name": "MeaSure",
+  "env": "develop",
+  "port": 3000,
+  "hostname": "localhost",
+  "apiUrl": "http://api-staging.measureup.co",
+  "cluster": {
+    "workerCount": 1,
+    "accessKey": "k3ad8ca3112ma01-03832",
+    "json": true
+  },
+  "secret": "YOLO",
+  "domain": "measure-web.com",
+  "log": {
+    "name": "Measure - log",
+    "level": "debug"
+  },
+  "corsWhitelist": [
+    "http://127.0.0.1:4000"
+  ],
+  "redis": {
+    "host": "localhost",
+    "port": 6379,
+    "db": 2,
+    "pass": ""
+  },
 
-  "specialization": {},
-  "middleware": {
-    "session": {
-      "priority": 100,
-      "module": {
-        "name": "path:./middlewares/mongo-session",
-        "arguments": [{
-          "secret": "hd4gf12kdF#FSDS",
-          "cookie": {
-              "path": "/",
-              "httpOnly": true,
-              "maxAge": null
-          },
-          "resave": true,
-          "saveUninitialized": true,
-          "store": null
-        }]
-      }
-    },
-    "appsec": {
-      "priority": 110,
-      "module": {
-        "name": "lusca",
-        "arguments": [{
-          "csrf": false,
-          "xframe": false,
-          "p3p": false,
-          "csp": false
-        }]
-      }
-    },
-    "static": {
-      "module": {
-        "name": "serve-static",
-        "arguments": ["path:./.build"]
-      },
-      "route": "/files"
-    },
-    "assetStatic": {
-      "module": {
-        "name": "serve-static",
-        "arguments": ["path:./assets"]
-      },
-      "route": "/files"
-    },
-    "router": {
-      "module": {
-        "arguments": [{
-          "directory": "path:./controllers"
-        }]
-      }
-    },
-    "logger": {
-      "enabled": false
-    }
+  "csrf": {
+    "token": false,
+    "origin": false
+  },
+
+  "customise": {
+    "instagramClientId": "",
+    "facebookAppId": ""
+  },
+
+  "cache": {
+    "defaultExpiration": 300,
+    "http": 300
+  },
+
+  "sessionLifetime": 3600000,
+  "session": {
+    "ipCheck": false,
+    "secret": "Mikeslakej135hlkd83",
+    "id": "sid",
+    "uaCheck": false
+  },
+
+  "aws": {
+    "key":"",
+    "secret": "",
+    "enabled": false
   }
 }

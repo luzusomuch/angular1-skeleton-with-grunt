@@ -1,0 +1,52 @@
+{
+  "name": "measure-web",
+  "version": "0.0.0",
+  "appPath": "app",
+  "testPath": "test/spec",
+  "dependencies": {
+    "angular": "1.5.9",
+    "angular-aria": "1.4.9",
+    "angular-animate": "~1.4.9",
+    "angular-cookies": "1.4.9",
+    "angular-resource": "1.4.9",
+    "angular-sanitize": "1.4.9",
+    "bootstrap": "3",
+    "font-awesome": "fontawesome#~4.7",
+    "lodash": "^4.17.4",
+    "modernizr": "3.2.0",
+    "jquery": "2.1.4",
+    "json3": "3.3.2",
+    "angular-ui-router": "^1.0.15"
+  },
+  "devDependencies": {
+    "angular-mocks": "1.5.3",
+    "angular-scenario": "1.4.9",
+    "livereload-js": "^2.3.0"
+  },
+  "overrides": {
+    "font-awesome": {
+      "main": [
+        "css/font-awesome.min.css"
+      ]
+    },
+    "bootstrap": {
+      "main": [
+        "dist/css/bootstrap.css",
+        "dist/css/bootstrap-theme.css"
+      ]
+    },
+    "outlayer": {
+      "main": [
+        "item.js",
+        "outlayer.js"
+      ]
+    }
+  },
+  "resolutions": {
+    "jquery": "2.1.4",
+    "angular": "1.5.9",
+    "moment": ">= 2.6.0",
+    "angular-mocks": "1.5.3"
+  },
+  "moduleName": "measureWeb"
+}

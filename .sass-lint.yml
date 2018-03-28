@@ -1,0 +1,16 @@
+options:
+  merge-default-rules: true
+  output-file: 'test-results/sass-lint-report.xml'
+files:
+  include: '**/*.s+(a|c)ss'
+rules:
+  indentation:
+    - 2
+    -
+      size: 4
+  nesting-depth:
+    - 2
+    -
+      max-depth: 5
+  no-vendor-prefixes: 0
+  placeholder-in-extend: 0
