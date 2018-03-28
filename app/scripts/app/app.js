@@ -12,6 +12,7 @@ angular.module('measureApp', [
 .config(function($urlRouterProvider, $locationProvider, $httpProvider, growlProvider, $stateProvider) {
   $stateProvider.state('app', {
     url: '/app',
+    template: '<ui-view/>',
     abstract: true,
   });
   // $locationProvider.html5Mode(true);

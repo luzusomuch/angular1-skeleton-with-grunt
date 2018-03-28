@@ -7,6 +7,15 @@ $darkGrey: #555;
 $facebookBlue: #3b5998;
 $googleRed: #DC4E41;
 
+.header {
+  min-height: 60px;
+}
+
+.content {
+  min-height: 550px;
+  padding: 0 15px;
+}
+
 .login-form {
   padding: 20px;
   border: 1px solid $black;
