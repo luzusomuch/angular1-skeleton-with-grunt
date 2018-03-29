@@ -4,7 +4,7 @@ var path = require('path');
 var config = require('./config/config.json');
 // Run the app by serving the static files
 // in the dist directory
-app.use(express.static(__dirname + '/build'));
+app.use(express.static(__dirname + '/dist'));
 
 // If an incoming request uses
 // a protocol other than HTTPS,
@@ -23,15 +23,10 @@ var forceSSL = function() {
 // Instruct the app
 // to use the forceSSL
 // middleware
-app.use(forceSSL());
+// app.use(forceSSL());
 
 app.get('/*', function(req, res) {
-  console.log(config.env)
-  if (config.env === 'production') {
-    res.sendFile(path.join(__dirname + '/build/index.html'));
-  } else if (config.env === 'develop') {
-    res.sendFile(path.join(__dirname + '/app/index.html'));
-  }
+  res.sendFile(path.join(__dirname + '/dist/index.html'));
 });
 
 // Start the app by listening on the default
