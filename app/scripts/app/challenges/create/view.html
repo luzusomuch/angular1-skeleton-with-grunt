@@ -21,13 +21,48 @@
         <div class="form-group" ng-class="{'has-error': form.expiresAt.$invalid && form.$submitted}">
           <label>End Date</label>
           <p class="input-group">
-            <input name="expiresAt" type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="data.expiresAt" is-open="openEndDate" datepicker-options="dateOptions" close-text="Close" required/>
+            <input name="expiresAt" type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="data.expiresAt" is-open="openEndDate" datepicker-options="dateOptions" close-text="Close" required readonly/>
             <span class="input-group-btn">
               <button type="button" class="btn btn-default" ng-click="openEndDate=!openEndDate"><i class="glyphicon glyphicon-calendar"></i></button>
             </span>
           </p>
           <p class="help-block" ng-if="form.expiresAt.$error.required && form.$submitted">End date is required</p>
           <p class="help-block" ng-if="form.expiresAt.$error.date && form.$submitted">Invalid date</p>
+        </div>
+        <div class="form-group">
+          <label>Prizes</label>
+          <div class="row">
+            <div class="col-sm-5">
+              <input class="form-control" type="text" name="prizeTitle" ng-model="prize.title">
+            </div>
+            <div class="col-sm-5">
+              <input class="form-control" type="text" name="prizeTitle" ng-model="prize.description">
+            </div>
+            <div class="col-sm-2">
+              <button class="btn btn-primary" type="button" ng-click="addPrize()">Add Prize</button>
+            </div>
+          </div>
+        </div>
+        <div class="form-group" ng-show="data.prizes.length > 0">
+          <label>Prizes List</label>
+          <table class="table">
+            <thead>
+              <tr>
+                <td>#</td>
+                <td>Title</td>
+                <td>Description</td>
+                <td>Action</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="prizeItem in data.prizes">
+                <td>{{$index + 1}}</td>
+                <td>{{prizeItem.title}}</td>
+                <td>{{prizeItem.description}}</td>
+                <td><a ng-click="removePrize($index)"><i class="fa fa-times"></i></a></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
         <div class="form-group" ng-class="{'has-error': form.video.$invalid && form.$submitted}">
           <label>Upload Video</label>

@@ -16,7 +16,7 @@
         <div class="form-group" ng-class="{'has-error': form.expiresAt.$invalid && form.$submitted}">
           <label>End Date</label>
           <p class="input-group">
-            <input name="expiresAt" type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="data.expiresAt" is-open="openEndDate" datepicker-options="dateOptions" close-text="Close" required/>
+            <input name="expiresAt" type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="data.expiresAt" is-open="openEndDate" datepicker-options="dateOptions" close-text="Close" required readonly/>
             <span class="input-group-btn">
               <button type="button" class="btn btn-default" ng-click="openEndDate=!openEndDate"><i class="glyphicon glyphicon-calendar"></i></button>
             </span>
