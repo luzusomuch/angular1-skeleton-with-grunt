@@ -10,6 +10,8 @@
           <td>#</td>
           <td>Title</td>
           <td>Creator</td>
+          <td>Total Challenges</td>
+          <td>End Date</td>
           <td>Status</td>
           <td>Action</td>
         </tr>
@@ -17,8 +19,10 @@
       <tbody>
         <tr ng-repeat="item in items">
           <td>{{$index + 1}}</td>
-          <td>[{item.title}}</td>
+          <td><a ui-sref="app.challenge.list({showId: item._id})">{{item.title}}</a></td>
           <td>{{item.creator}}</td>
+          <td>{{item.numberOfChallenges}}</td>
+          <td>{{item.expiresAt | date: 'dd MMM yyyy'}}</td>
           <td>{{item.status}}</td>
           <td>
             <a ui-sref="app.show.edit({id: item._id})">
@@ -27,7 +31,7 @@
             <a href="javascript:void(0)" ng-click="removeShow(item)">
               <i class="fa fa-times"></i> Delete
             </a>
-            <a ui-sref="app.challenge.create({show_id: item._id})">
+            <a ui-sref="app.challenge.create({showId: item._id})">
               <i class="fa fa-plus"></i> Creat New Challenge
             </a>
           </td>

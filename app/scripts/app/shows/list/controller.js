@@ -12,6 +12,7 @@
     $scope.total = 0;
 
     function search(params) {
+      params.page--;
       ShowService.list(params).$promise.then(function(resp) {
         $scope.items = resp.items;
         $scope.total = resp.total;

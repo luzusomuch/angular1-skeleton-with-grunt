@@ -2,7 +2,7 @@
 
 angular.module('measureApp').config(function ($stateProvider) {
   $stateProvider.state('app.challenge', {
-    url: '/challenge',
+    url: '/challenge/:showId',
     abstract: true,
     template: '<ui-view/>'
   }).state('app.challenge.list', {

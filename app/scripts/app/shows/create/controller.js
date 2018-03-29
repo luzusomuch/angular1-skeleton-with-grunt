@@ -3,32 +3,33 @@
   angular.module('measureApp').controller('CreateShowController', CreateShowController);
 
   /* @ngInject */
-  function CreateShowController($scope, VideoService, growl, Upload) {
+  function CreateShowController($scope, VideoService, growl, Upload, UploadService, ShowService) {
     $scope.data = {
       title: '',
+      expiresAt: new Date(),
     };
 
     $scope.submit = function(form) {
-      if (form.$valid) {
-        VideoService.create().$promise.then(function(videoData) {
-          Upload.upload({
-            method: 'PUT',
-            url: videoData.uploadUrl,
-            data: {
-              key: videoData.key,
-              AWSAccessKeyId: videoData.AWSAccessKeyId,
-              acl: videoData.acl,
-              signature: videoData.signature,
-              'Content-Type': $scope.file.type !== '' ? $scope.file.type : 'binary/octet-stream',
-              file: $scope.file,
-              filename: $scope.file.name,
-            },
-          }).then(function(resp) {
-            console.log(resp);
-          }, function(err) {
-            console.log(err);
+      if (form.$valid && $scope.file) {
+        console.log($scope.file);
+        var isVideo = UploadService.checkVideoType($scope.file);
+        if (isVideo) {
+          VideoService.create().$promise.then(function(videoData) {
+            UploadService.uploadVideo(videoData, $scope.file).then(function() {
+              VideoService.update({id: videoData._id}, {status: 'uploaded'});
+              $scope.data.videoId = videoData._id;
+              ShowService.create($scope.data).$promise.then(function(resp) {
+                console.log(resp);
+              }).catch(function(err) {
+                console.log(err);
+              });
+            }).catch(function(err) {
+              console.log(err);
+            });
           });
-        });
+        } else {
+          growl.error('Invalid File');
+        }
       }
     };
   }

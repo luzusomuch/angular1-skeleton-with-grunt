@@ -7,6 +7,9 @@ angular.module('measureApp').factory('httpRequestInterceptor', function ($cookie
       if ($cookies.get('token') && config.url.indexOf('s3-us-west-1.amazonaws.com') < 0) {
         config.headers.Authorization = $cookies.get('token');
       }
+      if (config.method === 'PUT' && config.url.indexOf('s3-us-west-1.amazonaws.com') !== -1) {
+        config.headers['Content-Type'] = 'binary/octet-stream';
+      }
       return config;
     },
     // Intercept 401s and redirect you to login
