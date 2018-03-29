@@ -3,24 +3,40 @@
     <div class="col-sm-8 col-sm-offset-2">
       <h1>Create New Challenge</h1>
       <form ng-submit="submit(form)" name="form" novalidate>
-        <div class="form-group">
+        <div class="form-group" ng-class="{'has-error': form.title.$invalid && form.$submitted}">
           <label>Title</label>
           <input class="form-control" type="text" name="title" ng-model="data.title" required>
+          <p class="help-block" ng-if="form.title.$error.required && form.$submitted">Title is required</p>
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-class="{'has-error': form.description.$invalid && form.$submitted}">
+          <label>Description</label>
+          <textarea class="form-control" ng-model="data.description" name="description" required rows="5"></textarea>
+          <p class="help-block" ng-if="form.description.$error.required && form.$submitted">Description is required</p>
+        </div>
+        <div class="form-group" ng-class="{'has-error': form.announcement.$invalid && form.$submitted}">
           <label>Announcement</label>
           <input class="form-control" type="text" name="announcement" ng-model="data.announcement" required>
+          <p class="help-block" ng-if="form.announcement.$error.required && form.$submitted">Announcement is required</p>
         </div>
-        <div class="form-group">
-          <label>Close Date</label>
-          <input type="text" name="closeDate" ng-model="data.expiresAt" required>
+        <div class="form-group" ng-class="{'has-error': form.expiresAt.$invalid && form.$submitted}">
+          <label>End Date</label>
+          <p class="input-group">
+            <input name="expiresAt" type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="data.expiresAt" is-open="openEndDate" datepicker-options="dateOptions" close-text="Close" required/>
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="openEndDate=!openEndDate"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+          </p>
+          <p class="help-block" ng-if="form.expiresAt.$error.required && form.$submitted">End date is required</p>
+          <p class="help-block" ng-if="form.expiresAt.$error.date && form.$submitted">Invalid date</p>
         </div>
-        
-        <div class="form-group">
+        <div class="form-group" ng-class="{'has-error': form.video.$invalid && form.$submitted}">
           <label>Upload Video</label>
+          <input name="video" class="form-control" type="file" ngf-select ngf-max-size="20MB" ng-model="file" uploader="uploader" ngf-pattern="'video/*'" ngf-accept="'video/*'" required/>
+          <p class="help-block" ng-if="form.video.$error.required && form.$submitted">Video is required</p>
         </div>
         <div class="form-group">
-          <label>Upload Thumbnail</label>
+          <button ng-disabled="submitted" type="submit" class="btn btn-primary">Submit</button>
+          <button type="button" class="btn btn-warning" ui-sref="app.show.list">Cancel</button>
         </div>
       </form>
     </div>
