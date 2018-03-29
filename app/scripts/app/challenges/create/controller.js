@@ -3,7 +3,7 @@
   angular.module('measureApp').controller('CreateChallengeController', CreateChallengeController);
 
   /* @ngInject */
-  function CreateChallengeController($scope) {
+  function CreateChallengeController($scope, growl, ChallengeService, VideoService, UploadService) {
     $scope.data = {
       title: '',
       description: '',
@@ -39,12 +39,12 @@
             UploadService.uploadVideo(videoData, $scope.file).then(function() {
               VideoService.update({id: videoData._id}, {status: 'uploaded'});
               $scope.data.videoId = videoData._id;
-              ShowService.create($scope.data).$promise.then(function() {
+              ChallengeService.create($scope.data).$promise.then(function() {
                 $scope.submitted = false;
-                growl.success('Show was created successfully');
+                growl.success('Challenge was created successfully');
               }).catch(function(err) {
                 $scope.submitted = false;
-                growl.error('Failed to create new show');
+                growl.error('Failed to create new challenge');
               });
             }).catch(function(err) {
               $scope.submitted = false;
