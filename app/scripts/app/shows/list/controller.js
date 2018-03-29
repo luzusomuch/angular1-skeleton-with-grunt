@@ -12,6 +12,8 @@
     $scope.total = 0;
 
     function search(params) {
+      params = params || {};
+      _.merge(params, angular.copy($scope.pagination));
       params.page--;
       ShowService.list(params).$promise.then(function(resp) {
         $scope.items = resp.items;
@@ -19,6 +21,10 @@
       });
     }
 
-    search($scope.pagination);
+    search();
+
+    $scope.pageChanged = function() {
+      search();
+    };
   }
 })();
