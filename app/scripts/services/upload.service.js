@@ -7,7 +7,6 @@ angular.module('measureApp').factory('UploadService', function ($http, $q) {
   }
   return {
     checkVideoType: function(file) {
-      console.log(file);
       var ext = getExtension(file.name);
       switch (ext.toLowerCase()) {
         case 'm4v':

@@ -3,16 +3,29 @@
     <div class="col-sm-8 col-sm-offset-2">
       <h1>Create New Show</h1>
       <form class="create-show-form" ng-submit="submit(form)" name="form" novalidate>
-        <div class="form-group">
+        <div class="form-group" ng-class="{'has-error': form.title.$invalid && form.$submitted}">
           <label>Title</label>
           <input class="form-control" type="text" name="title" ng-model="data.title" required>
+          <p class="help-block" ng-if="form.title.$error.required && form.$submitted">Title is required</p>
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-class="{'has-error': form.video.$invalid && form.$submitted}">
           <label>Upload Video</label>
-          <input class="form-control" type="file" ngf-select ngf-max-size="20MB" ng-model="file" uploader="uploader" ngf-pattern="'video/*'" ngf-accept="'video/*'"/>
+          <input name="video" class="form-control" type="file" ngf-select ngf-max-size="20MB" ng-model="file" uploader="uploader" ngf-pattern="'video/*'" ngf-accept="'video/*'" required/>
+          <p class="help-block" ng-if="form.video.$error.required && form.$submitted">Video is required</p>
+        </div>
+        <div class="form-group" ng-class="{'has-error': form.expiresAt.$invalid && form.$submitted}">
+          <label>End Date</label>
+          <p class="input-group">
+            <input name="expiresAt" type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="data.expiresAt" is-open="openEndDate" datepicker-options="dateOptions" close-text="Close" required/>
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="openEndDate=!openEndDate"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+          </p>
+          <p class="help-block" ng-if="form.expiresAt.$error.required && form.$submitted">End date is required</p>
+          <p class="help-block" ng-if="form.expiresAt.$error.date && form.$submitted">Invalid date</p>
         </div>
         <div class="form-group">
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button ng-disabled="submitted" type="submit" class="btn btn-primary">Submit</button>
           <button type="button" class="btn btn-warning" ui-sref="app.show.list">Cancel</button>
         </div>
       </form>
