@@ -1,7 +1,6 @@
 var express = require('express');
 var app = express();
 var path = require('path');
-var config = require('./config/config.json');
 // Run the app by serving the static files
 // in the dist directory
 app.use(express.static(__dirname + '/dist'));
@@ -31,4 +30,4 @@ app.get('/*', function(req, res) {
 
 // Start the app by listening on the default
 // Heroku port
-app.listen(config.port || 3000);
+app.listen(process.env.PORT || 3000);
