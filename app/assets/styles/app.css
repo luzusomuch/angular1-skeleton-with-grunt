@@ -1,0 +1,18 @@
+.header.navbar {
+  margin-bottom: 0px; }
+
+.content {
+  min-height: 550px;
+  padding: 0 15px; }
+
+.login-form {
+  padding: 20px;
+  border: 1px solid #151515; }
+
+.add-new-challenge-button, .add-new-show-button {
+  margin-top: 35px;
+  text-align: right;
+  cursor: pointer; }
+
+textarea {
+  resize: none; }

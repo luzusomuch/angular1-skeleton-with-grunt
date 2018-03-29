@@ -35,22 +35,14 @@ nbproject
 ################################################
 .sass-cache/
 .tmp/
-apidoc/
 .tmp/public/
-assets
-build
-www
-styles
-vendors
+dist
 .build
 .vscode
 .env*
 yarn.lock
-SPHRS.note.txt
 .yo-rc.json
 config/local.json
-coverage
-dump.rdb
 config/test.json
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
