@@ -34,7 +34,7 @@
         <div class="form-group">
           <label>Status <span class="required">*</span></label>
           <div class="form-group" ng-class="{'has-error': form.status.$invalid && form.$submitted}">
-            <select name="status" class="form-control" ng-model="data.status" ng-options="status for status in showStatuses" required></select>
+            <select ng-disabled="!isAllowUpdateStatus" name="status" class="form-control" ng-model="data.status" ng-options="status for status in showStatuses" required></select>
           </div>
           <p class="help-block" ng-if="form.status.$error.required && form.$submitted">Status is required</p>
         </div>

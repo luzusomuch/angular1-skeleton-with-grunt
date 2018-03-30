@@ -5,7 +5,9 @@
   /* @ngInject */
   function UpdateShowController($scope, $stateParams, showDetail, pageSettings, ShowService, 
     growl, showStatusesUnableToUpdate, VideoService, UploadService) {
+    var numberOfChallenges = showDetail.numberOfChallenges;
     $scope.isAllowUpdateShow = showStatusesUnableToUpdate.indexOf(showDetail.status) === -1;
+    $scope.isAllowUpdateStatus = showDetail.status==='unpublished' && pageSettings['MINIMUM_NUMBER_OF_CHALLENGES_ACTIVE_SHOW'] <= numberOfChallenges;
     $scope.data = angular.copy(showDetail);
     $scope.data.expiresAt = new Date($scope.data.expiresAt);
     $scope.showStatuses = pageSettings['SHOW_STATUSES'];
@@ -56,6 +58,10 @@
       if (form.$valid) {
         // var data = _.pick($scope.data, ['title', 'status', 'expiresAt', 'videoId']);
         var data = _.pick($scope.data, ['title', 'status', 'videoId']);
+        // handle show status we only allow to update status when show reached enough challenges numbers
+        if (pageSettings['MINIMUM_NUMBER_OF_CHALLENGES_ACTIVE_SHOW'] > numberOfChallenges || pageSettings['MAXIMUM_NUMBER_OF_CHALLENGES_ACTIVE_SHOW'] < numberOfChallenges || data.status !== 'published') {
+          delete data.status;
+        }
         ShowService.update({id: $stateParams.id}, data).$promise.then(function() {
           growl.success('Updated show successfully');
         }).catch(function() {
