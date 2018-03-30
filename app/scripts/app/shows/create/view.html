@@ -5,13 +5,15 @@
       <form class="create-show-form" ng-submit="submit(form)" name="form" novalidate>
         <div class="form-group" ng-class="{'has-error': form.title.$invalid && form.$submitted}">
           <label>Title</label>
-          <input class="form-control" type="text" name="title" ng-model="data.title" required>
+          <input class="form-control" type="text" name="title" ng-model="data.title" required ng-maxlength="25">
           <p class="help-block" ng-if="form.title.$error.required && form.$submitted">Title is required</p>
+          <p class="help-block" ng-if="form.title.$error.maxlength && form.$submitted">Title must be less than 25 character</p>
         </div>
         <div class="form-group" ng-class="{'has-error': form.video.$invalid && form.$submitted}">
           <label>Upload Video</label>
-          <input name="video" class="form-control" type="file" ngf-select ngf-max-size="20MB" ng-model="file" uploader="uploader" ngf-pattern="'video/*'" ngf-accept="'video/*'" required/>
+          <input name="video" class="form-control" type="file" ngf-select ngf-max-size="40MB" ng-model="file" uploader="uploader" ngf-pattern="'video/*'" ngf-accept="'video/*'" required/>
           <p class="help-block" ng-if="form.video.$error.required && form.$submitted">Video is required</p>
+          <p class="help-block" ng-if="form.video.$error.maxSize && form.$submitted">Video maximum file is 40MB</p>
         </div>
         <div class="form-group" ng-class="{'has-error': form.expiresAt.$invalid && form.$submitted}">
           <label>End Date</label>
