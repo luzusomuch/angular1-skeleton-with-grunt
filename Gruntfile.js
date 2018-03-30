@@ -3,6 +3,7 @@ var version = require('./package.json').version;
 var port = require('./config/config.json').port;
 var hostname = require('./config/config.json').hostname;
 var apiUrl = require('./config/config.json').apiUrl;
+var showStatusesUnableToUpdate = require('./config/config.json').showStatusesUnableToUpdate;
 var appPath = require('./bower.json').appPath || 'app';
 
 // usemin custom step
@@ -315,7 +316,8 @@ module.exports = function (grunt) {
         constants: {
           ENV: 'dev',
           VERSION: version,
-          apiUrl: apiUrl
+          apiUrl: apiUrl,
+          showStatusesUnableToUpdate: showStatusesUnableToUpdate
         }
       },
       prod: {
@@ -325,7 +327,8 @@ module.exports = function (grunt) {
         constants: {
           ENV: 'prod',
           VERSION: version,
-          apiUrl: apiUrl
+          apiUrl: apiUrl,
+          showStatusesUnableToUpdate: showStatusesUnableToUpdate
         }
       }
     },

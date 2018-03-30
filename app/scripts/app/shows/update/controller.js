@@ -3,8 +3,8 @@
   angular.module('measureApp').controller('UpdateShowController', UpdateShowController);
 
   /* @ngInject */
-  function UpdateShowController($scope, $stateParams, showDetail, pageSettings, ShowService, growl) {
-    $scope.isAllowUpdateShow = ['published', 'closed'].indexOf(showDetail.status) === -1;
+  function UpdateShowController($scope, $stateParams, showDetail, pageSettings, ShowService, growl, showStatusesUnableToUpdate) {
+    $scope.isAllowUpdateShow = showStatusesUnableToUpdate.indexOf(showDetail.status) === -1;
     $scope.data = angular.copy(showDetail);
     $scope.data.expiresAt = new Date($scope.data.expiresAt);
     $scope.showStatuses = pageSettings['SHOW_STATUSES'];
@@ -32,7 +32,8 @@
         return growl.error('Please wait until upload process done');
       }
       if (moment(moment($scope.data.expiresAt).format('YYYY-MM-DD')).isBefore(moment(minDate).format('YYYY-MM-DD'))) {
-        return $scope.dateError = true;
+        $scope.dateError = true;
+        return false;
       }
       if (form.$valid) {
         var data = _.pick($scope.data, ['title', 'status', 'expiresAt', 'videoId']);

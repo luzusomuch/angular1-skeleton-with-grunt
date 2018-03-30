@@ -4,6 +4,7 @@
   "port": 3000,
   "hostname": "localhost",
   "apiUrl": "https://api-staging.measureup.co",
+  "showStatusesUnableToUpdate": "['published', 'closed']",
   "cluster": {
     "workerCount": 1,
     "accessKey": "k3ad8ca3112ma01-03832",

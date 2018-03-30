@@ -25,7 +25,7 @@
           <td>{{item.expiresAt | date: 'dd MMM yyyy'}}</td>
           <td>{{item.status}}</td>
           <td>
-            <a ui-sref="app.show.update({id: item._id})">
+            <a href="javascript:void(0)" ng-click="editShow(item)">
               <i class="fa fa-pencil"></i> Edit
             </a>
             <a href="javascript:void(0)" ng-click="removeShow(item)">

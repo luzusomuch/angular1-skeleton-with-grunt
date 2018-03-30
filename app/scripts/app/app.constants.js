@@ -8,4 +8,6 @@ angular.module('measureApp')
 
 .constant('apiUrl', 'https://api-staging.measureup.co')
 
+.constant('showStatusesUnableToUpdate', '[\'published\', \'closed\']')
+
 ;
