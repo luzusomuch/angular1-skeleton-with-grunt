@@ -33,6 +33,9 @@
               $scope.submitted = false;
               growl.error('Failed to upload video');
             });
+          }).catch(function() {
+            $scope.submitted = false;
+            growl.error('Failed to upload video');
           });
         } else {
           growl.error('Invalid File');

@@ -9,7 +9,7 @@ angular.module('measureApp', [
   'ngAnimate',
   'angular-growl',
   'ngFileUpload',
-  'ui.bootstrap'
+  'ui.bootstrap',
 ])
 .config(function($urlRouterProvider, $locationProvider, $httpProvider, growlProvider, $stateProvider) {
   $stateProvider.state('app', {

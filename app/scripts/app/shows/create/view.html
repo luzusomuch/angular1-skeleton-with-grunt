@@ -5,7 +5,7 @@
       <form class="create-show-form" ng-submit="submit(form)" name="form" novalidate>
         <div class="form-group" ng-class="{'has-error': form.title.$invalid && form.$submitted}">
           <label>Title</label>
-          <input class="form-control" type="text" name="title" ng-model="data.title" required ng-maxlength="25">
+          <input class="form-control" type="text" name="title" ng-model="data.title" required ng-maxlength="25" placeholder="Show Title">
           <p class="help-block" ng-if="form.title.$error.required && form.$submitted">Title is required</p>
           <p class="help-block" ng-if="form.title.$error.maxlength && form.$submitted">Title must be less than 25 character</p>
         </div>
