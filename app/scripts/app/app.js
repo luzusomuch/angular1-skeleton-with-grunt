@@ -17,6 +17,13 @@ angular.module('measureApp', [
     template: '<ui-view/>',
     abstract: true,
     isAuthenticate: true,
+    resolve: {
+      pageSettings:['$http', 'apiUrl', function($http, apiUrl) {
+        return $http.get(apiUrl + '/settings').then(function(resp) {
+          return resp.data;
+        });
+      }]
+    }
   });
   // $locationProvider.html5Mode(true);
   $urlRouterProvider.otherwise('/login');

@@ -28,6 +28,16 @@ angular.module('measureApp').config(function ($stateProvider) {
     authenticate: true,
     hideHeader: false,
     hideFooter: false,
-    pageTitle: 'Update Show'
+    pageTitle: 'Update Show',
+    resolve: {
+        showDetail: ['ShowService', '$stateParams', 'growl', '$state', function(ShowService, $stateParams, growl, $state) {
+            return ShowService.get({id: $stateParams.id}).$promise.then(function(resp) {
+                return resp;
+            }).catch(function() {
+                growl.error('Cannot get show detail');
+                return $state.go('app.show.list');
+            });
+        }],
+    }
   });
 });

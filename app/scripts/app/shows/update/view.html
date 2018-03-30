@@ -1,1 +1,42 @@
-<div class="content"></div>
+<div class="content">
+  <div class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+      <h1>Update Show</h1>
+      <form class="update-show-form" ng-submit="submit(form)" name="form" novalidate>
+        <div class="form-group" ng-class="{'has-error': form.title.$invalid && form.$submitted}">
+          <label>Title <span class="required">*</span></label>
+          <input class="form-control" type="text" name="title" ng-model="data.title" required ng-maxlength="30" placeholder="Show Title">
+          <p class="help-block" ng-if="form.title.$error.required && form.$submitted">Title is required</p>
+          <p class="help-block" ng-if="form.title.$error.maxlength && form.$submitted">Title must be less than 30 character</p>
+        </div>
+        <div class="form-group" ng-class="{'has-error': form.video.$invalid && form.$submitted}">
+          <label>Upload Video <span class="required">*</span></label>
+          <input name="video" class="form-control" type="file" ngf-select ngf-max-size="40MB" ng-model="file" uploader="uploader" ngf-pattern="'video/*'" ngf-accept="'video/*'" ng-required="!data.video || !data.video._id"/>
+          <p class="help-block" ng-if="form.video.$error.required && !form.video.$error.maxSize && form.$submitted">Video is required</p>
+          <p class="help-block" ng-if="form.video.$error.maxSize && form.$submitted">Video maximum file is 40MB</p>
+        </div>
+        <div class="form-group" ng-class="{'has-error': form.expiresAt.$invalid && form.$submitted}">
+          <label>End Date <span class="required">*</span></label>
+          <p class="input-group">
+            <input name="expiresAt" type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="data.expiresAt" is-open="openEndDate" datepicker-options="dateOptions" close-text="Close" required readonly/>
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="openEndDate=!openEndDate"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+          </p>
+          <p class="help-block" ng-if="form.expiresAt.$error.required && form.$submitted">End date is required</p>
+          <p class="help-block" ng-if="form.expiresAt.$error.date && form.$submitted">Invalid date</p>
+        </div>
+        <div class="form-group">
+          <label>Status <span class="required">*</span></label>
+          <div class="form-group">
+            <select class="form-control" ng-model="data.status" ng-options="status for status in showStatuses"></select>
+          </div>
+        </div>
+        <div class="form-group">
+          <button ng-disabled="submitted || !isAllowUpdateShow" type="submit" class="btn btn-primary">Submit</button>
+          <button type="button" class="btn btn-warning" ui-sref="app.show.list">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

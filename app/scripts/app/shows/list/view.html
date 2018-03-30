@@ -20,12 +20,12 @@
         <tr ng-repeat="item in items">
           <td>{{$index + 1}}</td>
           <td><a ui-sref="app.challenge.list({showId: item._id})">{{item.title}}</a></td>
-          <td>{{item.creator}}</td>
+          <td>{{item.creator.firstName}} {{item.creator.lastName}}</td>
           <td>{{item.numberOfChallenges}}</td>
           <td>{{item.expiresAt | date: 'dd MMM yyyy'}}</td>
           <td>{{item.status}}</td>
           <td>
-            <a ui-sref="app.show.edit({id: item._id})">
+            <a ui-sref="app.show.update({id: item._id})">
               <i class="fa fa-pencil"></i> Edit
             </a>
             <a href="javascript:void(0)" ng-click="removeShow(item)">
