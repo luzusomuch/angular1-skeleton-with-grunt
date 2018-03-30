@@ -15,7 +15,7 @@
           <p class="help-block" ng-if="form.video.$error.required && !form.video.$error.maxSize && form.$submitted">Video is required</p>
           <p class="help-block" ng-if="form.video.$error.maxSize && form.$submitted">Video maximum file is 40MB</p>
         </div>
-        <div class="form-group" ng-class="{'has-error': form.expiresAt.$invalid && form.$submitted}">
+        <div class="form-group" ng-class="{'has-error': (form.expiresAt.$invalid || dateError) && form.$submitted}">
           <label>End Date <span class="required">*</span></label>
           <p class="input-group">
             <input name="expiresAt" type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="data.expiresAt" is-open="openEndDate" datepicker-options="dateOptions" close-text="Close" required readonly/>
@@ -25,12 +25,14 @@
           </p>
           <p class="help-block" ng-if="form.expiresAt.$error.required && form.$submitted">End date is required</p>
           <p class="help-block" ng-if="form.expiresAt.$error.date && form.$submitted">Invalid date</p>
+          <p class="help-block" ng-if="dateError && form.$submitted">End date must greater than challenge end date</p>
         </div>
         <div class="form-group">
           <label>Status <span class="required">*</span></label>
-          <div class="form-group">
-            <select class="form-control" ng-model="data.status" ng-options="status for status in showStatuses"></select>
+          <div class="form-group" ng-class="{'has-error': form.status.$invalid && form.$submitted}">
+            <select name="status" class="form-control" ng-model="data.status" ng-options="status for status in showStatuses" required></select>
           </div>
+          <p class="help-block" ng-if="form.status.$error.required && form.$submitted">Status is required</p>
         </div>
         <div class="form-group">
           <button ng-disabled="submitted || !isAllowUpdateShow" type="submit" class="btn btn-primary">Submit</button>

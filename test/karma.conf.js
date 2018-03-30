@@ -34,6 +34,7 @@ module.exports = function (config) {
             'app/bower_components/ng-file-upload/ng-file-upload.js',
             'app/bower_components/ng-file-upload-shim/ng-file-upload-shim.js',
             'app/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+            'app/bower_components/moment/moment.js',
             'app/bower_components/angular-mocks/angular-mocks.js',
             'app/bower_components/livereload-js/dist/livereload.js',
             // endbower
