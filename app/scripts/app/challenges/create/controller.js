@@ -20,9 +20,21 @@
       description: '',
     };
     $scope.submitted = false;
+    $scope.prizeTitleError = false;
+    $scope.prizeDescError = false;
 
     $scope.addPrize = function() {
-      if ($scope.prize.title && $scope.prize.description) {
+      $scope.prizeTitleError = false;
+      $scope.prizeDescError = false;
+      if (!$scope.prize.title || ($scope.prize.title && $scope.prize.title.length > 30)) {
+        $scope.prizeTitleError = true;
+      }
+      if (!$scope.prize.description || ($scope.prize.description && $scope.prize.description.length > 60)) {
+        $scope.prizeDescError = true;
+      }
+      if ($scope.prizeTitleError || $scope.prizeDescError) {
+        growl.error('Please check your prize data.');
+      } else {
         $scope.data.prizes.push($scope.prize);
         $scope.prize = {
           title: '',
@@ -36,7 +48,6 @@
     };
 
     $scope.submit = function(form) {
-      console.log($scope.data);
       if (form.$valid && $scope.file) {
         var isVideo = UploadService.checkVideoType($scope.file);
         if (isVideo) {
@@ -48,6 +59,18 @@
               ChallengeService.create({showId: $stateParams.showId}, $scope.data).$promise.then(function() {
                 $scope.submitted = false;
                 growl.success('Challenge was created successfully');
+                $scope.data = {
+                  title: '',
+                  description: '',
+                  announcement: '',
+                  expiresAt: new Date(),
+                  prizes: [],
+                  showId: $stateParams.showId
+                };
+                form.$setDirty();
+                form.$setUntouched();
+                form.$setPristine();
+                form.$submitted = false;
               }).catch(function(err) {
                 $scope.submitted = false;
                 growl.error('Failed to create new challenge');

@@ -16,3 +16,6 @@
 
 textarea {
   resize: none; }
+
+.required {
+  color: red; }

@@ -25,6 +25,14 @@
               ShowService.create($scope.data).$promise.then(function() {
                 $scope.submitted = false;
                 growl.success('Show was created successfully');
+                $scope.data = {
+                  title: '',
+                  expiresAt: new Date()
+                };
+                form.$setDirty();
+                form.$setUntouched();
+                form.$setPristine();
+                form.$submitted = false;
               }).catch(function(err) {
                 $scope.submitted = false;
                 growl.error('Failed to create new show');
