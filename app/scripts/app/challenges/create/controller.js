@@ -10,6 +10,7 @@
       announcement: '',
       expiresAt: new Date(),
       prizes: [],
+      showId: $stateParams.showId
     };
     $scope.dateOptions = {
       minDate: new Date(),
@@ -34,15 +35,6 @@
       $scope.data.prizes.splice(index, 1);
     };
 
-    $scope.updateEditAbleModal = function(index, key) {
-      $scope.editAbleModel = $scope.data.prizes[index][key];
-      console.log($scope.editAbleModel);
-    };
-
-    $scope.onUpdateContent = function() {
-      console.log($scope.editAbleModel);
-    };
-
     $scope.submit = function(form) {
       console.log($scope.data);
       if (form.$valid && $scope.file) {
@@ -53,7 +45,6 @@
             UploadService.uploadVideo(videoData, $scope.file).then(function() {
               VideoService.update({id: videoData._id}, {status: 'uploaded'});
               $scope.data.videoId = videoData._id;
-              $scope.data.showId = $stateParams.showId;
               ChallengeService.create({showId: $stateParams.showId}, $scope.data).$promise.then(function() {
                 $scope.submitted = false;
                 growl.success('Challenge was created successfully');

@@ -10,6 +10,7 @@
           <td>#</td>
           <td>Name</td>
           <td>Description</td>
+          <td>Status</td>
           <td>Action</td>
         </tr>
       </thead>
@@ -18,7 +19,15 @@
           <td>{{$index+1}}</td>
           <td>{{item.title}}</td>
           <td>{{item.description}}</td>
-          <td></td>
+          <td>{{item.status}}</td>
+          <td>
+            <a ui-sref="app.challenge.update({showId: showId, id: item._id})">
+              <i class="fa fa-pencil"></i> Edit
+            </a>
+            <a href="javascript:void(0)" ng-click="removeChallenge(item)">
+              <i class="fa fa-times"></i> Delete
+            </a>
+          </td>
         </tr>
       </tbody>
     </table>

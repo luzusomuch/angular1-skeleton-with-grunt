@@ -21,5 +21,9 @@
     }
 
     search($scope.pagination);
+
+    $scope.removeChallenge = function(item) {
+      
+    };
   }
 })();
