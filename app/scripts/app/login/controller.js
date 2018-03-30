@@ -12,7 +12,7 @@
     $scope.submit = function(form) {
       if (form.$valid) {
         AuthService.login($scope.user).then(function() {
-          $state.go('app.home');
+          $state.go('app.show.list');
         }).catch(function(err) {
           growl.error('Something wrong');
         });
