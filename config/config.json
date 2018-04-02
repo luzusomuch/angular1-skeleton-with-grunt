@@ -4,8 +4,8 @@
   "hostname": "localhost",
   "devEnv": "develop",
   "devApiUrl": "https://api-staging.measureup.co",
-  "stagingEnv": "staging",
-  "stagingApiUrl": "https://api-staging.measureup.co",
+  "prodEnv": "production",
+  "prodApiUrl": "https://api.measureup.co",
   "showStatusesUnableToUpdate": "['published', 'closed']",
   "cluster": {
     "workerCount": 1,
