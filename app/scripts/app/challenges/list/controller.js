@@ -22,7 +22,7 @@
 
     search($scope.pagination);
 
-    $scope.removeChallenge = function(item) {
+    $scope.removeChallenge = function(item, index) {
       if (showDetail.status === 'unpublished') {
         $uibModal.open({
           controller: 'ConfirmModalController',

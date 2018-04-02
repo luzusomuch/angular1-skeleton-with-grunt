@@ -3,7 +3,7 @@
   angular.module('measureApp').controller('UpdateChallengeController', UpdateChallengeController);
 
   /* @ngInject */
-  function UpdateChallengeController($scope, $stateParams, challengeDetail, growl, ChallengeService) {
+  function UpdateChallengeController($scope, $stateParams, challengeDetail, growl, ChallengeService, VideoService, UploadService, showDetail) {
     $scope.showId = $stateParams.showId;
     $scope.data = angular.copy(challengeDetail);
     $scope.data.expiresAt = new Date($scope.data.expiresAt);
@@ -61,6 +61,9 @@
     };
 
     $scope.submit = function(form) {
+      if (showDetail.status !== 'unpublished') {
+        return growl.error('Cannot edit this challenge. Because show status is not unpublished');
+      }
       if (form.$valid) {
         if ($scope.isUploading) {
           return growl.error('Please wait until upload process done');
