@@ -3,7 +3,7 @@
   angular.module('measureApp').controller('ChallengesListController', ChallengesListController);
 
   /* @ngInject */
-  function ChallengesListController($scope, ChallengeService, $stateParams) {
+  function ChallengesListController($scope, ChallengeService, $stateParams, $uibModal, growl) {
     $scope.showId = $stateParams.showId;
     $scope.pagination = {
       page: 1,
@@ -23,7 +23,26 @@
     search($scope.pagination);
 
     $scope.removeChallenge = function(item) {
-      
+      $uibModal.open({
+        controller: 'ConfirmModalController',
+        controllerAs: 'cm',
+        templateUrl: 'scripts/components/confirmModal/view.html',
+        resolve: {
+          title: function() {
+            return 'Delete Challenge Confirmation';
+          },
+          description: function() {
+            return 'Are you sure that you want to delete this challenge?';
+          }
+        }
+      }).result.then(function() {
+        ChallengeService.delete({showId: $scope.showId, id: item._id}).$promise.then(function() {
+          $scope.items.splice(index, 1);
+          $scope.total--;
+        }).catch(function() {
+          growl.error('Error when delete a challenge. Please try again');
+        });
+      });
     };
   }
 })();
