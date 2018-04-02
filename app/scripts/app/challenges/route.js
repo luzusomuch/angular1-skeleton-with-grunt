@@ -4,7 +4,18 @@ angular.module('measureApp').config(function ($stateProvider) {
   $stateProvider.state('app.challenge', {
     url: '/challenge/:showId',
     abstract: true,
-    template: '<ui-view/>'
+    template: '<ui-view/>',
+    resolve: {
+      showDetail: ['ShowService', '$stateParams', '$state', 'growl', 
+      function(ShowService, $stateParams, $state, growl) {
+        return ShowService.get({id: $stateParams.showId}).$promise.then(function(resp) {
+          return resp;
+        }).catch(function() {
+          growl.error('Something wrong. Please try again later');
+          $state.go('app.show.list', {id: $stateParams.showId});
+        });
+      }]
+    }
   }).state('app.challenge.list', {
     url: '/list',
     templateUrl: 'scripts/app/challenges/list/view.html',
