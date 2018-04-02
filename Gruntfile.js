@@ -2,7 +2,8 @@
 var version = require('./package.json').version;
 var port = require('./config/config.json').port;
 var hostname = require('./config/config.json').hostname;
-var apiUrl = require('./config/config.json').apiUrl;
+var devApiUrl = require('./config/config.json').devApiUrl;
+var prodApiUrl = require('./config/config.json').prodApiUrl;
 var showStatusesUnableToUpdate = require('./config/config.json').showStatusesUnableToUpdate;
 var appPath = require('./bower.json').appPath || 'app';
 
@@ -316,7 +317,7 @@ module.exports = function (grunt) {
         constants: {
           ENV: 'dev',
           VERSION: version,
-          apiUrl: apiUrl,
+          apiUrl: devApiUrl,
           showStatusesUnableToUpdate: showStatusesUnableToUpdate
         }
       },
@@ -327,7 +328,7 @@ module.exports = function (grunt) {
         constants: {
           ENV: 'prod',
           VERSION: version,
-          apiUrl: apiUrl,
+          apiUrl: prodApiUrl,
           showStatusesUnableToUpdate: showStatusesUnableToUpdate
         }
       }
