@@ -3,7 +3,7 @@
   angular.module('measureApp').controller('ShowsListController', ShowsListController);
 
   /* @ngInject */
-  function ShowsListController($scope, $state, ShowService, showStatusesUnableToUpdate, growl) {
+  function ShowsListController($scope, $state, ShowService, showStatusesUnableToUpdate, growl, $uibModal) {
     $scope.pagination = {
       page: 1,
       limit: 20,
@@ -33,6 +33,29 @@
       } else {
         growl.error('This show do not allow to update');
       }
+    };
+
+    $scope.deleteShow = function(item, index) {
+      $uibModal.open({
+        controller: 'ConfirmModalController',
+        controllerAs: 'cm',
+        templateUrl: 'scripts/components/confirmModal/view.html',
+        resolve: {
+          title: function() {
+            return 'Delete Show Confirmation';
+          },
+          description: function() {
+            return 'Are you sure that you want to delete this show?';
+          }
+        }
+      }).result.then(function() {
+        ShowService.delete({id: item._id}).$promise.then(function() {
+          $scope.items.splice(index, 1);
+          $scope.total--;
+        }).catch(function() {
+          growl.error('Error when delete a show. Please try again');
+        });
+      });
     };
   }
 })();

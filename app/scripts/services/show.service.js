@@ -22,6 +22,13 @@ angular.module('measureApp').factory('ShowService', function($resource, apiUrl){
         id: '@id',
       },
       isArray: false,
+    },
+    delete: {
+      method: 'DELETE',
+      params: {
+        id: '@id',
+      },
+      isArray: false
     }
   });
 });

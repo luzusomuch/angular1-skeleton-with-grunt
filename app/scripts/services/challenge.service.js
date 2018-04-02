@@ -1,6 +1,6 @@
 'use strict';
 angular.module('measureApp').factory('ChallengeService', function($resource, apiUrl){
-  return $resource(apiUrl + '/api/shows/:showId/challenges/', {}, {
+  return $resource(apiUrl + '/api/shows/:showId/challenges/:id/', {}, {
     list: {
       method: 'GET',
       params: {

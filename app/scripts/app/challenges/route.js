@@ -28,6 +28,17 @@ angular.module('measureApp').config(function ($stateProvider) {
     authenticate: true,
     hideHeader: false,
     hideFooter: false,
-    pageTitle: 'Update Challenge'
+    pageTitle: 'Update Challenge',
+    resolve: {
+      challengeDetail: ['ChallengeService', '$stateParams', '$state', 'growl', 
+      function(ChallengeService, $stateParams, $state, growl) {
+        return ChallengeService.get({showId: $stateParams.showId, id: $stateParams.id}).$promise.then(function(resp) {
+          return resp;
+        }).catch(function() {
+          growl.error('Something wrong. Please try again later');
+          $state.go('app.challenge.list', {showId: $stateParams.showId});
+        });
+      }]
+    }
   });
 });
