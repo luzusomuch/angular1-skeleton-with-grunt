@@ -1,8 +1,8 @@
 {
   "name": "MeaSure",
-  "env": "develop",
   "port": 3000,
   "hostname": "localhost",
+  "env": "develop",
   "apiUrl": "https://api-staging.measureup.co",
   "showStatusesUnableToUpdate": "['published', 'closed']",
   "cluster": {
