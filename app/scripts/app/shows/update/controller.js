@@ -17,12 +17,12 @@
 
     // calculate min date based on challenges list
     var minDate = new Date();
-    var minChallengeDate = null;
-    if (showDetail.challenges && showDetail.challenges.length > 0) {
-      minChallengeDate = new Date(_.max(_.map(showDetail.challenges, function(challenge) {
-        return challenge.expiresAt;
-      })));
-    }
+    // var minChallengeDate = null;
+    // if (showDetail.challenges && showDetail.challenges.length > 0) {
+    //   minChallengeDate = new Date(_.max(_.map(showDetail.challenges, function(challenge) {
+    //     return challenge.expiresAt;
+    //   })));
+    // }
     $scope.dateOptions = {
       minDate: minDate
     };
@@ -53,7 +53,7 @@
         return growl.error('Please wait until upload process done');
       }
       if (form.$valid) {
-        if (minChallengeDate && moment(moment($scope.data.expiresAt).format('YYYY-MM-DD')).isBefore(moment(minChallengeDate).format('YYYY-MM-DD'))) {
+        if (!moment(moment($scope.data.expiresAt).format('YYYY-MM-DD')).isSame(moment(showDetail.expiresAt).format('YYYY-MM-DD'))) {
           // show warning message that all challenges which are after show expires date will update
           $uibModal.open({
             controller: 'WarningModalController',
@@ -64,7 +64,7 @@
                 return 'Update show warning';
               },
               description: function() {
-                return 'All challenges which have end date greater than ' + moment(minChallengeDate).format('DD-MM-YYYY') + ' will be update';
+                return 'All challenges which have end date after ' + moment($scope.data.expiresAt).format('DD-MM-YYYY') + ' will be update.';
               }
             }
           }).result.then(function() {

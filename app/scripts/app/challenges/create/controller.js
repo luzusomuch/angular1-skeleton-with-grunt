@@ -3,7 +3,8 @@
   angular.module('measureApp').controller('CreateChallengeController', CreateChallengeController);
 
   /* @ngInject */
-  function CreateChallengeController($scope, $stateParams, growl, ChallengeService, VideoService, UploadService) {
+  function CreateChallengeController($scope, $stateParams, growl, ChallengeService, VideoService, UploadService, pageSettings, showDetail) {
+    var maximumChallenge = pageSettings['MAXIMUM_NUMBER_OF_CHALLENGES_ACTIVE_SHOW'];
     $scope.data = {
       title: '',
       description: '',
@@ -48,6 +49,9 @@
     };
 
     $scope.submit = function(form) {
+      if (showDetail.numberOfChallenges >= maximumChallenge) {
+        return growl.error('This show has reached maximum number of challenges');
+      }
       if (form.$valid && $scope.file) {
         var isVideo = UploadService.checkVideoType($scope.file);
         if (isVideo) {
@@ -67,6 +71,7 @@
                   prizes: [],
                   showId: $stateParams.showId
                 };
+                showDetail.numberOfChallenges++;
                 form.$setDirty();
                 form.$setUntouched();
                 form.$setPristine();
