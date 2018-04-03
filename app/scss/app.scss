@@ -2,25 +2,58 @@ $orange: #ff7038;
 $white: #FFF;
 $black: #151515;
 $grey: #f2f5f8;
+$backgroundColor: #2E363F;
 $darkBlue: #1d1f2a;
 $darkGrey: #555;
 $facebookBlue: #3b5998;
 $googleRed: #DC4E41;
 
+body {
+  background-color: $backgroundColor;
+  color: $white;
+}
+
 .header {
+  &.navbar-custom {
+    .navbar-brand {
+      color: $white;
+    }
+    li {
+      a {
+        color: $white;
+      }
+    }
+  }
   &.navbar {
     margin-bottom: 0px;
   }
 }
 
-.content {
-  min-height: 550px;
+.footer {
   padding: 0 15px;
 }
 
-.login-form {
-  padding: 20px;
-  border: 1px solid $black;
+.content {
+  min-height: 600px;
+  padding: 0 15px;
+  background-color: $white;
+  color: $black;
+}
+
+.login-page {
+  margin-top: 15%;
+  
+  .login-form {
+    padding: 20px 20px 30px 20px;
+    border-top: 1px solid #3f4954;
+    border-bottom: 1px solid #3f4954;
+  }
+
+  .login-button-group {
+    .login-btn {
+      float: right;
+    }
+  }
 }
 
 .add-new-challenge-button, .add-new-show-button {

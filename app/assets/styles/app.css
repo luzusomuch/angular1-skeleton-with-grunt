@@ -1,13 +1,33 @@
+body {
+  background-color: #2E363F;
+  color: #FFF; }
+
+.header.navbar-custom .navbar-brand {
+  color: #FFF; }
+
+.header.navbar-custom li a {
+  color: #FFF; }
+
 .header.navbar {
   margin-bottom: 0px; }
 
-.content {
-  min-height: 550px;
+.footer {
   padding: 0 15px; }
 
-.login-form {
-  padding: 20px;
-  border: 1px solid #151515; }
+.content {
+  min-height: 600px;
+  padding: 0 15px;
+  background-color: #FFF;
+  color: #151515; }
+
+.login-page {
+  margin-top: 15%; }
+  .login-page .login-form {
+    padding: 20px 20px 30px 20px;
+    border-top: 1px solid #3f4954;
+    border-bottom: 1px solid #3f4954; }
+  .login-page .login-button-group .login-btn {
+    float: right; }
 
 .add-new-challenge-button, .add-new-show-button {
   margin-top: 35px;
