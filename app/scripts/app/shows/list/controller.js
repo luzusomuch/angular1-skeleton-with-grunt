@@ -46,7 +46,7 @@
               return 'Delete Show Confirmation';
             },
             description: function() {
-              return 'Are you sure that you want to delete this show? It will remove all challenges belong to this.';
+              return 'Do you want to delete this show? It will remove all challenges belong to this.';
             }
           }
         }).result.then(function() {
@@ -58,7 +58,7 @@
           });
         });
       } else {
-        growl.error('Cannot delete unpublished show');
+        growl.error('Cannot delete Published/Closed show');
       }
     };
   }

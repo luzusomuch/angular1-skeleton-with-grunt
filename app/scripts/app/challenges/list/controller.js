@@ -43,7 +43,7 @@
               return 'Delete Challenge Confirmation';
             },
             description: function() {
-              return 'Are you sure that you want to delete this challenge?';
+              return 'Do you want to delete this challenge?';
             }
           }
         }).result.then(function() {
@@ -55,7 +55,7 @@
           });
         });
       } else {
-        growl.error('Cannot delete unpublished show');
+        growl.error('Cannot delete challenge belongs to Published/Closed show');
       }
     };
   }
