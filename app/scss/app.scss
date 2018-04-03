@@ -1,7 +1,7 @@
 $orange: #ff7038;
 $white: #FFF;
 $black: #151515;
-$grey: #f2f5f8;
+$grey: #b0b6bd;
 $backgroundColor: #2E363F;
 $darkBlue: #1d1f2a;
 $darkGrey: #555;
@@ -21,6 +21,27 @@ body {
     li {
       a {
         color: $white;
+
+        &:hover, &:focus {
+          background-color: inherit;
+        }
+      }
+    }
+    .open {
+      a {
+        background-color: inherit;
+        &:hover, &:focus {
+          background-color: inherit;
+        }
+      }
+    }
+    .dropdown-menu {
+      background-color: $backgroundColor;
+
+      li {
+        a {
+          background-image: inherit;
+        }
       }
     }
   }
@@ -30,7 +51,7 @@ body {
 }
 
 .footer {
-  padding: 0 15px;
+  padding: 5px 15px 0 15px;
 }
 
 .content {
@@ -40,24 +61,28 @@ body {
   color: $black;
 }
 
-.login-page {
-  margin-top: 15%;
-  
-  .login-form {
-    padding: 20px 20px 30px 20px;
-    border-top: 1px solid #3f4954;
-    border-bottom: 1px solid #3f4954;
-  }
+.login-content {
+  overflow: hidden;
 
-  .login-button-group {
-    .login-btn {
-      float: right;
+  .login-page {
+    margin-top: 15%;
+    
+    .login-form {
+      padding: 20px 20px 30px 20px;
+      border-top: 1px solid #3f4954;
+      border-bottom: 1px solid #3f4954;
+    }
+
+    .login-button-group {
+      .login-btn {
+        float: right;
+      }
     }
   }
 }
 
 .add-new-challenge-button, .add-new-show-button {
-  margin-top: 35px;
+  margin-top: 30px;
   text-align: right;
   cursor: pointer;
 }
@@ -68,4 +93,20 @@ textarea {
 
 .required {
   color: red;
+}
+
+.table {
+  text-align: center;
+
+  thead {
+    tr {
+      td {
+        color: $grey;
+      }
+    }
+  }
+
+  .table-icon {
+    color: $grey;
+  }
 }

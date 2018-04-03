@@ -7,12 +7,24 @@ body {
 
 .header.navbar-custom li a {
   color: #FFF; }
+  .header.navbar-custom li a:hover, .header.navbar-custom li a:focus {
+    background-color: inherit; }
+
+.header.navbar-custom .open a {
+  background-color: inherit; }
+  .header.navbar-custom .open a:hover, .header.navbar-custom .open a:focus {
+    background-color: inherit; }
+
+.header.navbar-custom .dropdown-menu {
+  background-color: #2E363F; }
+  .header.navbar-custom .dropdown-menu li a {
+    background-image: inherit; }
 
 .header.navbar {
   margin-bottom: 0px; }
 
 .footer {
-  padding: 0 15px; }
+  padding: 5px 15px 0 15px; }
 
 .content {
   min-height: 600px;
@@ -20,17 +32,19 @@ body {
   background-color: #FFF;
   color: #151515; }
 
-.login-page {
-  margin-top: 15%; }
-  .login-page .login-form {
-    padding: 20px 20px 30px 20px;
-    border-top: 1px solid #3f4954;
-    border-bottom: 1px solid #3f4954; }
-  .login-page .login-button-group .login-btn {
-    float: right; }
+.login-content {
+  overflow: hidden; }
+  .login-content .login-page {
+    margin-top: 15%; }
+    .login-content .login-page .login-form {
+      padding: 20px 20px 30px 20px;
+      border-top: 1px solid #3f4954;
+      border-bottom: 1px solid #3f4954; }
+    .login-content .login-page .login-button-group .login-btn {
+      float: right; }
 
 .add-new-challenge-button, .add-new-show-button {
-  margin-top: 35px;
+  margin-top: 30px;
   text-align: right;
   cursor: pointer; }
 
@@ -39,3 +53,10 @@ textarea {
 
 .required {
   color: red; }
+
+.table {
+  text-align: center; }
+  .table thead tr td {
+    color: #b0b6bd; }
+  .table .table-icon {
+    color: #b0b6bd; }

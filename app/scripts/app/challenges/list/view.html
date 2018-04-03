@@ -1,8 +1,10 @@
 <div class="content">
   <div class="challenges-list">
     <div class="row">
-      <h1 class="col-sm-8">Challenges List</h1>
-      <span ui-sref="app.challenge.create({showId: showId})" class="col-sm-4 add-new-challenge-button"><i class="fa fa-plus"></i> Add New Challenge</span>
+      <h1 class="col-sm-10">Challenges List</h1>
+      <div class="col-sm-2">
+        <button ui-sref="app.challenge.create({showId: showId})" class="btn btn-primary add-new-challenge-button"><i class="fa fa-plus"></i> Add New Challenge</button>
+      </div>
     </div>
     <table class="table">
       <thead>
