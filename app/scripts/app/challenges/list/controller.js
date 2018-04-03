@@ -3,7 +3,7 @@
   angular.module('measureApp').controller('ChallengesListController', ChallengesListController);
 
   /* @ngInject */
-  function ChallengesListController($scope, ChallengeService, showDetail, $stateParams, $uibModal, growl) {
+  function ChallengesListController($scope, ChallengeService, showDetail, $stateParams, $uibModal, growl, $state) {
     $scope.showId = $stateParams.showId;
     $scope.pagination = {
       page: 1,

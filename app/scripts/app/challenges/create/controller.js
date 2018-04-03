@@ -23,18 +23,26 @@
     };
     $scope.submitted = false;
     $scope.prizeTitleError = false;
+    $scope.prizeTitleLengthError = false;
     $scope.prizeDescError = false;
+    $scope.prizeDescLengthError = false;
 
     $scope.addPrize = function() {
       $scope.prizeTitleError = false;
+      $scope.prizeTitleLengthError = false;
       $scope.prizeDescError = false;
-      if (!$scope.prize.title || ($scope.prize.title && $scope.prize.title.length > 30)) {
+      $scope.prizeDescLengthError = false;
+      if (!$scope.prize.title) {
         $scope.prizeTitleError = true;
+      } else if ($scope.prize.title && $scope.prize.title.length > 30) {
+        $scope.prizeTitleLengthError = true;
       }
-      if (!$scope.prize.description || ($scope.prize.description && $scope.prize.description.length > 60)) {
+      if (!$scope.prize.description) {
         $scope.prizeDescError = true;
+      } else if ($scope.prize.description && $scope.prize.description.length > 60) {
+        $scope.prizeDescLengthError = true;
       }
-      if ($scope.prizeTitleError || $scope.prizeDescError) {
+      if ($scope.prizeTitleError || $scope.prizeDescError || $scope.prizeTitleLengthError || $scope.prizeDescLengthError) {
         growl.error('Please check your prize data.');
       } else {
         $scope.data.prizes.push($scope.prize);
@@ -53,8 +61,8 @@
       if (showDetail.numberOfChallenges >= maximumChallenge) {
         return growl.error('This show has reached maximum number of challenges');
       }
-      var endTimeValidity = moment($scope.data.expiresAt).isSameOrBefore(moment(showDetail.expiresAt));
-      form.expiresAt.$setValidity("endTime", endTimeValidity);
+      var endTimeValidity = moment(moment($scope.data.expiresAt).format('YYYY-MM-DD')).isSameOrBefore(moment(showDetail.expiresAt).format('YYYY-MM-DD'));
+      form.expiresAt.$setValidity('endTime', endTimeValidity);
       if (form.$valid && $scope.file) {
         var isVideo = UploadService.checkVideoType($scope.file);
         if (isVideo) {
@@ -75,6 +83,7 @@
                   prizes: [],
                   showId: $stateParams.showId
                 };
+                $scope.file = null;
                 showDetail.numberOfChallenges++;
                 form.$setDirty();
                 form.$setUntouched();
