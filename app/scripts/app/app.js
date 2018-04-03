@@ -10,6 +10,9 @@ angular.module('measureApp', [
   'angular-growl',
   'ngFileUpload',
   'ui.bootstrap',
+  'com.2fdevs.videogular',
+  "com.2fdevs.videogular.plugins.controls",
+  "com.2fdevs.videogular.plugins.buffering"
 ])
 .config(function($urlRouterProvider, $locationProvider, $httpProvider, growlProvider, $stateProvider) {
   $stateProvider.state('app', {

@@ -61,5 +61,18 @@
         growl.error('Cannot delete Published/Closed show');
       }
     };
+
+    $scope.viewVideo = function(item) {
+      $uibModal.open({
+        controller: 'ViewVideoModalController',
+        controllerAs: 'vm',
+        templateUrl: 'scripts/components/viewVideoModal/view.html',
+        resolve: {
+          videoDetail: function() {
+            return item.video;
+          }
+        }
+      });
+    };
   }
 })();
