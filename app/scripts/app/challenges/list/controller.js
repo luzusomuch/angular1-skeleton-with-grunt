@@ -22,6 +22,16 @@
 
     search($scope.pagination);
 
+    $scope.editChallenge = function(item) {
+      if (item.status === 'closed') {
+        return growl.error('Cannot edit Closed challenge');
+      }
+      if (showDetail.status !== 'unpublished') {
+        return growl.error('Cannot edit challenge which has show status is Published/Closed');
+      }
+      $state.go('app.challenge.update', {showId: $scope.showId, id: item._id});
+    };
+
     $scope.removeChallenge = function(item, index) {
       if (showDetail.status === 'unpublished') {
         $uibModal.open({

@@ -15,6 +15,7 @@
     };
     $scope.dateOptions = {
       minDate: new Date(),
+      maxDate: new Date(showDetail.expiresAt)
     };
     $scope.prize = {
       title: '',
@@ -52,6 +53,8 @@
       if (showDetail.numberOfChallenges >= maximumChallenge) {
         return growl.error('This show has reached maximum number of challenges');
       }
+      var endTimeValidity = moment($scope.data.expiresAt).isSameOrBefore(moment(showDetail.expiresAt));
+      form.expiresAt.$setValidity("endTime", endTimeValidity);
       if (form.$valid && $scope.file) {
         var isVideo = UploadService.checkVideoType($scope.file);
         if (isVideo) {
@@ -60,6 +63,7 @@
             UploadService.uploadVideo(videoData, $scope.file).then(function() {
               VideoService.update({id: videoData._id}, {status: 'uploaded'});
               $scope.data.videoId = videoData._id;
+              $scope.data.expiresAt = new Date(moment($scope.data.expiresAt).endOf('day'));
               ChallengeService.create({showId: $stateParams.showId}, $scope.data).$promise.then(function() {
                 $scope.submitted = false;
                 growl.success('Challenge was created successfully');

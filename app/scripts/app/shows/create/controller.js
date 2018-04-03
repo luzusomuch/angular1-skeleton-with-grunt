@@ -14,7 +14,6 @@
     $scope.submitted = false;
 
     $scope.submit = function(form) {
-      console.log(form);
       if (form.$valid && $scope.file) {
         var isVideo = UploadService.checkVideoType($scope.file);
         if (isVideo) {
@@ -23,6 +22,7 @@
             UploadService.uploadVideo(videoData, $scope.file).then(function() {
               VideoService.update({id: videoData._id}, {status: 'uploaded'});
               $scope.data.videoId = videoData._id;
+              $scope.data.expiresAt = new Date(moment($scope.data.expiresAt).endOf('day'));
               ShowService.create($scope.data).$promise.then(function() {
                 $scope.submitted = false;
                 growl.success('Show was created successfully');
