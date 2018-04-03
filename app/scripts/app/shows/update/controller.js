@@ -28,20 +28,22 @@
     };
 
     $scope.upload = function(file) {
-      $scope.isUploading = true;
-      VideoService.create().$promise.then(function(videoData) {
-        UploadService.uploadVideo(videoData, file).then(function() {
-          VideoService.update({id: videoData._id}, {status: 'uploaded'});
-          $scope.data.videoId = videoData._id;
-          $scope.isUploading = false;
-        }).catch(function(err) {
+      if (file) {
+        $scope.isUploading = true;
+        VideoService.create().$promise.then(function(videoData) {
+          UploadService.uploadVideo(videoData, file).then(function() {
+            VideoService.update({id: videoData._id}, {status: 'uploaded'});
+            $scope.data.videoId = videoData._id;
+            $scope.isUploading = false;
+          }).catch(function(err) {
+            growl.error('Failed to upload video');
+            $scope.isUploading = false;
+          });
+        }).catch(function() {
           growl.error('Failed to upload video');
           $scope.isUploading = false;
         });
-      }).catch(function() {
-        growl.error('Failed to upload video');
-        $scope.isUploading = false;
-      });
+      }
     };
 
     $scope.submit = function(form) {
