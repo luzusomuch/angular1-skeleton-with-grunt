@@ -64,6 +64,9 @@
       if (showDetail.numberOfChallenges >= maximumChallenge) {
         return growl.error('This show has reached maximum number of challenges');
       }
+      if ($scope.data.prizes.length !== 2) {
+        return growl.error('A challenge always requires 2 prizes');
+      }
       var endTimeValidity = moment(moment($scope.data.expiresAt).format('YYYY-MM-DD')).isSameOrBefore(moment(showDetail.expiresAt).format('YYYY-MM-DD'));
       form.expiresAt.$setValidity('endTime', endTimeValidity);
       if (form.$valid && $scope.file) {

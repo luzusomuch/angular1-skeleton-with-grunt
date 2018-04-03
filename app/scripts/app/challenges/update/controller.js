@@ -77,6 +77,9 @@
       if (showDetail.status !== 'unpublished') {
         return growl.error('Cannot edit challenge which has show status is Published/Closed');
       }
+      if ($scope.data.prizes.length !== 2) {
+        return growl.error('A challenge always requires 2 prizes');
+      }
       if (form.$valid) {
         if ($scope.isUploading) {
           return growl.error('Please wait until upload process done');
