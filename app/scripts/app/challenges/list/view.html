@@ -10,24 +10,26 @@
       <thead>
         <tr>
           <td>#</td>
-          <td>Name</td>
+          <td class="text-left">Name</td>
           <td>Description</td>
+          <td>End Date</td>
           <td>Status</td>
-          <td>Action</td>
+          <td class="text-right">Action</td>
         </tr>
       </thead>
       <tbody>
         <tr ng-repeat="item in items">
           <td>{{$index+1}}</td>
-          <td>{{item.title}}</td>
+          <td class="text-left">{{item.title}}</td>
           <td>{{item.description}}</td>
+          <td>{{item.expiresAt | date: 'dd MMM yyyy'}}</td>
           <td>{{item.status}}</td>
-          <td>
-            <a href="javascript:void(0)" ng-click="editChallenge(item)">
-              <i class="fa fa-pencil"></i> Edit
+          <td class="text-right">
+            <a title="Edit Challenge" class="table-icon" href="javascript:void(0)" ng-click="editChallenge(item)">
+              <i class="fa fa-pencil"></i>
             </a>
-            <a href="javascript:void(0)" ng-click="removeChallenge(item, $index)">
-              <i class="fa fa-times"></i> Delete
+            <a title="Delete Challenge" class="table-icon" href="javascript:void(0)" ng-click="removeChallenge(item, $index)">
+              <i class="fa fa-trash-o"></i>
             </a>
           </td>
         </tr>
