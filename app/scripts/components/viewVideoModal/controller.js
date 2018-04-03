@@ -13,7 +13,6 @@
       plugins: {
         poster: 'http://www.videogular.com/assets/images/videogular.png'
       },
-      theme: "bower_components/videogular-themes-default/videogular.css",
     };
 
     this.okay = function() {
