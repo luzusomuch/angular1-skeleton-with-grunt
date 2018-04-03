@@ -33,7 +33,7 @@
           <p class="help-block" ng-if="form.expiresAt.$error.date && form.$submitted">Invalid date</p>
           <p class="help-block" ng-if="form.expiresAt.$error.endTime && form.$submitted">End Date must be less than End Date of Show</p>
         </div>
-        <div class="form-group" ng-class="{'has-error': data.prizes.length < 3 && form.$submitted}">
+        <div class="form-group" ng-class="{'has-error': data.prizes.length < 2 && form.$submitted}">
           <label>Prizes</label>
           <div class="row">
             <div class="col-sm-5" ng-class="{'has-error': prizeTitleError || prizeTitleLengthError}">
@@ -50,7 +50,7 @@
               <button class="btn btn-primary" type="button" ng-click="addPrize()">Add Prize</button>
             </div>
           </div>
-          <p class="help-block" ng-if="data.prizes.length < 3 && form.$submitted">A challenge always requires 2 prizes</p>
+          <p class="help-block" ng-if="data.prizes.length < 2 && form.$submitted">A challenge always requires 2 prizes</p>
         </div>
         <div class="form-group" ng-show="data.prizes.length > 0">
           <label>Prizes List</label>

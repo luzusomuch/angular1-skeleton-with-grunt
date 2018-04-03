@@ -32,6 +32,9 @@
       $scope.prizeTitleLengthError = false;
       $scope.prizeDescError = false;
       $scope.prizeDescLengthError = false;
+      if ($scope.data.prizes.length === 2) {
+        return growl.error('A challenge always requires 2 prizes');
+      }
       if (!$scope.prize.title) {
         $scope.prizeTitleError = true;
       } else if ($scope.prize.title && $scope.prize.title.length > 30) {
