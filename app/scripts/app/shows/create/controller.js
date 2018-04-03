@@ -14,6 +14,7 @@
     $scope.submitted = false;
 
     $scope.submit = function(form) {
+      console.log(form);
       if (form.$valid && $scope.file) {
         var isVideo = UploadService.checkVideoType($scope.file);
         if (isVideo) {

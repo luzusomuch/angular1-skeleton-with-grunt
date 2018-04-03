@@ -64,7 +64,7 @@
                 return 'Update show warning';
               },
               description: function() {
-                return 'All challenges which have end date after ' + moment($scope.data.expiresAt).format('DD-MM-YYYY') + ' will be update.';
+                return 'All challenges which have end date after ' + moment($scope.data.expiresAt).format('DD-MM-YYYY') + ' will be updated accordingly.';
               }
             }
           }).result.then(function() {

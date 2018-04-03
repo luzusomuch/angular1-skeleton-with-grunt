@@ -31,7 +31,7 @@
       if (showStatusesUnableToUpdate.indexOf(item.status) === -1) {
         $state.go('app.show.update', {id: item._id});
       } else {
-        growl.error('This show do not allow to update');
+        growl.error('Cannot edit Published/Closed show');
       }
     };
 
