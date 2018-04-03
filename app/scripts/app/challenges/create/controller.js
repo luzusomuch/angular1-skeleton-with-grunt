@@ -58,6 +58,9 @@
     };
 
     $scope.submit = function(form) {
+      if (showDetail.status !== 'unpublished') {
+        return growl.error('Cannot create challenge which has show status is Published/Closed');
+      }
       if (showDetail.numberOfChallenges >= maximumChallenge) {
         return growl.error('This show has reached maximum number of challenges');
       }

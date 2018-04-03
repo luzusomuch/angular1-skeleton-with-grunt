@@ -33,15 +33,15 @@
           <p class="help-block" ng-if="form.expiresAt.$error.date && form.$submitted">Invalid date</p>
           <p class="help-block" ng-if="form.expiresAt.$error.endTime && form.$submitted">End Date must be less than End Date of Show</p>
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-class="{'has-error': data.prizes.length < 3 && form.$submitted}">
           <label>Prizes</label>
           <div class="row">
-            <div class="col-sm-5" ng-class="{'has-error': prizeTitleError}">
+            <div class="col-sm-5" ng-class="{'has-error': prizeTitleError || prizeTitleLengthError}">
               <input class="form-control" type="text" name="prizeTitle" ng-model="prize.title" placeholder="Prize Title">
               <p class="help-block" ng-if="prizeTitleError">Prize title is required</p>
               <p class="help-block" ng-if="prizeTitleLengthError">Prize Title exceeds the allowable limit (30 characters)</p>
             </div>
-            <div class="col-sm-5" ng-class="{'has-error': prizeDescError}">
+            <div class="col-sm-5" ng-class="{'has-error': prizeDescError || prizeDescLengthError}">
               <input class="form-control" type="text" name="prizeTitle" ng-model="prize.description" placeholder="Prize Description">
               <p class="help-block" ng-if="prizeDescError">Prize Description is required</p>
               <p class="help-block" ng-if="prizeDescLengthError">Prize Description exceeds the allowable limit (60 characters)</p>
@@ -50,6 +50,7 @@
               <button class="btn btn-primary" type="button" ng-click="addPrize()">Add Prize</button>
             </div>
           </div>
+          <p class="help-block" ng-if="data.prizes.length < 3 && form.$submitted">A challenge always requires 2 prizes</p>
         </div>
         <div class="form-group" ng-show="data.prizes.length > 0">
           <label>Prizes List</label>

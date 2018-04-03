@@ -21,7 +21,7 @@
           <td>{{item.description}}</td>
           <td>{{item.status}}</td>
           <td>
-            <a ui-sref="editChallenge(item)">
+            <a href="javascript:void(0)" ng-click="editChallenge(item)">
               <i class="fa fa-pencil"></i> Edit
             </a>
             <a href="javascript:void(0)" ng-click="removeChallenge(item, $index)">
