@@ -15,6 +15,7 @@
           <td>Total Challenges</td>
           <td>End Date</td>
           <td>Status</td>
+          <td>Uploaded Video</td>
           <td class="text-right">Action</td>
         </tr>
       </thead>
@@ -26,6 +27,7 @@
           <td>{{item.numberOfChallenges}}</td>
           <td>{{item.expiresAt | date: 'dd MMM yyyy'}}</td>
           <td>{{item.status}}</td>
+          <td><a href="javascript:void(0)">View video</a></td>
           <td class="text-right">
             <a title="Edit Show" class="table-icon" href="javascript:void(0)" ng-click="editShow(item)">
               <i class="fa fa-pencil"></i>
