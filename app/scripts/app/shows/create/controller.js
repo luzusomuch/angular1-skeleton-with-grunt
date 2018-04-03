@@ -6,7 +6,6 @@
   function CreateShowController($scope, VideoService, growl, Upload, UploadService, ShowService) {
     $scope.data = {
       title: '',
-      campaignId: '',
       expiresAt: new Date()
     };
     $scope.dateOptions = {

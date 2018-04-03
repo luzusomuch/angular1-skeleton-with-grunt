@@ -11,7 +11,8 @@
       announcement: '',
       expiresAt: new Date(),
       prizes: [],
-      showId: $stateParams.showId
+      showId: $stateParams.showId,
+      campaignId: '',
     };
     $scope.dateOptions = {
       minDate: new Date(),
