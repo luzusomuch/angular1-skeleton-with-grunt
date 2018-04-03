@@ -29,6 +29,7 @@
                   title: '',
                   expiresAt: new Date()
                 };
+                $scope.file = null;
                 form.$setDirty();
                 form.$setUntouched();
                 form.$setPristine();
