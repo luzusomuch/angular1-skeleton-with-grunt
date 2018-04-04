@@ -7,6 +7,7 @@
     $scope.showId = $stateParams.showId;
     $scope.data = angular.copy(challengeDetail);
     $scope.data.expiresAt = new Date($scope.data.expiresAt);
+    $scope.data.prizes = $scope.data.prizes || [];
     $scope.dateOptions = {
       minDate: new Date(),
     };

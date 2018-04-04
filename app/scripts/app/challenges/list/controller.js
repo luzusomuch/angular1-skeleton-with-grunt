@@ -3,8 +3,9 @@
   angular.module('measureApp').controller('ChallengesListController', ChallengesListController);
 
   /* @ngInject */
-  function ChallengesListController($scope, ChallengeService, showDetail, $stateParams, $uibModal, growl, $state) {
+  function ChallengesListController($scope, ChallengeService, showDetail, $stateParams, $uibModal, growl, $state, pageSettings) {
     $scope.showId = $stateParams.showId;
+    $scope.isAllowCreateChallenge = showDetail.numberOfChallenges !== pageSettings['MAXIMUM_NUMBER_OF_CHALLENGES_ACTIVE_SHOW'];
     $scope.pagination = {
       page: 1,
       limit: 20,

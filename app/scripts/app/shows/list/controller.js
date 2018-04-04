@@ -3,7 +3,7 @@
   angular.module('measureApp').controller('ShowsListController', ShowsListController);
 
   /* @ngInject */
-  function ShowsListController($scope, $state, ShowService, showStatusesUnableToUpdate, growl, $uibModal) {
+  function ShowsListController($scope, $state, ShowService, showStatusesUnableToUpdate, growl, $uibModal, pageSettings) {
     $scope.pagination = {
       page: 1,
       limit: 20,
@@ -15,6 +15,7 @@
       params = params || {};
       _.merge(params, angular.copy($scope.pagination));
       params.page--;
+      params.status = pageSettings['SHOW_STATUSES'].toString();
       ShowService.list(params).$promise.then(function(resp) {
         $scope.items = resp.items;
         $scope.total = resp.total;

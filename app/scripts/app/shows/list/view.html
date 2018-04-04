@@ -24,7 +24,7 @@
           <td>{{$index + 1}}</td>
           <td class="text-left"><a ui-sref="app.challenge.list({showId: item._id})">{{item.title}}</a></td>
           <td>{{item.creator.firstName}} {{item.creator.lastName}}</td>
-          <td>{{item.numberOfChallenges}}</td>
+          <td><a ui-sref="app.challenge.list({showId: item._id})">{{item.numberOfChallenges}}</a></td>
           <td>{{item.expiresAt | date: 'dd MMM yyyy'}}</td>
           <td>{{item.status}}</td>
           <td><a href="javascript:void(0)" ng-click="viewVideo(item)">View video</a></td>
