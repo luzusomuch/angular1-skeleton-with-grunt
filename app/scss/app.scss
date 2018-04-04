@@ -111,6 +111,12 @@ textarea {
   .table-icon {
     color: $grey;
   }
+
+  .user-avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+  }
 }
 
 .modal-content {

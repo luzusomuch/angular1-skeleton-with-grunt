@@ -18,20 +18,13 @@ angular.module('measureApp').factory('SubmissionService', function($resource, ap
       },
       isArray: false,
     },
-    create: {
+    setAsWinner: {
       method: 'POST',
+      url: apiUrl + '/api/shows/:showId/challenges/:challengeId/submissions/:id/win',
       params: {
         showId: '@showId',
         challengeId: '@challengeId',
-      },
-      isArray: false,
-    },
-    update: {
-      method: 'PUT',
-      params: {
-        showId: '@showId',
-        challengeId: '@challengeId',
-        id: '@id',
+        id: '@id'
       },
       isArray: false,
     }

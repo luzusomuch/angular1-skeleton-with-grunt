@@ -533,6 +533,10 @@ textarea {
     color: #b0b6bd; }
   .table .table-icon {
     color: #b0b6bd; }
+  .table .user-avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%; }
 
 .modal-content {
   color: #151515; }

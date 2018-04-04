@@ -3,13 +3,18 @@
   angular.module('measureApp').controller('SubmissionsListController', SubmissionsListController);
 
   /* @ngInject */
-  function SubmissionsListController($scope, $state, $stateParams, SubmissionService, growl, $uibModal) {
+  function SubmissionsListController($scope, $state, $stateParams, SubmissionService, ChallengeService, growl, $uibModal) {
     $scope.pagination = {
       page: 1,
       limit: 20,
     };
     $scope.items = [];
     $scope.total = 0;
+
+    $scope.challengeDetail = {};
+    ChallengeService.get({showId: $stateParams.showId, id: $stateParams.challengeId}).$promise.then(function(resp) {
+      $scope.challengeDetail = resp;
+    });
 
     function search(params) {
       params = params || {};
@@ -29,40 +34,28 @@
       search();
     };
 
-    // $scope.editShow = function(item) {
-    //   if (showStatusesUnableToUpdate.indexOf(item.status) === -1) {
-    //     $state.go('app.show.update', {id: item._id});
-    //   } else {
-    //     growl.error('Cannot edit Published/Closed show');
-    //   }
-    // };
-
-    // $scope.deleteShow = function(item, index) {
-    //   if (item.status === 'unpublished') {
-    //     $uibModal.open({
-    //       controller: 'ConfirmModalController',
-    //       controllerAs: 'cm',
-    //       templateUrl: 'scripts/components/confirmModal/view.html',
-    //       resolve: {
-    //         title: function() {
-    //           return 'Delete Show Confirmation';
-    //         },
-    //         description: function() {
-    //           return 'Do you want to delete this show? It will remove all challenges belong to this.';
-    //         }
-    //       }
-    //     }).result.then(function() {
-    //       ShowService.delete({id: item._id}).$promise.then(function() {
-    //         $scope.items.splice(index, 1);
-    //         $scope.total--;
-    //       }).catch(function() {
-    //         growl.error('Error when delete a show. Please try again');
-    //       });
-    //     });
-    //   } else {
-    //     growl.error('Cannot delete Published/Closed show');
-    //   }
-    // };
+    $scope.setPrize = function(item) {
+      $uibModal.open({
+        controller: 'SelectSubmissionWinnerModalController',
+        controllerAs: 'swm',
+        templateUrl: 'scripts/components/selectSubmissionWinnerModal/view.html',
+        resolve: {
+          challengeDetail: function() {
+            return $scope.challengeDetail;
+          }
+        }
+      }).result.then(function(prizeIndex) {
+        SubmissionService.setAsWinner({
+          showId: $stateParams.showId,
+          challengeId: $stateParams.challengeId,
+          id: item._id,
+        }, {prizeIndex: prizeIndex}).$promise.then(function() {
+          growl.success('Select winner submission successfully');
+        }).catch(function() {
+          growl.error('Error when select winner submission');
+        });
+      });
+    };
 
     $scope.viewVideo = function(item) {
       $uibModal.open({
