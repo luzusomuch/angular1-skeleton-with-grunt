@@ -81,13 +81,13 @@
         <div class="form-group" ng-class="{'has-error': form.video.$invalid && form.$submitted}">
           <label>Upload Video <span class="required">*</span></label>
           <input name="video" class="form-control" type="file" ngf-select ngf-max-size="40MB" ng-model="file" uploader="uploader" ngf-pattern="'video/*'" ngf-accept="'video/*'" required/>
-          <p class="help-block" ng-if="form.video.$error.required && !form.video.$error.maxSize && !form.video.$error.pattern && form.$submitted">Video is required</p>
+          <p class="help-block" ng-if="form.video.$error.required && !form.video.$error.maxSize && !form.video.$error.pattern && form.$submitted">Upload Video is required</p>
           <p class="help-block" ng-if="form.video.$error.maxSize && form.$submitted">Video size exceeds the allowable limit (40MB)</p>
           <p class="help-block" ng-if="form.video.$error.pattern && form.$submitted">Only allow video format</p>
         </div>
         <div class="form-group">
           <button ng-disabled="submitted" type="submit" class="btn btn-primary">Submit</button>
-          <button type="button" class="btn btn-warning" ui-sref="app.challenge.list({showId: data.showId})">Cancel</button>
+          <button type="button" class="btn btn-warning" ui-sref="app.show.list">Cancel</button>
         </div>
       </form>
     </div>

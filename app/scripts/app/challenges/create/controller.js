@@ -34,7 +34,7 @@
       $scope.prizeDescError = false;
       $scope.prizeDescLengthError = false;
       if ($scope.data.prizes.length === 2) {
-        return growl.error('A challenge always requires 2 prizes');
+        return true;
       }
       if (!$scope.prize.title) {
         $scope.prizeTitleError = true;
@@ -69,7 +69,7 @@
         return growl.error('This show has reached maximum number of challenges');
       }
       if ($scope.data.prizes.length !== 2) {
-        return growl.error('A challenge always requires 2 prizes');
+        return true
       }
       var endTimeValidity = moment(moment($scope.data.expiresAt).format('YYYY-MM-DD')).isSameOrBefore(moment(showDetail.expiresAt).format('YYYY-MM-DD'));
       form.expiresAt.$setValidity('endTime', endTimeValidity);

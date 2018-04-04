@@ -27,7 +27,7 @@
       $scope.prizeDescError = false;
       $scope.prizeDescLengthError = false;
       if ($scope.data.prizes.length === 2) {
-        return growl.error('A challenge always requires 2 prizes');
+        return true;
       }
       if (!$scope.prize.title) {
         $scope.prizeTitleError = true;
@@ -83,7 +83,7 @@
         return growl.error('Cannot edit challenge which has show status is Published/Closed');
       }
       if ($scope.data.prizes.length !== 2) {
-        return growl.error('A challenge always requires 2 prizes');
+        return true;
       }
       if (form.$valid) {
         if ($scope.isUploading) {

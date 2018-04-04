@@ -56,6 +56,7 @@
       }
       if (form.$valid) {
         if (!moment(moment($scope.data.expiresAt).format('YYYY-MM-DD')).isSame(moment(showDetail.expiresAt).format('YYYY-MM-DD'))) {
+          $scope.dateError = true;
           // show warning message that all challenges which are after show expires date will update
           $uibModal.open({
             controller: 'WarningModalController',
@@ -88,6 +89,7 @@
       $scope.submitted = true;
       ShowService.update({id: $stateParams.id}, data).$promise.then(function() {
         $scope.submitted = false;
+        $scope.dateError = false;
         growl.success('Updated show successfully');
       }).catch(function() {
         $scope.submitted = false;
