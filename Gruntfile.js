@@ -244,8 +244,8 @@ module.exports = function (grunt) {
           dot: true,
           flatten: true,
           cwd: 'app',
-          dest: '<%= yeoman.dist %>/assets/icons',
-          src: ['assets/icons/*']
+          dest: '<%= yeoman.dist %>/assets/fonts',
+          src: ['assets/fonts/*']
         }]
       },
       dist: {

@@ -38,6 +38,7 @@ module.exports = function (config) {
             'app/bower_components/videogular/videogular.js',
             'app/bower_components/videogular-controls/vg-controls.js',
             'app/bower_components/videogular-buffering/vg-buffering.js',
+            'app/bower_components/videogular-overlay-play/vg-overlay-play.js',
             'app/bower_components/angular-mocks/angular-mocks.js',
             'app/bower_components/livereload-js/dist/livereload.js',
             // endbower

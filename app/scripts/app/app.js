@@ -12,7 +12,8 @@ angular.module('measureApp', [
   'ui.bootstrap',
   'com.2fdevs.videogular',
   'com.2fdevs.videogular.plugins.controls',
-  'com.2fdevs.videogular.plugins.buffering'
+  'com.2fdevs.videogular.plugins.buffering',
+  'com.2fdevs.videogular.plugins.overlayplay'
 ])
 .config(function($urlRouterProvider, $locationProvider, $httpProvider, growlProvider, $stateProvider) {
   $stateProvider.state('app', {
