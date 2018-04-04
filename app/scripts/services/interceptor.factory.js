@@ -8,7 +8,7 @@ angular.module('measureApp').factory('httpRequestInterceptor', function ($cookie
         config.headers.Authorization = $cookies.get('token');
       }
       if (config.method === 'PUT' && config.url.indexOf('s3-us-west-1.amazonaws.com') !== -1) {
-        config.headers['Content-Type'] = 'binary/octet-stream';
+        config.headers['Content-Type'] = 'video/mp4';
       }
       return config;
     },
