@@ -537,6 +537,13 @@ textarea {
     width: 35px;
     height: 35px;
     border-radius: 50%; }
+  .table .fa-gift {
+    font-size: 17px; }
+    .table .fa-gift:active {
+      color: #337ab7; }
+
+.submissions-list .td-item {
+  padding-top: 15px; }
 
 .modal-content {
   color: #151515; }
