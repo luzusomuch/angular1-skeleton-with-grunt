@@ -25,7 +25,7 @@
           <td class="text-left">{{item.title}}</td>
           <td>{{item.description}}</td>
           <td>{{item.expiresAt | date: 'dd MMM yyyy'}}</td>
-          <td>{{item.status}}</td>
+          <td>{{item.status | capitalize}}</td>
           <td><a href="javascript:void(0)" ng-click="viewVideo(item)">View video</a></td>
           <td><a ui-sref="app.submission.list({showId: showId, challengeId: item._id})">{{item.numberOfSubmissions}}</a></td>
           <td class="text-right">

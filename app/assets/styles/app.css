@@ -539,11 +539,14 @@ textarea {
     border-radius: 50%; }
   .table .fa-gift {
     font-size: 17px; }
-    .table .fa-gift:active {
+    .table .fa-gift.active {
       color: #337ab7; }
 
 .submissions-list .td-item {
   padding-top: 15px; }
+
+.modal-title {
+  font-weight: bold; }
 
 .modal-content {
   color: #151515; }

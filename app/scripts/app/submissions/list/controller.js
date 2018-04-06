@@ -42,14 +42,18 @@
         resolve: {
           challengeDetail: function() {
             return $scope.challengeDetail;
+          },
+          submissionDetail: function() {
+            return item;
           }
         }
-      }).result.then(function(prizeIndex) {
+      }).result.then(function(prizeIndexes) {
         SubmissionService.setAsWinner({
           showId: $stateParams.showId,
           challengeId: $stateParams.challengeId,
           id: item._id,
-        }, {prizeIndex: prizeIndex}).$promise.then(function() {
+        }, {prizeIndexes: prizeIndexes}).$promise.then(function() {
+          search();
           growl.success('Select winner submission successfully');
         }).catch(function() {
           growl.error('Error when select winner submission');

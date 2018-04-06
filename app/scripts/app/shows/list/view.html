@@ -26,7 +26,7 @@
           <td>{{item.creator.firstName}} {{item.creator.lastName}}</td>
           <td><a ui-sref="app.challenge.list({showId: item._id})">{{item.numberOfChallenges}}</a></td>
           <td>{{item.expiresAt | date: 'dd MMM yyyy'}}</td>
-          <td>{{item.status}}</td>
+          <td>{{item.status | capitalize}}</td>
           <td><a href="javascript:void(0)" ng-click="viewVideo(item)">View video</a></td>
           <td class="text-right">
             <a title="Edit Show" class="table-icon" href="javascript:void(0)" ng-click="editShow(item)">
@@ -35,7 +35,7 @@
             <a title="Delete Show" class="table-icon" href="javascript:void(0)" ng-click="deleteShow(item, index)">
               <i class="fa fa-trash-o"></i>
             </a>
-            <a title="Add Challenge" class="table-icon" ui-sref="app.challenge.create({showId: item._id})">
+            <a ng-if="isAllowCreateChallenge(item)" title="Add Challenge" class="table-icon" ui-sref="app.challenge.create({showId: item._id})">
               <i class="fa fa-plus"></i>
             </a>
           </td>

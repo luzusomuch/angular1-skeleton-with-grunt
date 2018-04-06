@@ -47,7 +47,10 @@
               return 'Delete Show Confirmation';
             },
             description: function() {
-              return 'Do you want to delete this show? It will remove all challenges belong to this.';
+              return 'Do you want to delete this show? <br> It will remove all challenges belong to this.';
+            },
+            confirmButton: function() {
+              return 'Delete';
             }
           }
         }).result.then(function() {
@@ -75,5 +78,9 @@
         }
       });
     };
+
+    $scope.isAllowCreateChallenge = function(item) {
+      return item.numberOfChallenges !== pageSettings['MAXIMUM_NUMBER_OF_CHALLENGES_ACTIVE_SHOW'];
+    }
   }
 })();

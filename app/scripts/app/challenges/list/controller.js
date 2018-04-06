@@ -45,6 +45,9 @@
             },
             description: function() {
               return 'Do you want to delete this challenge?';
+            },
+            confirmButton: function() {
+              return 'Delete';
             }
           }
         }).result.then(function() {

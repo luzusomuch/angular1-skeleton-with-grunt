@@ -92,7 +92,8 @@ module.exports = function (grunt) {
         'app/scripts/app.js',
         'app/scripts/app/**/*.js',
         'app/scripts/components/**/*.js',
-        'app/scripts/services/**/*.js'
+        'app/scripts/services/**/*.js',
+        'app/scripts/filters/**/*.js'
       ]
     },
     sass: {

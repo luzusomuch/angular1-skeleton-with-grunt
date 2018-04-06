@@ -121,7 +121,7 @@ textarea {
   .fa-gift {
     font-size: 17px;
 
-    &:active {
+    &.active {
       color: #337ab7;
     }
   }
@@ -131,6 +131,10 @@ textarea {
   .td-item {
     padding-top: 15px;
   }
+}
+
+.modal-title {
+  font-weight: bold;
 }
 
 .modal-content {

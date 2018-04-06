@@ -18,14 +18,14 @@
       <tbody>
         <tr ng-repeat="item in items">
           <td class="td-item">{{$index+1}}</td>
-          <td class="text-left"><img class="user-avatar" src="{{item.user.avatar}}"></td>
+          <td class="text-left"><img class="user-avatar" src="{{item.user.avatar || 'assets/images/avatar-placeholder.png'}}"></td>
           <td class="td-item">{{item.user.name}}</td>
           <td class="td-item"><a href="javascript:void(0)" ng-click="viewVideo(item)">View video</a></td>
           <td class="td-item">{{item.content.numberOfLikes}}</td>
           <td class="td-item">{{item.content.proScore}}%</td>
           <td class="text-right td-item">
             <a title="Set Prize" class="table-icon" href="javascript:void(0)" ng-click="setPrize(item)">
-              <i class="fa fa-gift"></i>
+              <i ng-class="{'active': item.prizes && item.prizes.length > 0}" class="fa fa-gift"></i>
             </a>
           </td>
         </tr>
