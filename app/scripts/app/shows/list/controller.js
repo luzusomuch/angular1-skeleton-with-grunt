@@ -8,14 +8,25 @@
       page: 1,
       limit: 20,
     };
+    $scope.filter = {
+      status: 'all',
+      title: null
+    };
     $scope.items = [];
     $scope.total = 0;
+    $scope.showStatuses = pageSettings['SHOW_STATUSES'];
+    $scope.showStatuses.unshift('all')
 
     function search(params) {
       params = params || {};
       _.merge(params, angular.copy($scope.pagination));
       params.page--;
-      params.status = pageSettings['SHOW_STATUSES'].toString();
+      if ($scope.filter.status === 'all') {
+        params.status = pageSettings['SHOW_STATUSES'].toString();
+      } else {
+        params.status = $scope.filter.status;
+      }
+      params.title = $scope.filter.title;
       ShowService.list(params).$promise.then(function(resp) {
         $scope.items = resp.items;
         $scope.total = resp.total;
@@ -26,6 +37,16 @@
 
     $scope.pageChanged = function() {
       search();
+    };
+
+    $scope.onSelectStatus = function() {
+      search();
+    };
+
+    $scope.onEnterTitle = function(e) {
+      if (e.keyCode === 13) {
+        search();
+      }
     };
 
     $scope.editShow = function(item) {
