@@ -3,7 +3,7 @@
   angular.module('measureApp').controller('WarningModalController', WarningModalController);
 
   /* @ngInject */
-  function WarningModalController($scope, $uibModalInstance, title, description) {
+  function WarningModalController($uibModalInstance, title, description) {
     this.title = title;
     this.description = description;
 

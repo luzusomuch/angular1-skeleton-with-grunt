@@ -1,38 +1,52 @@
 <div class="content">
   <div class="shows-list">
     <div class="row">
-      <h1 class="col-sm-8">Shows List</h1>
-      <span ui-sref="app.show.create" class="col-sm-4 add-new-show-button"><i class="fa fa-plus"></i> Add New Show</span>
+      <h1 class="col-sm-10">Shows List</h1>
+      <div class="col-sm-2">
+        <button ui-sref="app.show.create" class="btn btn-primary add-new-show-button"><i class="fa fa-plus"></i> Add New Show</button>
+      </div>
+    </div>
+    <div class="row filter-content">
+      <div class="col-sm-3">
+        <input type="text" name="title" placeholder="Enter show title" ng-model="filter.title" class="form-control" ng-keydown="onEnterTitle($event)">
+      </div>
+      <div class="col-sm-3">
+        <select ng-model="filter.status" class="form-control" ng-change="onSelectStatus()">
+          <option ng-repeat="status in showStatuses" value="{{status}}">{{status | capitalize}}</option>
+        </select>
+      </div>
     </div>
     <table class="table">
       <thead>
         <tr>
           <td>#</td>
-          <td>Title</td>
+          <td class="text-left">Title</td>
           <td>Creator</td>
           <td>Total Challenges</td>
           <td>End Date</td>
           <td>Status</td>
-          <td>Action</td>
+          <td>Uploaded Video</td>
+          <td class="text-right">Action</td>
         </tr>
       </thead>
       <tbody>
         <tr ng-repeat="item in items">
           <td>{{$index + 1}}</td>
-          <td><a ui-sref="app.challenge.list({showId: item._id})">{{item.title}}</a></td>
+          <td class="text-left"><a ui-sref="app.challenge.list({showId: item._id})">{{item.title}}</a></td>
           <td>{{item.creator.firstName}} {{item.creator.lastName}}</td>
-          <td>{{item.numberOfChallenges}}</td>
+          <td><a ui-sref="app.challenge.list({showId: item._id})">{{item.numberOfChallenges}}</a></td>
           <td>{{item.expiresAt | date: 'dd MMM yyyy'}}</td>
-          <td>{{item.status}}</td>
-          <td>
-            <a href="javascript:void(0)" ng-click="editShow(item)">
-              <i class="fa fa-pencil"></i> Edit
+          <td>{{item.status | capitalize}}</td>
+          <td><a href="javascript:void(0)" ng-click="viewVideo(item)">View video</a></td>
+          <td class="text-right">
+            <a title="Edit Show" class="table-icon" href="javascript:void(0)" ng-click="editShow(item)">
+              <i class="fa fa-pencil"></i>
             </a>
-            <a href="javascript:void(0)" ng-click="deleteShow(item, index)">
-              <i class="fa fa-times"></i> Delete
+            <a title="Delete Show" class="table-icon" href="javascript:void(0)" ng-click="deleteShow(item, index)">
+              <i class="fa fa-trash-o"></i>
             </a>
-            <a ui-sref="app.challenge.create({showId: item._id})">
-              <i class="fa fa-plus"></i> Creat New Challenge
+            <a ng-if="isAllowCreateChallenge(item)" title="Add Challenge" class="table-icon" ui-sref="app.challenge.create({showId: item._id})">
+              <i class="fa fa-plus"></i>
             </a>
           </td>
         </tr>

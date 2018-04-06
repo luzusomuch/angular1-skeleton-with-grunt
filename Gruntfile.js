@@ -93,7 +93,8 @@ module.exports = function (grunt) {
         'app/scripts/app.js',
         'app/scripts/app/**/*.js',
         'app/scripts/components/**/*.js',
-        'app/scripts/services/**/*.js'
+        'app/scripts/services/**/*.js',
+        'app/scripts/filters/**/*.js'
       ]
     },
     sass: {
@@ -238,15 +239,15 @@ module.exports = function (grunt) {
           flatten: true,
           cwd: 'app',
           dest: '<%= yeoman.dist %>/assets/fonts',
-          src: ['bower_components/font-awesome/fonts/*']
+          src: ['bower_components/font-awesome/fonts/*', 'bower_components/bootstrap/fonts/*']
         },
         {
           expand: true,
           dot: true,
           flatten: true,
           cwd: 'app',
-          dest: '<%= yeoman.dist %>/assets/icons',
-          src: ['assets/icons/*']
+          dest: '<%= yeoman.dist %>/assets/fonts',
+          src: ['assets/fonts/*']
         }]
       },
       dist: {

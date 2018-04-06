@@ -1,0 +1,27 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h3 class="modal-title">Select Prize For Winner Submission</h3>
+  </div>
+  <div class="modal-body">
+    <table class="table">
+      <thead>
+        <tr>
+          <td class="text-left">Action</td>
+          <td class="text-left">Title</td>
+          <td class="text-left">Description</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="prize in swm.challengeDetail.prizes">
+          <td class="text-left"><input type="checkbox" name="prize" ng-model="prize.isSelected" ng-value="$index"></td>
+          <td class="text-left">{{prize.title}}</td>
+          <td class="text-left">{{prize.description}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="swm.submit()">Select</button>
+    <button class="btn btn-warning" type="button" ng-click="swm.close()">Cancel</button>
+  </div>
+</div>

@@ -73,6 +73,10 @@
   <script src="bower_components/ng-file-upload-shim/ng-file-upload-shim.js"></script>
   <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
   <script src="bower_components/moment/moment.js"></script>
+  <script src="bower_components/videogular/videogular.js"></script>
+  <script src="bower_components/videogular-controls/vg-controls.js"></script>
+  <script src="bower_components/videogular-buffering/vg-buffering.js"></script>
+  <script src="bower_components/videogular-overlay-play/vg-overlay-play.js"></script>
   <!-- endbower -->
   <!-- endbuild -->
 
@@ -93,12 +97,16 @@
   <script src="scripts/app/challenges/list/controller.js"></script>
   <script src="scripts/app/challenges/create/controller.js"></script>
   <script src="scripts/app/challenges/update/controller.js"></script>
+  <script src="scripts/app/submissions/route.js"></script>
+  <script src="scripts/app/submissions/list/controller.js"></script>
 
   <script src="scripts/components/header/header.directive.js"></script>
   <script src="scripts/components/footer/footer.directive.js"></script>
   <script src="scripts/components/contenteditable/contenteditable.directive.js"></script>
   <script src="scripts/components/warningModal/controller.js"></script>
   <script src="scripts/components/confirmModal/controller.js"></script>
+  <script src="scripts/components/viewVideoModal/controller.js"></script>
+  <script src="scripts/components/selectSubmissionWinnerModal/controller.js"></script>
 
   <script src="scripts/services/auth.service.js"></script>    
   <script src="scripts/services/interceptor.factory.js"></script>    
@@ -107,6 +115,10 @@
   <script src="scripts/services/challenge.service.js"></script>    
   <script src="scripts/services/video.service.js"></script>    
   <script src="scripts/services/upload.service.js"></script>    
+  <script src="scripts/services/submission.service.js"></script>   
+
+  <script src="scripts/filters/html.filter.js"></script>    
+  <script src="scripts/filters/capitalize.filter.js"></script>    
   <!-- endbuild -->
 </body>
 </html>

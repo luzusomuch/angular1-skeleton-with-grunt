@@ -8,7 +8,7 @@ angular.module('measureApp').directive('header', function (AuthService) {
       scope.menuItems = [{
         label: 'Shows',
         sref: 'app.show.list',
-        faClass: 'fa fa-history'
+        faClass: 'fa fa-server'
       }];
     }
   };

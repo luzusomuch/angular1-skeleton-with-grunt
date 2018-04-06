@@ -5,7 +5,7 @@
   "devEnv": "develop",
   "devApiUrl": "https://api-staging.measureup.co",
   "prodEnv": "production",
-  "prodApiUrl": "https://api.measureup.co",
+  "prodApiUrl": "https://api.measureup.co/v1",
   "showStatusesUnableToUpdate": "['published', 'closed']",
   "cluster": {
     "workerCount": 1,

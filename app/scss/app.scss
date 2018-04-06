@@ -1,30 +1,90 @@
 $orange: #ff7038;
 $white: #FFF;
 $black: #151515;
-$grey: #f2f5f8;
+$grey: #b0b6bd;
+$backgroundColor: #2E363F;
 $darkBlue: #1d1f2a;
 $darkGrey: #555;
 $facebookBlue: #3b5998;
 $googleRed: #DC4E41;
 
+@import 'videogular';
+
+body {
+  background-color: $backgroundColor;
+  color: $white;
+}
+
 .header {
+  &.navbar-custom {
+    .navbar-brand {
+      color: $white;
+    }
+    li {
+      a {
+        color: $white;
+
+        &:hover, &:focus {
+          background-color: inherit;
+        }
+      }
+    }
+    .open {
+      a {
+        background-color: inherit;
+        &:hover, &:focus {
+          background-color: inherit;
+        }
+      }
+    }
+    .dropdown-menu {
+      background-color: $backgroundColor;
+
+      li {
+        a {
+          background-image: inherit;
+        }
+      }
+    }
+  }
   &.navbar {
     margin-bottom: 0px;
   }
 }
 
-.content {
-  min-height: 550px;
-  padding: 0 15px;
+.footer {
+  padding: 0 15px 10px 15px;
 }
 
-.login-form {
-  padding: 20px;
-  border: 1px solid $black;
+.content {
+  min-height: 600px;
+  padding: 0 15px;
+  background-color: $white;
+  color: $black;
+}
+
+.login-content {
+  overflow: hidden;
+
+  .login-page {
+    margin-top: 15%;
+    
+    .login-form {
+      padding: 20px 20px 30px 20px;
+      border-top: 1px solid #3f4954;
+      border-bottom: 1px solid #3f4954;
+    }
+
+    .login-button-group {
+      .login-btn {
+        float: right;
+      }
+    }
+  }
 }
 
 .add-new-challenge-button, .add-new-show-button {
-  margin-top: 35px;
+  margin-top: 30px;
   text-align: right;
   cursor: pointer;
 }
@@ -35,4 +95,48 @@ textarea {
 
 .required {
   color: red;
+}
+
+.table {
+  text-align: center;
+
+  thead {
+    tr {
+      td {
+        color: $grey;
+      }
+    }
+  }
+
+  .table-icon {
+    color: $grey;
+  }
+
+  .user-avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+  }
+
+  .fa-gift {
+    font-size: 17px;
+
+    &.active {
+      color: #337ab7;
+    }
+  }
+}
+
+.submissions-list {
+  .td-item {
+    padding-top: 15px;
+  }
+}
+
+.modal-title {
+  font-weight: bold;
+}
+
+.modal-content {
+  color: $black;
 }

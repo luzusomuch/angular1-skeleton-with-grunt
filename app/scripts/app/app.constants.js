@@ -6,7 +6,7 @@ angular.module('measureApp')
 
 .constant('VERSION', '0.0.1')
 
-.constant('apiUrl', 'https://api-staging.measureup.co')
+.constant('apiUrl', 'https://api-staging.measureup.co/v1')
 
 .constant('showStatusesUnableToUpdate', '[\'published\', \'closed\']')
 

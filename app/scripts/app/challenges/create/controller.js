@@ -11,10 +11,12 @@
       announcement: '',
       expiresAt: new Date(),
       prizes: [],
-      showId: $stateParams.showId
+      showId: $stateParams.showId,
+      campaignId: '',
     };
     $scope.dateOptions = {
       minDate: new Date(),
+      maxDate: new Date(showDetail.expiresAt)
     };
     $scope.prize = {
       title: '',
@@ -22,18 +24,29 @@
     };
     $scope.submitted = false;
     $scope.prizeTitleError = false;
+    $scope.prizeTitleLengthError = false;
     $scope.prizeDescError = false;
+    $scope.prizeDescLengthError = false;
 
     $scope.addPrize = function() {
       $scope.prizeTitleError = false;
+      $scope.prizeTitleLengthError = false;
       $scope.prizeDescError = false;
-      if (!$scope.prize.title || ($scope.prize.title && $scope.prize.title.length > 30)) {
+      $scope.prizeDescLengthError = false;
+      if ($scope.data.prizes.length === 2) {
+        return true;
+      }
+      if (!$scope.prize.title) {
         $scope.prizeTitleError = true;
+      } else if ($scope.prize.title && $scope.prize.title.length > 30) {
+        $scope.prizeTitleLengthError = true;
       }
-      if (!$scope.prize.description || ($scope.prize.description && $scope.prize.description.length > 60)) {
+      if (!$scope.prize.description) {
         $scope.prizeDescError = true;
+      } else if ($scope.prize.description && $scope.prize.description.length > 60) {
+        $scope.prizeDescLengthError = true;
       }
-      if ($scope.prizeTitleError || $scope.prizeDescError) {
+      if ($scope.prizeTitleError || $scope.prizeDescError || $scope.prizeTitleLengthError || $scope.prizeDescLengthError) {
         growl.error('Please check your prize data.');
       } else {
         $scope.data.prizes.push($scope.prize);
@@ -49,9 +62,17 @@
     };
 
     $scope.submit = function(form) {
+      if (showDetail.status !== 'unpublished') {
+        return growl.error('Cannot create challenge which has show status is Published/Closed');
+      }
       if (showDetail.numberOfChallenges >= maximumChallenge) {
         return growl.error('This show has reached maximum number of challenges');
       }
+      if ($scope.data.prizes.length !== 2) {
+        return true;
+      }
+      var endTimeValidity = moment(moment($scope.data.expiresAt).format('YYYY-MM-DD')).isSameOrBefore(moment(showDetail.expiresAt).format('YYYY-MM-DD'));
+      form.expiresAt.$setValidity('endTime', endTimeValidity);
       if (form.$valid && $scope.file) {
         var isVideo = UploadService.checkVideoType($scope.file);
         if (isVideo) {
@@ -60,6 +81,7 @@
             UploadService.uploadVideo(videoData, $scope.file).then(function() {
               VideoService.update({id: videoData._id}, {status: 'uploaded'});
               $scope.data.videoId = videoData._id;
+              $scope.data.expiresAt = new Date(moment($scope.data.expiresAt).endOf('day'));
               ChallengeService.create({showId: $stateParams.showId}, $scope.data).$promise.then(function() {
                 $scope.submitted = false;
                 growl.success('Challenge was created successfully');
@@ -71,6 +93,7 @@
                   prizes: [],
                   showId: $stateParams.showId
                 };
+                $scope.file = null;
                 showDetail.numberOfChallenges++;
                 form.$setDirty();
                 form.$setUntouched();

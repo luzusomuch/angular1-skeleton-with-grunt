@@ -7,18 +7,19 @@
           <label>Title <span class="required">*</span></label>
           <input class="form-control" type="text" name="title" ng-model="data.title" required ng-maxlength="30" placeholder="Show Title">
           <p class="help-block" ng-if="form.title.$error.required && form.$submitted">Title is required</p>
-          <p class="help-block" ng-if="form.title.$error.maxlength && form.$submitted">Title must be less than 30 character</p>
+          <p class="help-block" ng-if="form.title.$error.maxlength && form.$submitted">Title exceeds the allowable limit (30 characters)</p>
         </div>
         <div class="form-group" ng-class="{'has-error': form.video.$invalid && form.$submitted}">
-          <label>Upload Video <span class="required">*</span></label>
+          <label>Video Show <span class="required">*</span></label>
           <input name="video" class="form-control" type="file" ngf-select ngf-max-size="40MB" ng-model="file" uploader="uploader" ngf-pattern="'video/*'" ngf-accept="'video/*'" required/>
-          <p class="help-block" ng-if="form.video.$error.required && !form.video.$error.maxSize && form.$submitted">Video is required</p>
-          <p class="help-block" ng-if="form.video.$error.maxSize && form.$submitted">Video maximum file is 40MB</p>
+          <p class="help-block" ng-if="form.video.$error.required && !form.video.$error.maxSize && !form.video.$error.pattern && form.$submitted">Video Show is required</p>
+          <p class="help-block" ng-if="form.video.$error.maxSize && form.$submitted">Video size exceeds the allowable limit (40MB)</p>
+          <p class="help-block" ng-if="form.video.$error.pattern && form.$submitted">Only allow video format</p>
         </div>
         <div class="form-group" ng-class="{'has-error': form.expiresAt.$invalid && form.$submitted}">
           <label>End Date <span class="required">*</span></label>
           <p class="input-group">
-            <input name="expiresAt" type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="data.expiresAt" is-open="openEndDate" datepicker-options="dateOptions" close-text="Close" required readonly/>
+            <input name="expiresAt" type="text" class="form-control" uib-datepicker-popup="dd-MMM-yyyy" ng-model="data.expiresAt" is-open="openEndDate" datepicker-options="dateOptions" close-text="Close" required readonly/>
             <span class="input-group-btn">
               <button type="button" class="btn btn-default" ng-click="openEndDate=!openEndDate"><i class="glyphicon glyphicon-calendar"></i></button>
             </span>

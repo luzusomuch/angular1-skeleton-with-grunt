@@ -1,31 +1,39 @@
 <div class="content">
   <div class="challenges-list">
     <div class="row">
-      <h1 class="col-sm-8">Challenges List</h1>
-      <span ui-sref="app.challenge.create({showId: showId})" class="col-sm-4 add-new-challenge-button"><i class="fa fa-plus"></i> Add New Challenge</span>
+      <h1 class="col-sm-10">Challenges List</h1>
+      <div class="col-sm-2">
+        <button ng-disabled="!isAllowCreateChallenge" ui-sref="app.challenge.create({showId: showId})" class="btn btn-primary add-new-challenge-button"><i class="fa fa-plus"></i> Add New Challenge</button>
+      </div>
     </div>
     <table class="table">
       <thead>
         <tr>
           <td>#</td>
-          <td>Name</td>
+          <td class="text-left">Name</td>
           <td>Description</td>
+          <td>End Date</td>
           <td>Status</td>
-          <td>Action</td>
+          <td>Uploaded Video</td>
+          <td>Total Submissions</td>
+          <td class="text-right">Action</td>
         </tr>
       </thead>
       <tbody>
         <tr ng-repeat="item in items">
           <td>{{$index+1}}</td>
-          <td>{{item.title}}</td>
+          <td class="text-left">{{item.title}}</td>
           <td>{{item.description}}</td>
-          <td>{{item.status}}</td>
-          <td>
-            <a ui-sref="app.challenge.update({showId: showId, id: item._id})">
-              <i class="fa fa-pencil"></i> Edit
+          <td>{{item.expiresAt | date: 'dd MMM yyyy'}}</td>
+          <td>{{item.status | capitalize}}</td>
+          <td><a href="javascript:void(0)" ng-click="viewVideo(item)">View video</a></td>
+          <td><a ui-sref="app.submission.list({showId: showId, challengeId: item._id})">{{item.numberOfSubmissions}}</a></td>
+          <td class="text-right">
+            <a title="Edit Challenge" class="table-icon" href="javascript:void(0)" ng-click="editChallenge(item)">
+              <i class="fa fa-pencil"></i>
             </a>
-            <a href="javascript:void(0)" ng-click="removeChallenge(item, $index)">
-              <i class="fa fa-times"></i> Delete
+            <a title="Delete Challenge" class="table-icon" href="javascript:void(0)" ng-click="removeChallenge(item, $index)">
+              <i class="fa fa-trash-o"></i>
             </a>
           </td>
         </tr>

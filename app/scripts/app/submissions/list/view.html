@@ -1,0 +1,53 @@
+<div class="content">
+  <div class="submissions-list">
+    <div class="row">
+      <h1 class="col-sm-10">Submissions List</h1>
+    </div>
+    <div class="row filter-content">
+      <div class="col-sm-3">
+        <input type="text" name="title" placeholder="Enter user name" ng-model="filter.userName" class="form-control" ng-keydown="onEnterUserName($event)">
+      </div>
+      <div class="col-sm-3">
+        <input type="number" name="title" placeholder="Enter likes number" ng-model="filter.likeNumber" class="form-control" ng-keydown="onEnterLikeNumber($event)">
+      </div>
+      <div class="col-sm-3">
+        <input type="number" name="title" placeholder="Enter pro-score" ng-model="filter.proScore" class="form-control" ng-keydown="onEnterProScore($event)">
+      </div>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <td>#</td>
+          <td class="text-left">Avatar</td>
+          <td>Name</td>
+          <td>Submission Video</td>
+          <td>Total of likes</td>
+          <td>Percent of pro-score</td>
+          <td class="text-right">Action</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="item in items">
+          <td class="td-item">{{$index+1}}</td>
+          <td class="text-left"><img class="user-avatar" src="{{item.user.avatar || 'assets/images/avatar-placeholder.png'}}"></td>
+          <td class="td-item">{{item.user.name}}</td>
+          <td class="td-item"><a href="javascript:void(0)" ng-click="viewVideo(item)">View video</a></td>
+          <td class="td-item">{{item.content.numberOfLikes}}</td>
+          <td class="td-item">
+            <span ng-if="item.content.proScore >= 0">{{item.content.proScore}}%</span>
+            <span ng-if="item.content.proScore < 0">
+              <i class="fa fa-spinner fa-spin fa-1x fa-fw"></i>
+              <span class="sr-only">Loading...</span>
+            </span>
+          </td>
+          <td class="text-right td-item">
+            <a title="Set Prize" class="table-icon" href="javascript:void(0)" ng-click="setPrize(item)">
+              <i ng-class="{'active': item.prizes && item.prizes.length > 0}" class="fa fa-gift"></i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <ul uib-pagination items-per-page="pagination.limit" total-items="total" ng-model="pagination.page" ng-change="pageChanged()"></ul>
+  </div>
+</div>
