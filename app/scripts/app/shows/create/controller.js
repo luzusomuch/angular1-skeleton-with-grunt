@@ -3,7 +3,7 @@
   angular.module('measureApp').controller('CreateShowController', CreateShowController);
 
   /* @ngInject */
-  function CreateShowController($scope, VideoService, growl, Upload, UploadService, ShowService) {
+  function CreateShowController($scope, VideoService, growl, Upload, UploadService, ShowService, $state) {
     $scope.data = {
       title: '',
       expiresAt: new Date()
@@ -35,6 +35,7 @@
                 form.$setUntouched();
                 form.$setPristine();
                 form.$submitted = false;
+                $state.go('app.show.list');
               }).catch(function(err) {
                 $scope.submitted = false;
                 growl.error('Failed to create new show');

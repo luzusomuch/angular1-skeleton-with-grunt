@@ -4,7 +4,7 @@
 
   /* @ngInject */
   function UpdateShowController($scope, $stateParams, showDetail, pageSettings, ShowService, 
-    growl, showStatusesUnableToUpdate, VideoService, UploadService, $uibModal) {
+    growl, showStatusesUnableToUpdate, VideoService, UploadService, $uibModal, $state) {
     var numberOfChallenges = showDetail.numberOfChallenges;
     $scope.isAllowUpdateShow = showStatusesUnableToUpdate.indexOf(showDetail.status) === -1;
     $scope.isAllowUpdateStatus = showDetail.status==='unpublished' && pageSettings['MINIMUM_NUMBER_OF_CHALLENGES_ACTIVE_SHOW'] <= numberOfChallenges;
@@ -61,6 +61,7 @@
       ShowService.update({id: $stateParams.id}, data).$promise.then(function() {
         $scope.submitted = false;
         growl.success('Updated show successfully');
+        $state.go('app.show.list');
       }).catch(function() {
         $scope.submitted = false;
         growl.error('Something wrong. Please try again later');

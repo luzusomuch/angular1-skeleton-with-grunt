@@ -3,7 +3,7 @@
   angular.module('measureApp').controller('UpdateChallengeController', UpdateChallengeController);
 
   /* @ngInject */
-  function UpdateChallengeController($scope, $stateParams, challengeDetail, growl, ChallengeService, VideoService, UploadService, showDetail) {
+  function UpdateChallengeController($scope, $stateParams, $state, challengeDetail, growl, ChallengeService, VideoService, UploadService, showDetail) {
     $scope.showId = $stateParams.showId;
     $scope.data = angular.copy(challengeDetail);
     $scope.data.expiresAt = new Date($scope.data.expiresAt);
@@ -95,6 +95,7 @@
         ChallengeService.update({showId: $stateParams.showId, id: $stateParams.id}, data).$promise.then(function(resp) {
           $scope.submitted = false;
           growl.success('Updated challenge successfully');
+          $state.go('app.challenge.list', {showId: $scope.showId});
         }).catch(function() {
           $scope.submitted = false;
           growl.error('Something wrong. Please try again later');
