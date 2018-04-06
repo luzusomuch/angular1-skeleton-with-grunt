@@ -8,6 +8,7 @@
       page: 1,
       limit: 20,
     };
+    $scope.filter = {};
     $scope.items = [];
     $scope.total = 0;
 
@@ -22,6 +23,9 @@
       params.page--;
       params.showId = $stateParams.showId;
       params.challengeId = $stateParams.challengeId;
+      params.userName = $scope.filter.userName;
+      params.likeNumber = $scope.filter.likeNumber;
+      params.proScore = $scope.filter.proScore;
       SubmissionService.list(params).$promise.then(function(resp) {
         $scope.items = resp.items;
         $scope.total = resp.total;
@@ -32,6 +36,24 @@
 
     $scope.pageChanged = function() {
       search();
+    };
+
+    $scope.onEnterUserName = function(e) {
+      if (e.keyCode === 13) {
+        search();
+      }
+    };
+
+    $scope.onEnterLikeNumber = function(e) {
+      if (e.keyCode === 13) {
+        search();
+      }
+    };
+
+    $scope.onEnterProScore = function(e) {
+      if (e.keyCode === 13) {
+        search();
+      }
     };
 
     $scope.setPrize = function(item) {
