@@ -91,7 +91,7 @@
           return growl.error('Please wait until upload process done');
         }
         $scope.submitted = true;
-        var data = _.pick($scope.data, ['title', 'announcement', 'description', 'videoId', 'prizes']);
+        var data = _.pick($scope.data, ['title', 'announcement', 'description', 'videoId', 'prizes', 'expiresAt']);
         ChallengeService.update({showId: $stateParams.showId, id: $stateParams.id}, data).$promise.then(function(resp) {
           $scope.submitted = false;
           growl.success('Updated challenge successfully');
