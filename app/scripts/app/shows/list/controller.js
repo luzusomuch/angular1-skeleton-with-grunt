@@ -15,7 +15,7 @@
     $scope.items = [];
     $scope.total = 0;
     $scope.showStatuses = pageSettings['SHOW_STATUSES'];
-    $scope.showStatuses.unshift('all')
+    $scope.showStatuses.unshift('all');
 
     function search(params) {
       params = params || {};
