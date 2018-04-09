@@ -15,8 +15,7 @@
       campaignId: '',
     };
     $scope.dateOptions = {
-      minDate: new Date(),
-      maxDate: new Date(showDetail.expiresAt)
+      minDate: new Date()
     };
     $scope.prize = {
       title: '',
@@ -71,8 +70,6 @@
       if ($scope.data.prizes.length !== 2) {
         return true;
       }
-      var endTimeValidity = moment(moment($scope.data.expiresAt).format('YYYY-MM-DD')).isSameOrBefore(moment(showDetail.expiresAt).format('YYYY-MM-DD'));
-      form.expiresAt.$setValidity('endTime', endTimeValidity);
       if (form.$valid && $scope.file) {
         var isVideo = UploadService.checkVideoType($scope.file);
         if (isVideo) {

@@ -75,8 +75,6 @@
     };
 
     $scope.submit = function(form) {
-      var endTimeValidity = moment(moment($scope.data.expiresAt).format('YYYY-MM-DD')).isSameOrBefore(moment(showDetail.expiresAt).format('YYYY-MM-DD'));
-      form.expiresAt.$setValidity('endTime', endTimeValidity);
       if (challengeDetail.status === 'closed') {
         return growl.error('Cannot edit Closed challenge');
       }
