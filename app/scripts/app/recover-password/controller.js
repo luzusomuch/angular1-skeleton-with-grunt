@@ -7,7 +7,7 @@
     $scope.submitted = false;
 
     $scope.submit = function(form) {
-      if (form.$valid && $scope.password === $scope.rePassword) {
+      if (form.$valid) {
         $scope.submitted = true;
         AuthService.recoverPassword($stateParams.token, $scope.password).then(function() {
           $scope.submitted = false;
