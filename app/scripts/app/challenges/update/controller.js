@@ -5,6 +5,7 @@
   /* @ngInject */
   function UpdateChallengeController($scope, $stateParams, $state, challengeDetail, growl, ChallengeService, VideoService, UploadService, showDetail) {
     $scope.showId = $stateParams.showId;
+    $scope.showDetail = showDetail;
     $scope.data = angular.copy(challengeDetail);
     $scope.data.expiresAt = new Date($scope.data.expiresAt);
     $scope.data.prizes = $scope.data.prizes || [];

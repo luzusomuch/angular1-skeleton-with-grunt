@@ -1,0 +1,27 @@
+<div class="login-content">
+  <div class="row">
+    <div class="col-md-4 col-sm-6 col-md-offset-4">
+      <div class="login-page">
+        <h1 class="text-center">MEASUREUP</h1>
+        <form name="form" class="login-form" ng-submit="submit(form)" novalidate>
+          <h3>Recover password</h3>
+          <div class="form-group" ng-class="{'has-error': form.password.$invalid && form.$submitted}">
+            <label>Password</label>
+            <input class="form-control" type="password" name="password" ng-model="password" required placeholder="Password">
+            <p class="help-block" ng-if="form.password.$error.required && form.$submitted">Password is required</p>
+          </div>
+          <div class="form-group" ng-class="{'has-error': (form.rePassword.$invalid || rePassword!==password) && form.$submitted}">
+            <label>Password</label>
+            <input class="form-control" type="password" name="rePassword" ng-model="rePassword" required placeholder="Password">
+            <p class="help-block" ng-if="form.rePassword.$error.required && form.$submitted">Retype password is required</p>
+            <p class="help-block" ng-if="!form.rePassword.$error.required && rePassword!==password && form.$submitted">Password does not match</p>
+          </div>
+          <div class="login-button-group">
+            <a ui-sref="login">Login</a>
+            <button ng-disabled="submitted" type="submit" class="btn btn-primary login-btn">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
