@@ -4,19 +4,16 @@
       <div class="login-page">
         <h1 class="text-center">MEASUREUP</h1>
         <form name="form" class="login-form" ng-submit="submit(form)" novalidate>
+          <h3>Forgot password</h3>
           <div class="form-group" ng-class="{'has-error': form.email.$invalid && form.$submitted}">
             <label>Email</label>
-            <input class="form-control" type="text" name="uid" ng-model="user.uid" required>
+            <input class="form-control" type="email" name="email" ng-model="email" required placeholder="Email">
             <p class="help-block" ng-if="form.email.$error.required && form.$submitted">Email is required</p>
-          </div>
-          <div class="form-group" ng-class="{'has-error': form.password.$invalid && form.$submitted}">
-            <label>Password</label>
-            <input class="form-control" type="password" name="password" ng-model="user.password" required>
-            <p class="help-block" ng-if="form.password.$error.required && form.$submitted">Password is required</p>
+            <p class="help-block" ng-if="form.email.$error.email && form.$submitted">Email is invalid</p>
           </div>
           <div class="login-button-group">
-            <a ui-sref="forgotPassword">Forgot password?</a>
-            <button type="submit" class="btn btn-primary login-btn">Login</button>
+            <a ui-sref="login">Login</a>
+            <button ng-disabled="submitted" type="submit" class="btn btn-primary login-btn">Submit</button>
           </div>
         </form>
       </div>
