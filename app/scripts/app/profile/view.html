@@ -18,7 +18,7 @@
           <p class="help-block" ng-if="form.lastName.$error.required && form.$submitted">Last Name is required</p>
         </div>
         <div class="login-button-group">
-          <button type="submit" class="btn btn-primary login-btn">Update</button>
+          <button ng-disabled="submitted" type="submit" class="btn btn-primary login-btn">Update</button>
         </div>
       </form>
     </div>
