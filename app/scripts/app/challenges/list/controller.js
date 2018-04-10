@@ -5,7 +5,7 @@
   /* @ngInject */
   function ChallengesListController($scope, ChallengeService, showDetail, $stateParams, $uibModal, growl, $state, pageSettings) {
     $scope.showId = $stateParams.showId;
-    $scope.isAllowCreateChallenge = showDetail.numberOfChallenges !== pageSettings['MAXIMUM_NUMBER_OF_CHALLENGES_ACTIVE_SHOW'];
+    $scope.isAllowCreateChallenge = showDetail.numberOfChallenges !== pageSettings['MAXIMUM_NUMBER_OF_CHALLENGES_ACTIVE_SHOW'] && showDetail.status === 'unpublished';
     $scope.pagination = {
       page: 1,
       limit: 20,
