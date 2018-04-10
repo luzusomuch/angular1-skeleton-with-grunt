@@ -4,7 +4,8 @@
 
   /* @ngInject */
   function CreateChallengeController($scope, $stateParams, growl, ChallengeService, VideoService, UploadService, pageSettings, showDetail) {
-    var maximumChallenge = pageSettings['MAXIMUM_NUMBER_OF_CHALLENGES_ACTIVE_SHOW'];
+    var maximumChallenge = pageSettings['SHOW']['MAX_NUMBER_OF_CHALLENGES'];
+    $scope.showDetail = showDetail;
     $scope.data = {
       title: '',
       description: '',
