@@ -18,8 +18,9 @@
           form.$setPristine();
           $scope.submitted = false;
           $scope.data = {};
-        }).catch(function() {
-          growl.error('Error when create new partner');
+        }).catch(function(err) {
+          var msg = err.data ? err.data.message || err.data.errmsg : 'Error when edit partner';
+          growl.error(msg);
           $scope.submitted = false;
         });
       }

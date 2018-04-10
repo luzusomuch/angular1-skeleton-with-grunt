@@ -48,8 +48,8 @@ angular.module('measureApp').factory('AuthService', function ($q, $http, apiUrl,
     registerPartner: function(data) {
       return $http.post(apiUrl+'/auth/register', data).then(function(resp) {
         return $q.resolve(resp);
-      }).catch(function() {
-        return $q.reject();
+      }).catch(function(err) {
+        return $q.reject(err);
       });
     }
   };

@@ -7,10 +7,13 @@
   </div>
   <div class="row filter-content">
     <div class="col-sm-3">
+      <input type="text" name="name" ng-model="filter.name" ng-keydown="onKeydownName($event)" ng-blur="onBlurName()" class="form-control" placeholder="Name">
+    </div>
+    <!-- <div class="col-sm-3">
       <select ng-model="filter.role" class="form-control" ng-change="onSelectRole()">
         <option ng-repeat="role in partnerRoles" value="{{role}}">{{role | capitalize}}</option>
       </select>
-    </div>
+    </div> -->
   </div>
   <div class="row">
     <table class="table">
@@ -34,14 +37,11 @@
           <td>{{item.createdAt | date: 'dd MMM yyyy'}}</td>
           <td>{{item.status | capitalize}}</td>
           <td class="text-right">
-            <a title="Edit Show" class="table-icon" href="javascript:void(0)" ng-click="editShow(item)">
+            <a title="Edit Partner" class="table-icon" href="javascript:void(0)" ui-sref="app.partner.edit({id: item._id})">
               <i class="fa fa-pencil"></i>
             </a>
-            <a title="Delete Show" class="table-icon" href="javascript:void(0)" ng-click="deleteShow(item, index)">
+            <a title="Delete Partner" class="table-icon" href="javascript:void(0)" ng-click="deletePartner(item, index)">
               <i class="fa fa-trash-o"></i>
-            </a>
-            <a ng-if="isAllowCreateChallenge(item)" title="Add Challenge" class="table-icon" ui-sref="app.challenge.create({showId: item._id})">
-              <i class="fa fa-plus"></i>
             </a>
           </td>
         </tr>

@@ -12,10 +12,6 @@ angular.module('measureApp').factory('AccountService', function($resource, apiUr
       },
       isArray: false,
     },
-    create: {
-      method: 'POST',
-      isArray: false,
-    },
     update: {
       method: 'PUT',
       params: {
@@ -23,12 +19,5 @@ angular.module('measureApp').factory('AccountService', function($resource, apiUr
       },
       isArray: false,
     },
-    delete: {
-      method: 'DELETE',
-      params: {
-        id: '@id',
-      },
-      isArray: false
-    }
   });
 });

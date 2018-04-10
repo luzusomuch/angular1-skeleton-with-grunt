@@ -46,6 +46,7 @@
 
     $scope.onEnterTitle = function(e) {
       if (e.keyCode === 13) {
+        $scope.pagination.page = 1;
         search();
       }
     };
