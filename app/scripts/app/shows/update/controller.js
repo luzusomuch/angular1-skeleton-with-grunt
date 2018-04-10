@@ -7,7 +7,7 @@
     growl, showStatusesUnableToUpdate, VideoService, UploadService, $uibModal, $state) {
     var numberOfChallenges = showDetail.numberOfChallenges;
     $scope.isAllowUpdateShow = showStatusesUnableToUpdate.indexOf(showDetail.status) === -1;
-    $scope.isAllowUpdateStatus = showDetail.status==='unpublished' && pageSettings['MINIMUM_NUMBER_OF_CHALLENGES_ACTIVE_SHOW'] <= numberOfChallenges;
+    $scope.isAllowUpdateStatus = showDetail.status==='unpublished' && pageSettings['SHOW']['MIN_NUMBER_OF_CHALLENGES'] <= numberOfChallenges;
     $scope.data = angular.copy(showDetail);
     $scope.data.expiresAt = new Date($scope.data.expiresAt);
     $scope.showStatuses = pageSettings['SHOW_STATUSES'];
@@ -54,7 +54,7 @@
       $scope.data.expiresAt = new Date(moment($scope.data.expiresAt).endOf('day'));
       var data = _.pick($scope.data, ['title', 'status', 'expiresAt', 'videoId']);
       // handle show status we only allow to update status when show reached enough challenges numbers
-      if (pageSettings['MINIMUM_NUMBER_OF_CHALLENGES_ACTIVE_SHOW'] > numberOfChallenges || pageSettings['MAXIMUM_NUMBER_OF_CHALLENGES_ACTIVE_SHOW'] < numberOfChallenges || data.status !== 'published') {
+      if (pageSettings['SHOW']['MIN_NUMBER_OF_CHALLENGES'] > numberOfChallenges || pageSettings['SHOW']['MAX_NUMBER_OF_CHALLENGES'] < numberOfChallenges || data.status !== 'published') {
         delete data.status;
       }
       $scope.submitted = true;

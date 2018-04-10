@@ -103,7 +103,7 @@
     };
 
     $scope.isAllowCreateChallenge = function(item) {
-      return item.numberOfChallenges !== pageSettings['MAXIMUM_NUMBER_OF_CHALLENGES_ACTIVE_SHOW'] && item.status === 'unpublished';
+      return item.numberOfChallenges !== pageSettings['SHOW']['MAX_NUMBER_OF_CHALLENGES'] && item.status === 'unpublished';
     };
   }
 })();
