@@ -1,3 +1,4 @@
+'use strict';
 angular.module('measureApp').directive('pwCheck', [function () {
   return {
     require: 'ngModel',
@@ -10,5 +11,5 @@ angular.module('measureApp').directive('pwCheck', [function () {
         });
       });
     }
-  }
+  };
 }]);
