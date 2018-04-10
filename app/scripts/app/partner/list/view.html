@@ -5,7 +5,48 @@
       <button ui-sref="app.partner.create" class="btn btn-primary add-new-show-button"><i class="fa fa-plus"></i> Add New Partner</button>
     </div>
   </div>
+  <div class="row filter-content">
+    <div class="col-sm-3">
+      <select ng-model="filter.role" class="form-control" ng-change="onSelectRole()">
+        <option ng-repeat="role in partnerRoles" value="{{role}}">{{role | capitalize}}</option>
+      </select>
+    </div>
+  </div>
   <div class="row">
-    <table class="table"></table>
+    <table class="table">
+      <thead>
+        <tr>
+          <td>#</td>
+          <td class="text-left">Name</td>
+          <td>UID</td>
+          <td>Role</td>
+          <td>Created Date</td>
+          <td>Status</td>
+          <td class="text-right">Action</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="item in items">
+          <td>{{$index + 1}}</td>
+          <td class="text-left">{{item.firstName}} {{item.lastName}}</td>
+          <td>{{item.uid}}</td>
+          <td>{{item.role | capitalize}}</td>
+          <td>{{item.createdAt | date: 'dd MMM yyyy'}}</td>
+          <td>{{item.status | capitalize}}</td>
+          <td class="text-right">
+            <a title="Edit Show" class="table-icon" href="javascript:void(0)" ng-click="editShow(item)">
+              <i class="fa fa-pencil"></i>
+            </a>
+            <a title="Delete Show" class="table-icon" href="javascript:void(0)" ng-click="deleteShow(item, index)">
+              <i class="fa fa-trash-o"></i>
+            </a>
+            <a ng-if="isAllowCreateChallenge(item)" title="Add Challenge" class="table-icon" ui-sref="app.challenge.create({showId: item._id})">
+              <i class="fa fa-plus"></i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <ul uib-pagination items-per-page="pagination.limit" total-items="total" ng-model="pagination.page" ng-change="pageChanged()"></ul>
   </div>
 </div>

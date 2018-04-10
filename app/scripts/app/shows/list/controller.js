@@ -40,6 +40,7 @@
     };
 
     $scope.onSelectStatus = function() {
+      $scope.pagination.page = 1;
       search();
     };
 
