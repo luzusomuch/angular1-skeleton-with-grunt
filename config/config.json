@@ -3,7 +3,7 @@
   "port": 3000,
   "hostname": "localhost",
   "devEnv": "develop",
-  "devApiUrl": "https://api-staging.measureup.co",
+  "devApiUrl": "https://api-staging.measureup.co/v1",
   "prodEnv": "production",
   "prodApiUrl": "https://api.measureup.co/v1",
   "showStatusesUnableToUpdate": "['published', 'closed']",
