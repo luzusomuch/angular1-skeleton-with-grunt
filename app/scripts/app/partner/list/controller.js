@@ -64,21 +64,20 @@
         templateUrl: 'scripts/components/confirmModal/view.html',
         resolve: {
           title: function() {
-            return 'Delete Partner Confirmation';
+            return 'Deactive Partner Confirmation';
           },
           description: function() {
-            return 'Do you want to delete this partner?';
+            return 'Do you want to deactive this partner?';
           },
           confirmButton: function() {
-            return 'Delete';
+            return 'Deactivate';
           }
         }
       }).result.then(function() {
         AccountService.update({id: item._id}, {status: 'inactive'}).$promise.then(function() {
-          $scope.items.splice(index, 1);
-          $scope.total--;
+          item.status = 'inactive';
         }).catch(function() {
-          growl.error('Error when delete partner. Please try again');
+          growl.error('Error when deactive partner. Please try again');
         });
       });
     };

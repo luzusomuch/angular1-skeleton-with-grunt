@@ -29,7 +29,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="item in items">
+        <tr ng-repeat="item in items | orderBy: 'status'">
           <td>{{$index + 1}}</td>
           <td class="text-left">{{item.firstName}} {{item.lastName}}</td>
           <td>{{item.uid}}</td>
@@ -40,7 +40,7 @@
             <a title="Edit Partner" class="table-icon" href="javascript:void(0)" ui-sref="app.partner.edit({id: item._id})">
               <i class="fa fa-pencil"></i>
             </a>
-            <a title="Delete Partner" class="table-icon" href="javascript:void(0)" ng-click="deletePartner(item, index)">
+            <a title="Deactive Partner" class="table-icon" href="javascript:void(0)" ng-click="deletePartner(item, index)">
               <i class="fa fa-trash-o"></i>
             </a>
           </td>

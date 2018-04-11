@@ -18,6 +18,7 @@
           form.$setPristine();
           $scope.submitted = false;
           $scope.data = {};
+          $state.go('app.partner.list');
         }).catch(function(err) {
           var msg = err.data ? err.data.message || err.data.errmsg : 'Error when edit partner';
           growl.error(msg);
