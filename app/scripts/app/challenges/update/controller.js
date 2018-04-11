@@ -4,11 +4,13 @@
 
   /* @ngInject */
   function UpdateChallengeController($scope, $stateParams, $state, challengeDetail, growl, ChallengeService, VideoService, UploadService, showDetail) {
+    var originalVideoUrl = angular.copy(challengeDetail.video.originalUrl);
     $scope.showId = $stateParams.showId;
     $scope.showDetail = showDetail;
     $scope.data = angular.copy(challengeDetail);
     $scope.data.expiresAt = new Date($scope.data.expiresAt);
     $scope.data.prizes = $scope.data.prizes || [];
+    $scope.data.videoUrl = angular.copy(challengeDetail.video.originalUrl);
     $scope.dateOptions = {
       minDate: new Date(),
     };
@@ -22,6 +24,8 @@
     $scope.prizeTitleLengthError = false;
     $scope.prizeDescError = false;
     $scope.prizeDescLengthError = false;
+    $scope.contentTypeError = false;
+    $scope.contentLengthError = false;
 
     $scope.addPrize = function() {
       $scope.prizeTitleError = false;
@@ -75,6 +79,31 @@
       }
     };
 
+    $scope.onBlurVideoUrl = function() {
+      if ($scope.data.videoUrl) {
+        $scope.isUploading = true;
+        $scope.contentTypeError = false;
+        $scope.contentLengthError = false;
+        $http.head($scope.data.videoUrl, {
+          headers: {
+            'Access-Control-Allow-Headers': 'Content-Length'
+          }
+        }).then(function(resp) {
+          $scope.isUploading = false;
+          if (resp.headers('Content-Type') !== pageSettings['VIDEO_CONTENT_TYPE']) {
+            $scope.contentTypeError = true;
+          }
+          var contentLength = resp.headers('Content-Length');
+          if (contentLength && contentLength > 1024 * 1024 * 40) {
+            $sope.contentLengthError = true;
+          }
+        }).catch(function() {
+          growl.error('Error when getting video detail. Please try again');
+          $scope.isUploading = false;
+        });
+      }
+    };
+
     $scope.submit = function(form) {
       if (challengeDetail.status === 'closed') {
         return growl.error('Cannot edit Closed challenge');
@@ -91,6 +120,9 @@
         }
         $scope.submitted = true;
         var data = _.pick($scope.data, ['title', 'announcement', 'description', 'videoId', 'prizes', 'expiresAt']);
+        if ($scope.data.videoUrl && $scope.data.videoUrl !== originalVideoUrl) {
+          data.videoUrl = $scope.data.videoUrl;
+        }
         ChallengeService.update({showId: $stateParams.showId, id: $stateParams.id}, data).$promise.then(function(resp) {
           $scope.submitted = false;
           growl.success('Updated challenge successfully');

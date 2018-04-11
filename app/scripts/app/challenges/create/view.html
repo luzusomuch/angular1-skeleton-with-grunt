@@ -88,6 +88,10 @@
           <p class="help-block" ng-if="form.video.$error.required && !form.video.$error.maxSize && !form.video.$error.pattern && form.$submitted">Video Challenge or Video URL is required</p>
           <p class="help-block" ng-if="form.video.$error.maxSize && form.$submitted">Video size exceeds the allowable limit (40MB)</p>
           <p class="help-block" ng-if="form.video.$error.pattern && form.$submitted">Only allow video format</p>
+          <p ng-if="isUploading">
+            <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+            <span class="sr-only">Loading...</span>
+          </p>
         </div>
         <div class="form-group" ng-class="{'has-error': (form.url.$invalid || contentTypeError || contentLengthError) && form.$submitted}">
           <label>Video URL</label>
