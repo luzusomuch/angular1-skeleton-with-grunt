@@ -3,7 +3,7 @@
   angular.module('measureApp').controller('UpdateChallengeController', UpdateChallengeController);
 
   /* @ngInject */
-  function UpdateChallengeController($scope, $stateParams, $state, challengeDetail, growl, ChallengeService, VideoService, UploadService, showDetail) {
+  function UpdateChallengeController($scope, $stateParams, $state, challengeDetail, growl, ChallengeService, VideoService, UploadService, showDetail, $http, pageSettings) {
     var originalVideoUrl = angular.copy(challengeDetail.video.originalUrl);
     $scope.showId = $stateParams.showId;
     $scope.showDetail = showDetail;
@@ -95,7 +95,7 @@
           }
           var contentLength = resp.headers('Content-Length');
           if (contentLength && contentLength > 1024 * 1024 * 40) {
-            $sope.contentLengthError = true;
+            $scope.contentLengthError = true;
           }
         }).catch(function() {
           growl.error('Error when getting video detail. Please try again');

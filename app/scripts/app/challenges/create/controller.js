@@ -99,7 +99,7 @@
           }
           var contentLength = resp.headers('Content-Length');
           if (contentLength && contentLength > 1024 * 1024 * 40) {
-            $sope.contentLengthError = true;
+            $scope.contentLengthError = true;
           }
         }).catch(function() {
           growl.error('Error when getting video detail. Please try again');
