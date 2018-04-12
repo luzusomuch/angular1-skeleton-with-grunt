@@ -51,7 +51,7 @@
 
     function updateShow() {
       $scope.data.expiresAt = new Date(moment($scope.data.expiresAt).endOf('day'));
-      var data = _.pick($scope.data, ['title', 'status', 'expiresAt', 'thumbnailUrl', 'brightcoveId']);
+      var data = _.pick($scope.data, ['title', 'status', 'expiresAt', 'thumbnailUrl', 'brightcoveId', 'duration']);
       // handle show status we only allow to update status when show reached enough challenges numbers
       if (pageSettings['SHOW']['MIN_NUMBER_OF_CHALLENGES'] > numberOfChallenges || pageSettings['SHOW']['MAX_NUMBER_OF_CHALLENGES'] < numberOfChallenges || data.status !== 'published') {
         delete data.status;

@@ -6,7 +6,8 @@
   function CreateShowController($scope, growl, Upload, UploadService, ShowService, $state, ImageService) {
     $scope.data = {
       title: '',
-      expiresAt: new Date()
+      expiresAt: new Date(),
+      duration: 10
     };
     $scope.dateOptions = {
       minDate: new Date(),
