@@ -141,13 +141,15 @@ textarea {
   color: $black;
 }
 
-.modal-view-thumbnail {
+.modal-view-thumbnail, .modal-view-video {
   .modal-body {
     height: 450px;
+  }
+}
 
-    .thumbnail {
-      height: 100%;
-      margin: auto;
-    }
+.modal-view-thumbnail {
+  .thumbnail {
+    height: 100%;
+    margin: auto;
   }
 }
