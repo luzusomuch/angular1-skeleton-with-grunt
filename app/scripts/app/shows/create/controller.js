@@ -3,7 +3,7 @@
   angular.module('measureApp').controller('CreateShowController', CreateShowController);
 
   /* @ngInject */
-  function CreateShowController($scope, VideoService, growl, Upload, UploadService, ShowService, $state) {
+  function CreateShowController($scope, growl, Upload, UploadService, ShowService, $state, ImageService) {
     $scope.data = {
       title: '',
       expiresAt: new Date()
@@ -15,13 +15,12 @@
 
     $scope.submit = function(form) {
       if (form.$valid && $scope.file) {
-        var isVideo = UploadService.checkVideoType($scope.file);
-        if (isVideo) {
+        var isPhoto = UploadService.checkImageType($scope.file);
+        if (isPhoto) {
           $scope.submitted = true;
-          VideoService.create().$promise.then(function(videoData) {
-            UploadService.uploadVideo(videoData, $scope.file).then(function() {
-              VideoService.update({id: videoData._id}, {status: 'uploaded'});
-              $scope.data.videoId = videoData._id;
+          ImageService.create({contentType: $scope.file.type}).$promise.then(function(thumbnailData) {
+            UploadService.uploadThumbnail(thumbnailData, $scope.file).then(function() {
+              $scope.data.thumbnailUrl = thumbnailData.originalUrl;
               $scope.data.expiresAt = new Date(moment($scope.data.expiresAt).endOf('day'));
               ShowService.create($scope.data).$promise.then(function() {
                 $scope.submitted = false;

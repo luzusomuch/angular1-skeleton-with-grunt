@@ -4,7 +4,7 @@
 
   /* @ngInject */
   function UpdateShowController($scope, $stateParams, showDetail, pageSettings, ShowService, 
-    growl, showStatusesUnableToUpdate, VideoService, UploadService, $uibModal, $state) {
+    growl, showStatusesUnableToUpdate, ImageService, UploadService, $uibModal, $state) {
     var numberOfChallenges = showDetail.numberOfChallenges;
     $scope.isAllowUpdateShow = showStatusesUnableToUpdate.indexOf(showDetail.status) === -1;
     $scope.isAllowUpdateStatus = showDetail.status==='unpublished' && pageSettings['SHOW']['MIN_NUMBER_OF_CHALLENGES'] <= numberOfChallenges;
@@ -22,10 +22,9 @@
     $scope.upload = function(file) {
       if (file) {
         $scope.isUploading = true;
-        VideoService.create().$promise.then(function(videoData) {
-          UploadService.uploadVideo(videoData, file).then(function() {
-            VideoService.update({id: videoData._id}, {status: 'uploaded'});
-            $scope.data.videoId = videoData._id;
+        ImageService.create().$promise.then(function(thumbnailData) {
+          UploadService.uploadVideo(thumbnailData, file).then(function() {
+            $scope.data.thumbnailUrl = thumbnailData.originalUrl;
             $scope.isUploading = false;
           }).catch(function(err) {
             growl.error('Failed to upload video');
@@ -52,7 +51,7 @@
 
     function updateShow() {
       $scope.data.expiresAt = new Date(moment($scope.data.expiresAt).endOf('day'));
-      var data = _.pick($scope.data, ['title', 'status', 'expiresAt', 'videoId']);
+      var data = _.pick($scope.data, ['title', 'status', 'expiresAt', 'thumbnailUrl']);
       // handle show status we only allow to update status when show reached enough challenges numbers
       if (pageSettings['SHOW']['MIN_NUMBER_OF_CHALLENGES'] > numberOfChallenges || pageSettings['SHOW']['MAX_NUMBER_OF_CHALLENGES'] < numberOfChallenges || data.status !== 'published') {
         delete data.status;

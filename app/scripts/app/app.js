@@ -22,8 +22,9 @@ angular.module('measureApp', [
     abstract: true,
     isAuthenticate: true,
     resolve: {
-      pageSettings:['$http', 'apiUrl', function($http, apiUrl) {
+      pageSettings:['$http', 'apiUrl', '$rootScope', function($http, apiUrl, $rootScope) {
         return $http.get(apiUrl + '/settings').then(function(resp) {
+          $rootScope.pageSettings = resp.data;
           return resp.data;
         });
       }]
