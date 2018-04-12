@@ -93,12 +93,13 @@
             <span class="sr-only">Loading...</span>
           </p>
         </div>
-        <div class="form-group" ng-class="{'has-error': (form.url.$invalid || contentTypeError || contentLengthError) && form.$submitted}">
+        <div class="form-group" ng-class="{'has-error': (form.url.$invalid || contentTypeError || contentLengthError || videoUrlError) && form.$submitted}">
           <label>Video URL</label>
           <input class="form-control" type="url" name="url" ng-model="data.videoUrl" ng-blur="onBlurVideoUrl()" ng-required="!file && !data.videoUrl">
           <p class="help-block" ng-if="form.url.$error.required && form.$submitted">Video Challenge or Video URL is required</p>
           <p class="help-block" ng-if="contentTypeError && form.$submitted">Video size exceeds the allowable limit (40MB)</p>
           <p class="help-block" ng-if="contentLengthError && form.$submitted">Only allow video format</p>
+          <p class="help-block" ng-if="videoUrlError && form.$submitted">Invalid video url</p>
         </div>
         <div class="form-group">
           <button ng-disabled="submitted" type="submit" class="btn btn-primary">Submit</button>

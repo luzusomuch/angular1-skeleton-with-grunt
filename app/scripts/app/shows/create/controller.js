@@ -3,11 +3,12 @@
   angular.module('measureApp').controller('CreateShowController', CreateShowController);
 
   /* @ngInject */
-  function CreateShowController($scope, growl, Upload, UploadService, ShowService, $state, ImageService) {
+  function CreateShowController($scope, growl, Upload, UploadService, ShowService, $state, ImageService, pageSettings) {
     $scope.data = {
       title: '',
       expiresAt: new Date(),
-      duration: 10
+      duration: 10,
+      brightcoveId: pageSettings['DEFAULT_BRIGHTCOVE_ID']
     };
     $scope.dateOptions = {
       minDate: new Date(),
