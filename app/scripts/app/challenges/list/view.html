@@ -29,6 +29,9 @@
           <td><a href="javascript:void(0)" ng-click="viewVideo(item)">View video</a></td>
           <td><a ui-sref="app.submission.list({showId: showId, challengeId: item._id})">{{item.numberOfSubmissions}}</a></td>
           <td class="text-right">
+            <a ng-if="item.status === 'closed'" href="javascript:void(0)" title="Winner announcement" class="table-icon" ng-click="sendNotification(item)">
+              <i class="fa fa-bell"></i>
+            </a>
             <a title="Edit Challenge" class="table-icon" href="javascript:void(0)" ng-click="editChallenge(item)">
               <i class="fa fa-pencil"></i>
             </a>
