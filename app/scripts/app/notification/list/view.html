@@ -1,0 +1,52 @@
+<div class="content">
+  <div class="notifications-list">
+    <div class="row">
+      <h1 class="col-sm-10">Notifications List</h1>
+      <div class="col-sm-2">
+        <button ui-sref="app.notification.create" class="btn btn-primary add-new-show-button"><i class="fa fa-plus"></i> Add New Notification</button>
+      </div>
+    </div>
+    <div class="row filter-content">
+      <div class="col-sm-3">
+        <input type="text" name="title" placeholder="Enter show title" ng-model="filter.title" class="form-control" ng-keydown="onEnterTitle($event)">
+      </div>
+      <div class="col-sm-3">
+        <select ng-model="filter.status" class="form-control" ng-change="onSelectStatus()">
+          <option ng-repeat="status in showStatuses" value="{{status}}">{{status | capitalize}}</option>
+        </select>
+      </div>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <td>#</td>
+          <td class="text-left">Title</td>
+          <td>Content</td>
+          <td>Type</td>
+          <td>Created Date</td>
+          <td>Status</td>
+          <td class="text-right">Action</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="item in items">
+          <td>{{$index + 1}}</td>
+          <td class="text-left"><a ui-sref="app.challenge.list({showId: item._id})">{{item.title}}</a></td>
+          <td>{{item.content}}</td>
+          <td>{{item.type}}</td>
+          <td>{{item.createdAt | date: 'dd MMM yyyy'}}</td>
+          <td>{{item.status | capitalize}}</td>
+          <td class="text-right">
+            <a title="Edit Notification" class="table-icon" href="javascript:void(0)" ng-click="editNotification(item)">
+              <i class="fa fa-pencil"></i>
+            </a>
+            <a title="Delete Notification" class="table-icon" href="javascript:void(0)" ng-click="deleteNotification(item, index)">
+              <i class="fa fa-trash-o"></i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <ul uib-pagination items-per-page="pagination.limit" total-items="total" ng-model="pagination.page" ng-change="pageChanged()"></ul>
+  </div>
+</div>

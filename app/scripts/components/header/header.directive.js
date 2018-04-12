@@ -18,6 +18,10 @@ angular.module('measureApp').directive('header', function (AuthService) {
         label: 'Shows',
         sref: 'app.show.list',
         faClass: 'fa fa-server'
+      }, {
+        label: 'Notifications',
+        sref: 'app.notification.list',
+        faClass: 'fa fa-bell'
       }];
     }
   };
