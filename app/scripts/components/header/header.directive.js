@@ -15,9 +15,9 @@ angular.module('measureApp').directive('header', function (AuthService) {
       //   faClass: 'fa fa-server'
       // }];
       scope.menuItems = [{
-        label: 'Partners',
-        sref: 'app.partner.list',
-        faClass: 'fa fa-user'
+        label: 'Shows',
+        sref: 'app.show.list',
+        faClass: 'fa fa-server'
       }];
     }
   };
