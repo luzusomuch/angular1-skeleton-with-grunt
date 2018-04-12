@@ -140,3 +140,14 @@ textarea {
 .modal-content {
   color: $black;
 }
+
+.modal-view-thumbnail {
+  .modal-body {
+    height: 450px;
+
+    .thumbnail {
+      height: 100%;
+      margin: auto;
+    }
+  }
+}

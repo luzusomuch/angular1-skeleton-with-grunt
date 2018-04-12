@@ -25,7 +25,7 @@
           <td>Total Challenges</td>
           <td>End Date</td>
           <td>Status</td>
-          <td>Uploaded Video</td>
+          <td>Uploaded Thumbnail</td>
           <td class="text-right">Action</td>
         </tr>
       </thead>
@@ -37,7 +37,7 @@
           <td><a ui-sref="app.challenge.list({showId: item._id})">{{item.numberOfChallenges}}</a></td>
           <td>{{item.expiresAt | date: 'dd MMM yyyy'}}</td>
           <td>{{item.status | capitalize}}</td>
-          <td><a href="javascript:void(0)" ng-click="viewVideo(item)">View video</a></td>
+          <td><a href="javascript:void(0)" ng-click="viewThumbnail(item)">View thumbnail</a></td>
           <td class="text-right">
             <a title="Edit Show" class="table-icon" href="javascript:void(0)" ng-click="editShow(item)">
               <i class="fa fa-pencil"></i>

@@ -89,14 +89,14 @@
       }
     };
 
-    $scope.viewVideo = function(item) {
+    $scope.viewThumbnail = function(item) {
       $uibModal.open({
-        controller: 'ViewVideoModalController',
+        controller: 'ViewThumbnailModalController',
         controllerAs: 'vm',
-        templateUrl: 'scripts/components/viewVideoModal/view.html',
+        templateUrl: 'scripts/components/viewThumbnailModal/view.html',
         resolve: {
-          videoDetail: function() {
-            return item.video;
+          thumbnailUrl: function() {
+            return item.thumbnailUrl;
           }
         }
       });

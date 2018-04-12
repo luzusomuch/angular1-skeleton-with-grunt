@@ -550,3 +550,9 @@ textarea {
 
 .modal-content {
   color: #151515; }
+
+.modal-view-thumbnail .modal-body {
+  height: 450px; }
+  .modal-view-thumbnail .modal-body .thumbnail {
+    height: 100%;
+    margin: auto; }
