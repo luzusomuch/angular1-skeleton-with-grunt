@@ -3,7 +3,7 @@
   angular.module('measureApp').controller('ShowsListController', ShowsListController);
 
   /* @ngInject */
-  function ShowsListController($scope, $state, ShowService, showStatusesUnableToUpdate, growl, $uibModal, pageSettings) {
+  function ShowsListController($scope, $state, ShowService, showStatusesUnableToUpdate, growl, $uibModal, pageSettings, PushNotificationService) {
     $scope.pagination = {
       page: 1,
       limit: 20,
@@ -104,6 +104,15 @@
 
     $scope.isAllowCreateChallenge = function(item) {
       return item.numberOfChallenges !== pageSettings['SHOW']['MAX_NUMBER_OF_CHALLENGES'] && item.status === 'unpublished';
+    };
+
+    $scope.sendNotification = function(item) {
+      PushNotificationService.create().$promise.then(function() {
+        item.isPushedNotification = true;
+        growl.success('Sent push notification to everybody successfully');
+      }).catch(function() {
+        growl.error('Error when send push notification to everybody');
+      });
     };
   }
 })();
