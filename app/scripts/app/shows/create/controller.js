@@ -8,7 +8,7 @@
       title: '',
       expiresAt: new Date(),
       duration: 10,
-      brightcoveId: pageSettings['DEFAULT_BRIGHTCOVE_ID']
+      brightcoveId: pageSettings['SHOW']['DEFAULT_BRIGHTCOVE_ID']
     };
     $scope.dateOptions = {
       minDate: new Date(),
