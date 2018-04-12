@@ -78,7 +78,7 @@
 
     $scope.sendNotification = function(item) {
       if (item.status === 'closed') {
-        PushNotificationService.create().$promise.then(function() {
+        PushNotificationService.sendPush().$promise.then(function() {
           growl.success('Sent winner announcement push notification successfully');
         }).catch(function() {
           growl.error('Error when send winner announcement push notification');

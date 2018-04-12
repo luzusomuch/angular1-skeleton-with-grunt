@@ -97,7 +97,7 @@
     };
 
     $scope.notificationWinnerAnnouncement = function() {
-      PushNotificationService.create().$promise.then(function() {
+      PushNotificationService.sendPush().$promise.then(function() {
         growl.success('Sent winner announcement notification successfully');
       }).catch(function() {
         growl.error('Error when send winner announcement notification');
@@ -105,7 +105,7 @@
     };
 
     $scope.notificationToWinner = function() {
-      PushNotificationService.create().$promise.then(function() {
+      PushNotificationService.sendPush().$promise.then(function() {
         growl.success('Sent notification to winner successfully');
       }).catch(function() {
         growl.error('Error when send notification to winner');
