@@ -30,7 +30,7 @@ angular.module('measureApp').config(function ($stateProvider) {
     hideFooter: false,
     pageTitle: 'Update Notification',
     resolve: {
-      notificationDetail: ['PushNotificationService', '$stateParams', 'growl', '$state', function(ShowService, $stateParams, growl, $state) {
+      notificationDetail: ['PushNotificationService', '$stateParams', 'growl', '$state', function(PushNotificationService, $stateParams, growl, $state) {
         return PushNotificationService.get({id: $stateParams.id}).$promise.then(function(resp) {
           return resp;
         }).catch(function() {
