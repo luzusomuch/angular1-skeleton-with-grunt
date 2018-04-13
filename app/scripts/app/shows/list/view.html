@@ -45,7 +45,7 @@
             <a title="Edit Show" class="table-icon" href="javascript:void(0)" ng-click="editShow(item)">
               <i class="fa fa-pencil"></i>
             </a>
-            <a title="Delete Show" class="table-icon" href="javascript:void(0)" ng-click="deleteShow(item, index)">
+            <a title="Delete Show" class="table-icon" href="javascript:void(0)" ng-click="deleteShow(item, $index)">
               <i class="fa fa-trash-o"></i>
             </a>
             <a ng-if="isAllowCreateChallenge(item)" title="Add Challenge" class="table-icon" ui-sref="app.challenge.create({showId: item._id})">
