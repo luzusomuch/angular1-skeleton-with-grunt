@@ -3,7 +3,7 @@
   angular.module('measureApp').controller('CreateChallengeController', CreateChallengeController);
 
   /* @ngInject */
-  function CreateChallengeController($scope, $stateParams, $state, growl, ChallengeService, VideoService, UploadService, pageSettings, showDetail, $http) {
+  function CreateChallengeController($scope, $stateParams, growl, ChallengeService, VideoService, UploadService, pageSettings, showDetail, $http) {
     var maximumChallenge = pageSettings['SHOW']['MAX_NUMBER_OF_CHALLENGES'];
     $scope.showDetail = showDetail;
     $scope.data = {
@@ -146,7 +146,6 @@
           form.$setUntouched();
           form.$setPristine();
           form.$submitted = false;
-          $state.go('app.challenge.list', {showId: $stateParams.showId});
         }).catch(function(err) {
           $scope.submitted = false;
           growl.error('Failed to create new challenge');
