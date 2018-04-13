@@ -4,6 +4,8 @@
 
   /* @ngInject */
   function UpdateChallengeController($scope, $stateParams, $state, challengeDetail, growl, ChallengeService, VideoService, UploadService, showDetail, $http, pageSettings) {
+    $scope.maximumPrize = pageSettings['CHALLENGE']['MAX_NUMBER_OF_PRIZES'];
+    $scope.minimumPrize = pageSettings['CHALLENGE']['MIN_NUMBER_OF_PRIZES'];
     $scope.showId = $stateParams.showId;
     $scope.showDetail = showDetail;
     $scope.data = angular.copy(challengeDetail);
@@ -33,8 +35,8 @@
       $scope.prizeTitleLengthError = false;
       $scope.prizeDescError = false;
       $scope.prizeDescLengthError = false;
-      if ($scope.data.prizes.length === 2) {
-        return true;
+      if ($scope.data.prizes.length === $scope.maximumPrize) {
+        return growl.error('You have reached maximum number of prizes');
       }
       if (!$scope.prize.title) {
         $scope.prizeTitleError = true;
@@ -67,9 +69,10 @@
         VideoService.create().$promise.then(function(videoData) {
           UploadService.uploadVideo(videoData, file).then(function() {
             VideoService.update({id: videoData._id}, {status: 'uploaded'});
-            $scope.data.videoUrl = videoData.originalUrl;
+            $scope.data.videoId = videoData._id;
             $scope.isUploading = false;
             $scope.videoUrlError = false;
+            delete $scope.data.videoUrl;
           }).catch(function(err) {
             growl.error('Failed to upload video');
             $scope.isUploading = false;
@@ -100,6 +103,8 @@
           if (contentLength && contentLength > 1024 * 1024 * 40) {
             $scope.contentLengthError = true;
           }
+          delete $scope.data.videoId;
+          $scope.file = null;
         }).catch(function() {
           growl.error('Error when getting video detail. Please try again');
           $scope.isUploadingVideoUrl = false;
@@ -115,7 +120,7 @@
       if (showDetail.status !== 'unpublished') {
         return growl.error('Cannot edit challenge which has show status is Published/Closed');
       }
-      if ($scope.data.prizes.length !== 2) {
+      if ($scope.data.prizes.length > $scope.maximumPrize || $scope.data.prizes.length < $scope.minimumPrize) {
         return true;
       }
       if (form.$valid && !$scope.videoUrlError) {
@@ -123,9 +128,12 @@
           return growl.error('Please wait until upload process done');
         }
         $scope.submitted = true;
-        var data = _.pick($scope.data, ['title', 'announcement', 'description', 'prizes', 'expiresAt', 'videoUrl']);
-        if (!$scope.data.videoUrl || ($scope.data.videoUrl && $scope.data.videoUrl.length === 0)) {
+        var data = _.pick($scope.data, ['title', 'announcement', 'description', 'prizes', 'expiresAt', 'videoUrl', 'videoId']);
+        if (!$scope.data.videoUrl) {
           delete data.videoUrl;
+        }
+        if (!$scope.data.videoId) {
+          delete data.videoId;
         }
         ChallengeService.update({showId: $stateParams.showId, id: $stateParams.id}, data).$promise.then(function(resp) {
           $scope.submitted = false;
