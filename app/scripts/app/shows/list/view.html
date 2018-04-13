@@ -7,9 +7,9 @@
       </div>
     </div>
     <div class="row filter-content">
-      <div class="col-sm-3">
+      <!-- <div class="col-sm-3">
         <input type="text" name="title" placeholder="Enter show title" ng-model="filter.title" class="form-control" ng-keydown="onEnterTitle($event)">
-      </div>
+      </div> -->
       <div class="col-sm-3">
         <select ng-model="filter.status" class="form-control" ng-change="onSelectStatus()">
           <option ng-repeat="status in showStatuses" value="{{status}}">{{status | capitalize}}</option>
