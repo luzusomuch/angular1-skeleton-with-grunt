@@ -5,6 +5,8 @@
   /* @ngInject */
   function CreateChallengeController($scope, $stateParams, growl, ChallengeService, VideoService, UploadService, pageSettings, showDetail, $http) {
     var maximumChallenge = pageSettings['SHOW']['MAX_NUMBER_OF_CHALLENGES'];
+    $scope.maximumPrize = pageSettings['CHALLENGE']['MAX_NUMBER_OF_PRIZES'];
+    $scope.minimumPrize = pageSettings['CHALLENGE']['MIN_NUMBER_OF_PRIZES'];
     $scope.showDetail = showDetail;
     $scope.data = {
       title: '',
@@ -38,8 +40,8 @@
       $scope.prizeTitleLengthError = false;
       $scope.prizeDescError = false;
       $scope.prizeDescLengthError = false;
-      if ($scope.data.prizes.length === 2) {
-        return true;
+      if ($scope.data.prizes.length === $scope.maximumPrize) {
+        return growl.error('You have reached maximum number of prizes');
       }
       if (!$scope.prize.title) {
         $scope.prizeTitleError = true;
@@ -75,6 +77,7 @@
             $scope.data.videoId = videoData._id;
             $scope.isUploading = false;
             $scope.videoUrlError = false;
+            delete $scope.data.videoUrl;
           }).catch(function(err) {
             growl.error('Failed to upload video');
             $scope.isUploading = false;
@@ -105,6 +108,8 @@
           if (contentLength && contentLength > 1024 * 1024 * 40) {
             $scope.contentLengthError = true;
           }
+          delete $scope.data.videoId;
+          $scope.file = null;
         }).catch(function() {
           growl.error('Error when getting video detail. Please try again');
           $scope.isUploadingVideoUrl = false;
@@ -120,12 +125,12 @@
       if (showDetail.numberOfChallenges >= maximumChallenge) {
         return growl.error('This show has reached maximum number of challenges');
       }
-      if ($scope.data.prizes.length !== 2) {
+      if ($scope.data.prizes.length > $scope.maximumPrize || $scope.data.prizes.length < $scope.minimumPrize) {
         return true;
       }
       if ($scope.isUploading || $scope.isUploadingVideoUrl) {
-          return growl.error('Please wait until upload process done');
-        }
+        return growl.error('Please wait until upload process done');
+      }
       if (form.$valid && !$scope.videoUrlError) {
         $scope.submitted = true;
         $scope.data.expiresAt = new Date(moment($scope.data.expiresAt).endOf('day'));
@@ -138,7 +143,8 @@
             announcement: '',
             expiresAt: new Date(),
             prizes: [],
-            showId: $stateParams.showId
+            showId: $stateParams.showId,
+            campaignId: '00000',
           };
           $scope.file = null;
           showDetail.numberOfChallenges++;
