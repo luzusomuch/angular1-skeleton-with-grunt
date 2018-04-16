@@ -134,13 +134,13 @@
         return prize.winner && prize.winner._id;
       }));
       if (prizes[0]) {
-        ChallengeService.otherWinnerhNotifications({
+        ChallengeService.selfWinnerhNotifications({
           showId: $stateParams.showId,
           id: $stateParams.challengeId,
           prizeIndex: prizes[0].index,
         }, {}).$promise.then(function() {
           if (prizes[1]) {
-            ChallengeService.otherWinnerhNotifications({
+            ChallengeService.selfWinnerhNotifications({
               showId: $stateParams.showId,
               id: $stateParams.challengeId,
               prizeIndex: prizes[1].index,
