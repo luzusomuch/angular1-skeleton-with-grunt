@@ -107,8 +107,8 @@
     };
 
     $scope.sendNotification = function(item) {
-      PushNotificationService.sendPush().$promise.then(function() {
-        item.isPushedNotification = true;
+      ShowService.publishNotifications({id: item._id}).$promise.then(function() {
+        item.notifiedOnPublish = true;
         growl.success('Sent push notification to everybody successfully');
       }).catch(function() {
         growl.error('Error when send push notification to everybody');

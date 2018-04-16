@@ -1,6 +1,6 @@
 'use strict';
 angular.module('measureApp').factory('ShowService', function($resource, apiUrl){
-  return $resource(apiUrl + '/api/shows/:id', {}, {
+  return $resource(apiUrl + '/api/shows/:id/:route', {}, {
     list: {
       method: 'GET',
       isArray: false,
@@ -29,6 +29,13 @@ angular.module('measureApp').factory('ShowService', function($resource, apiUrl){
         id: '@id',
       },
       isArray: false
+    },
+    publishNotifications: {
+      method: 'POST',
+      params: {
+        id: '@id',
+        route: 'publishnotifications'
+      }
     }
   });
 });

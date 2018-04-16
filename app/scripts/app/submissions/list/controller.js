@@ -3,7 +3,7 @@
   angular.module('measureApp').controller('SubmissionsListController', SubmissionsListController);
 
   /* @ngInject */
-  function SubmissionsListController($scope, $state, $stateParams, SubmissionService, ChallengeService, growl, $uibModal, PushNotificationService) {
+  function SubmissionsListController($scope, $state, $stateParams, $q, SubmissionService, ChallengeService, growl, $uibModal) {
     $scope.pagination = {
       page: 1,
       limit: 20,
@@ -13,9 +13,16 @@
     $scope.total = 0;
 
     $scope.challengeDetail = {};
-    ChallengeService.get({showId: $stateParams.showId, id: $stateParams.challengeId}).$promise.then(function(resp) {
-      $scope.challengeDetail = resp;
-    });
+    $scope.hasWinner = false;
+
+    function getChallengeDetail() {
+      ChallengeService.get({showId: $stateParams.showId, id: $stateParams.challengeId}).$promise.then(function(resp) {
+        $scope.challengeDetail = resp;
+        $scope.hasWinner = _.filter($scope.challengeDetail.prizes, function(prize) {
+          return prize.winner && prize.winner._id;
+        }).length;
+      });
+    }
 
     function search(params) {
       params = params || {};
@@ -33,6 +40,7 @@
     }
 
     search();
+    getChallengeDetail();
 
     $scope.pageChanged = function() {
       search();
@@ -76,6 +84,7 @@
           id: item._id,
         }, {prizeIndexes: prizeIndexes}).$promise.then(function() {
           search();
+          getChallengeDetail();
           growl.success('Select winner submission successfully');
         }).catch(function() {
           growl.error('Error when select winner submission');
@@ -97,19 +106,52 @@
     };
 
     $scope.notificationWinnerAnnouncement = function() {
-      PushNotificationService.sendPush().$promise.then(function() {
-        growl.success('Sent winner announcement notification successfully');
-      }).catch(function() {
-        growl.error('Error when send winner announcement notification');
-      });
+      var prizes = angular.copy($scope.challengeDetail.prizes);
+      if (prizes[0]) {
+        ChallengeService.otherWinnerhNotifications({
+          showId: $stateParams.showId,
+          id: $stateParams.challengeId,
+          prizeIndex: 0,
+        }, {}).$promise.then(function() {
+          if (prizes[1]) {
+            ChallengeService.otherWinnerhNotifications({
+              showId: $stateParams.showId,
+              id: $stateParams.challengeId,
+              prizeIndex: 1,
+            }, {}).$promise.then(function() {
+              growl.success('Sent winner announcement notification successfully');
+            });
+          } else {
+            growl.success('Sent winner announcement notification successfully');
+          }
+        });
+      }
     };
 
     $scope.notificationToWinner = function() {
-      PushNotificationService.sendPush().$promise.then(function() {
-        growl.success('Sent notification to winner successfully');
-      }).catch(function() {
-        growl.error('Error when send notification to winner');
-      });
+      var prizes = angular.copy(_.filter($scope.challengeDetail.prizes, function(prize, $index) {
+        prize.index = $index;
+        return prize.winner && prize.winner._id;
+      }));
+      if (prizes[0]) {
+        ChallengeService.otherWinnerhNotifications({
+          showId: $stateParams.showId,
+          id: $stateParams.challengeId,
+          prizeIndex: prizes[0].index,
+        }, {}).$promise.then(function() {
+          if (prizes[1]) {
+            ChallengeService.otherWinnerhNotifications({
+              showId: $stateParams.showId,
+              id: $stateParams.challengeId,
+              prizeIndex: prizes[1].index,
+            }, {}).$promise.then(function() {
+              growl.success('Sent notification to winner successfully');  
+            });
+          } else {
+            growl.error('Error when send notification to winner');
+          }
+        });
+      }
     };
   }
 })();

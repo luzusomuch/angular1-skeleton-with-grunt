@@ -1,6 +1,6 @@
 'use strict';
 angular.module('measureApp').factory('ChallengeService', function($resource, apiUrl){
-  return $resource(apiUrl + '/api/shows/:showId/challenges/:id/', {}, {
+  return $resource(apiUrl + '/api/shows/:showId/challenges/:id', {}, {
     list: {
       method: 'GET',
       params: {
@@ -30,6 +30,24 @@ angular.module('measureApp').factory('ChallengeService', function($resource, api
         id: '@id',
       },
       isArray: false,
+    },
+    otherWinnerhNotifications: {
+      method: 'POST',
+      url: apiUrl + '/api/shows/:showId/challenges/:id/prizes/:prizeIndex/otherwinnernotifications',
+      params: {
+        showId: '@showId',
+        id: '@id',
+        prizeIndex: '@prizeIndex',
+      }
+    },
+    selfWinnerhNotifications: {
+      method: 'POST',
+      url: apiUrl + '/api/shows/:showId/challenges/:id/prizes/:prizeIndex/selfwinnernotifications',
+      params: {
+        showId: '@showId',
+        id: '@id',
+        prizeIndex: '@prizeIndex',
+      }
     }
   });
 });
