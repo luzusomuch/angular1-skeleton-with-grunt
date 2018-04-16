@@ -1,0 +1,26 @@
+<div class="content">
+  <div class="row">
+    <div class="col-md-4 col-sm-6 col-md-offset-4">
+      <h1>Profile</h1>
+      <form name="form" class="login-form" ng-submit="submit(form)" novalidate>
+        <div class="form-group" ng-class="{'has-error': form.email.$invalid && form.$submitted}">
+          <label>Email</label>
+          <input class="form-control" type="text" name="uid" ng-model="user.uid" required readonly>
+        </div>
+        <div class="form-group" ng-class="{'has-error': form.firstName.$invalid && form.$submitted}">
+          <label>Fist Name</label>
+          <input class="form-control" type="text" name="firstName" ng-model="user.firstName" required>
+          <p class="help-block" ng-if="form.firstName.$error.required && form.$submitted">First Name is required</p>
+        </div>
+        <div class="form-group" ng-class="{'has-error': form.lastName.$invalid && form.$submitted}">
+          <label>Last Name</label>
+          <input class="form-control" type="text" name="lastName" ng-model="user.lastName" required>
+          <p class="help-block" ng-if="form.lastName.$error.required && form.$submitted">Last Name is required</p>
+        </div>
+        <div class="login-button-group">
+          <button ng-disabled="submitted" type="submit" class="btn btn-primary login-btn">Update</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

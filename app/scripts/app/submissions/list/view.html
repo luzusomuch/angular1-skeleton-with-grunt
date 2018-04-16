@@ -1,9 +1,15 @@
 <div class="content">
   <div class="submissions-list">
     <div class="row">
-      <h1 class="col-sm-10">Submissions List</h1>
+      <h1 class="col-sm-7">Submissions List</h1>
+      <div class="col-sm-2">
+        <button ng-click="notificationToWinner()" class="btn btn-primary add-new-challenge-button"><i class="fa fa-bell"></i> Notification to winner</button>
+      </div>
+      <div class="col-sm-3">
+        <button ng-click="notificationWinnerAnnouncement()" ng-disabled="challengeDetail.status !== 'closed'" class="btn btn-primary add-new-challenge-button"><i class="fa fa-bell"></i> Notification winner announcement</button>
+      </div>
     </div>
-    <div class="row filter-content">
+    <!-- <div class="row filter-content">
       <div class="col-sm-3">
         <input type="text" name="title" placeholder="Enter user name" ng-model="filter.userName" class="form-control" ng-keydown="onEnterUserName($event)">
       </div>
@@ -13,7 +19,7 @@
       <div class="col-sm-3">
         <input type="number" name="title" placeholder="Enter pro-score" ng-model="filter.proScore" class="form-control" ng-keydown="onEnterProScore($event)">
       </div>
-    </div>
+    </div> -->
     <table class="table">
       <thead>
         <tr>

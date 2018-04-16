@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('measureApp').factory('UploadService', function ($http, $q) {
+angular.module('measureApp').factory('UploadService', function ($http, $q, $rootScope) {
   function getExtension(filename) {
     var parts = filename.split('.');
     return parts[parts.length - 1];
@@ -21,8 +21,7 @@ angular.module('measureApp').factory('UploadService', function ($http, $q) {
       var ext = getExtension(file.name);
       switch (ext.toLowerCase()) {
         case 'jpg':
-        case 'gif':
-        case 'bmp':
+        case 'jpeg':
         case 'png':
           return true;
       }
@@ -32,8 +31,22 @@ angular.module('measureApp').factory('UploadService', function ($http, $q) {
       return $http({
         url: s3Info.uploadUrl,
         method: 'PUT',
-        header: {
-          'Content-Type': file.type || 'binary/octet-stream',
+        headers: {
+          'Content-Type': $rootScope.pageSettings['VIDEO_CONTENT_TYPE'],
+        },
+        data: file,
+      }).then(function() {
+        return $q.resolve();
+      }).catch(function(err) {
+        return $q.reject(err);
+      });
+    },
+    uploadThumbnail: function (s3Info, file) {
+      return $http({
+        url: s3Info.uploadUrl,
+        method: 'PUT',
+        headers: {
+          'Content-Type': file.type,
         },
         data: file,
       }).then(function() {

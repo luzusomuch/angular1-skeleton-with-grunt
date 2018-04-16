@@ -3,7 +3,7 @@
   angular.module('measureApp').controller('ShowsListController', ShowsListController);
 
   /* @ngInject */
-  function ShowsListController($scope, $state, ShowService, showStatusesUnableToUpdate, growl, $uibModal, pageSettings) {
+  function ShowsListController($scope, $state, ShowService, showStatusesUnableToUpdate, growl, $uibModal, pageSettings, PushNotificationService) {
     $scope.pagination = {
       page: 1,
       limit: 20,
@@ -40,11 +40,13 @@
     };
 
     $scope.onSelectStatus = function() {
+      $scope.pagination.page = 1;
       search();
     };
 
     $scope.onEnterTitle = function(e) {
       if (e.keyCode === 13) {
+        $scope.pagination.page = 1;
         search();
       }
     };
@@ -87,14 +89,14 @@
       }
     };
 
-    $scope.viewVideo = function(item) {
+    $scope.viewThumbnail = function(item) {
       $uibModal.open({
-        controller: 'ViewVideoModalController',
+        controller: 'ViewThumbnailModalController',
         controllerAs: 'vm',
-        templateUrl: 'scripts/components/viewVideoModal/view.html',
+        templateUrl: 'scripts/components/viewThumbnailModal/view.html',
         resolve: {
-          videoDetail: function() {
-            return item.video;
+          thumbnailUrl: function() {
+            return item.thumbnailUrl;
           }
         }
       });
@@ -102,6 +104,15 @@
 
     $scope.isAllowCreateChallenge = function(item) {
       return item.numberOfChallenges !== pageSettings['SHOW']['MAX_NUMBER_OF_CHALLENGES'] && item.status === 'unpublished';
+    };
+
+    $scope.sendNotification = function(item) {
+      PushNotificationService.sendPush().$promise.then(function() {
+        item.isPushedNotification = true;
+        growl.success('Sent push notification to everybody successfully');
+      }).catch(function() {
+        growl.error('Error when send push notification to everybody');
+      });
     };
   }
 })();

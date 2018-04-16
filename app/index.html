@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta http-equiv="content-language" content="en">
 
-  <title>{{pageTitle || "Measure Up Admin Page"}}</title>
+  <title ng-bind="pageTitle">Measure Up Admin Page</title>
   <meta name="fragment" content="!">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -86,7 +86,13 @@
   <script src="scripts/app/app.constants.js"></script>
   <script src="scripts/app/login/route.js"></script>
   <script src="scripts/app/login/controller.js"></script>
+  <script src="scripts/app/forgot-password/route.js"></script>
+  <script src="scripts/app/forgot-password/controller.js"></script>
+  <script src="scripts/app/recover-password/route.js"></script>
+  <script src="scripts/app/recover-password/controller.js"></script>
   <script src="scripts/app/logout/controller.js"></script>
+  <script src="scripts/app/profile/route.js"></script>
+  <script src="scripts/app/profile/controller.js"></script>
   <script src="scripts/app/home/route.js"></script>
   <script src="scripts/app/home/controller.js"></script>
   <script src="scripts/app/shows/route.js"></script>
@@ -99,6 +105,16 @@
   <script src="scripts/app/challenges/update/controller.js"></script>
   <script src="scripts/app/submissions/route.js"></script>
   <script src="scripts/app/submissions/list/controller.js"></script>
+  <script src="scripts/app/partner/route.js"></script>
+  <script src="scripts/app/partner/list/controller.js"></script>
+  <script src="scripts/app/partner/create/controller.js"></script>
+  <script src="scripts/app/partner/edit/controller.js"></script>
+  <script src="scripts/app/notification/route.js"></script>
+  <script src="scripts/app/notification/list/controller.js"></script>
+  <script src="scripts/app/notification/create/controller.js"></script>
+  <script src="scripts/app/notification/edit/controller.js"></script>
+  <script src="scripts/app/settings/route.js"></script>
+  <script src="scripts/app/settings/controller.js"></script>
 
   <script src="scripts/components/header/header.directive.js"></script>
   <script src="scripts/components/footer/footer.directive.js"></script>
@@ -107,6 +123,8 @@
   <script src="scripts/components/confirmModal/controller.js"></script>
   <script src="scripts/components/viewVideoModal/controller.js"></script>
   <script src="scripts/components/selectSubmissionWinnerModal/controller.js"></script>
+  <script src="scripts/components/pwCheck/pwCheck.directive.js"></script>
+  <script src="scripts/components/viewThumbnailModal/controller.js"></script>
 
   <script src="scripts/services/auth.service.js"></script>    
   <script src="scripts/services/interceptor.factory.js"></script>    
@@ -116,6 +134,11 @@
   <script src="scripts/services/video.service.js"></script>    
   <script src="scripts/services/upload.service.js"></script>    
   <script src="scripts/services/submission.service.js"></script>   
+  <script src="scripts/services/partner.service.js"></script>   
+  <script src="scripts/services/account.service.js"></script>   
+  <script src="scripts/services/image.service.js"></script>   
+  <script src="scripts/services/push-notification.service.js"></script>   
+  <script src="scripts/services/test.service.js"></script>   
 
   <script src="scripts/filters/html.filter.js"></script>    
   <script src="scripts/filters/capitalize.filter.js"></script>    

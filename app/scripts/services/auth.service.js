@@ -23,6 +23,34 @@ angular.module('measureApp').factory('AuthService', function ($q, $http, apiUrl,
     logout: function () {
       $cookies.remove('token');
       currentUser = {};
+    },
+
+    forgotPassword: function(email) {
+      return $http.post(apiUrl+'/auth/forgot-password', {
+        email: email
+      }).then(function() {
+        return $q.resolve();
+      }).catch(function() {
+        return $q.reject();
+      });
+    },
+
+    recoverPassword: function(token, password) {
+      return $http.post(apiUrl+'/auth/recover-password/'+token, {
+        password: password
+      }).then(function() {
+        return $q.resolve();
+      }).catch(function() {
+        return $q.reject();
+      });
+    },
+
+    registerPartner: function(data) {
+      return $http.post(apiUrl+'/auth/register', data).then(function(resp) {
+        return $q.resolve(resp);
+      }).catch(function(err) {
+        return $q.reject(err);
+      });
     }
   };
 });

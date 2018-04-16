@@ -1,0 +1,22 @@
+<div class="login-content">
+  <div class="row">
+    <div class="col-md-4 col-sm-6 col-md-offset-4">
+      <div class="login-page">
+        <h1 class="text-center">MEASUREUP</h1>
+        <form name="form" class="login-form" ng-submit="submit(form)" novalidate>
+          <h3>Forgot password</h3>
+          <div class="form-group" ng-class="{'has-error': form.email.$invalid && form.$submitted}">
+            <label>Email</label>
+            <input class="form-control" type="email" name="email" ng-model="email" required placeholder="Email">
+            <p class="help-block" ng-if="form.email.$error.required && form.$submitted">Email is required</p>
+            <p class="help-block" ng-if="form.email.$error.email && form.$submitted">Email is invalid</p>
+          </div>
+          <div class="login-button-group">
+            <a ui-sref="login">Login</a>
+            <button ng-disabled="submitted" type="submit" class="btn btn-primary login-btn">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

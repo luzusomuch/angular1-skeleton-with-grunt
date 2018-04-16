@@ -3,9 +3,13 @@
     <div class="col-sm-8 col-sm-offset-2">
       <h1>Update Challenge</h1>
       <form ng-submit="submit(form)" name="form" novalidate>
+        <div class="form-group">
+          <label>Show Name</label>
+          <input type="text" name="showName" placeholder="Show Name" disabled class="form-control" ng-model="showDetail.title">
+        </div>
         <div class="form-group" ng-class="{'has-error': form.campaignId.$invalid && form.$submitted}">
           <label>Campaign ID <span class="required">*</span></label>
-          <input class="form-control" type="text" name="campaignId" ng-model="data.campaignId" required  placeholder="Campaign ID">
+          <input class="form-control" type="text" name="campaignId" ng-model="data.campaignId" required  placeholder="Campaign ID" disabled>
           <p class="help-block" ng-if="form.campaignId.$error.required && form.$submitted">Campaign ID is required</p>
         </div>
         <div class="form-group" ng-class="{'has-error': form.title.$invalid && form.$submitted}">
@@ -39,7 +43,7 @@
           <p class="help-block" ng-if="form.expiresAt.$error.endTime && form.$submitted">End Date must be less than End Date of Show</p>
         </div>
         <div class="form-group" ng-class="{'has-error': data.prizes.length < 2 && form.$submitted}">
-          <label>Prizes</label>
+          <label>Prizes <span class="required">*</span></label>
           <div class="row">
             <div class="col-sm-5" ng-class="{'has-error': prizeTitleError || prizeTitleLengthError}">
               <input class="form-control" type="text" name="prizeTitle" ng-model="prize.title" placeholder="Prize Title">
@@ -80,7 +84,7 @@
         </div>
         <div class="form-group" ng-class="{'has-error': form.video.$invalid}">
           <label>Video Challenge <span class="required">*</span></label>
-          <input name="video" class="form-control" type="file" ngf-max-size="40MB" ng-model="file" uploader="uploader" ngf-pattern="'video/*'" ngf-accept="'video/*'" ng-required="!data.video || !data.video._id" ngf-select="upload($file)"/>
+          <input name="video" class="form-control" type="file" ngf-max-size="40MB" ng-model="file" uploader="uploader" ngf-pattern="'video/*'" ngf-accept="'video/*'" ng-required="(!data.video || !data.video._id) && !data.videoUrl" ngf-select="upload($file)"/>
           <p class="help-block" ng-if="form.video.$error.required && !form.video.$error.maxSize && !form.video.$error.pattern">Video Challenge is required</p>
           <p class="help-block" ng-if="form.video.$error.maxSize">Video size exceeds the allowable limit (40MB)</p>
           <p class="help-block" ng-if="form.video.$error.pattern">Only allow video format</p>
@@ -88,6 +92,14 @@
             <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
             <span class="sr-only">Loading...</span>
           </p>
+        </div>
+        <div class="form-group" ng-class="{'has-error': (form.url.$invalid || contentTypeError || contentLengthError || videoUrlError) && form.$submitted}">
+          <label>Video URL</label>
+          <input class="form-control" type="url" name="url" ng-model="data.videoUrl" ng-blur="onBlurVideoUrl()" ng-required="(!data.video || !data.video._id) && !data.videoUrl">
+          <p class="help-block" ng-if="form.url.$error.required && form.$submitted">Video Challenge or Video URL is required</p>
+          <p class="help-block" ng-if="contentTypeError && form.$submitted">Video size exceeds the allowable limit (40MB)</p>
+          <p class="help-block" ng-if="contentLengthError && form.$submitted">Only allow video format</p>
+          <p class="help-block" ng-if="videoUrlError && form.$submitted">Invalid video url</p>
         </div>
         <div class="form-group">
           <button ng-disabled="submitted" type="submit" class="btn btn-primary">Submit</button>

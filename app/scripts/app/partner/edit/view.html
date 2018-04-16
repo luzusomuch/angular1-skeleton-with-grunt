@@ -1,0 +1,29 @@
+<div class="content">
+  <div class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+      <h1>Edit Partner</h1>
+      <form class="create-show-form" ng-submit="submit(form)" name="form" novalidate>
+        <div class="form-group" ng-class="{'has-error': form.uid.$invalid && form.$submitted}">
+          <label>Email <span class="required">*</span></label>
+          <input class="form-control" type="email" name="uid" ng-model="data.uid" required placeholder="Email">
+          <p class="help-block" ng-if="form.uid.$error.required && form.$submitted">Email is required</p>
+          <p class="help-block" ng-if="form.uid.$error.email && form.$submitted">Email is invaid</p>
+        </div>
+        <div class="form-group" ng-class="{'has-error': form.firstName.$invalid && form.$submitted}">
+          <label>First Name <span class="required">*</span></label>
+          <input class="form-control" type="text" name="firstName" ng-model="data.firstName" required placeholder="First Name">
+          <p class="help-block" ng-if="form.firstName.$error.required && form.$submitted">First Name is required</p>
+        </div>
+        <div class="form-group" ng-class="{'has-error': form.lastName.$invalid && form.$submitted}">
+          <label>Last Name <span class="required">*</span></label>
+          <input class="form-control" type="text" name="lastName" ng-model="data.lastName" required placeholder="Last Name">
+          <p class="help-block" ng-if="form.lastName.$error.required && form.$submitted">Last Name is required</p>
+        </div>
+        <div class="form-group">
+          <button ng-disabled="submitted" type="submit" class="btn btn-primary">Update</button>
+          <button type="button" class="btn btn-warning" ui-sref="app.partner.list">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+<div class="content">
+  <div class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+      <h1>Create New Partner</h1>
+      <form class="create-show-form" ng-submit="submit(form)" name="form" novalidate>
+        <div class="form-group" ng-class="{'has-error': form.uid.$invalid && form.$submitted}">
+          <label>Email <span class="required">*</span></label>
+          <input class="form-control" type="email" name="uid" ng-model="data.uid" required placeholder="Email">
+          <p class="help-block" ng-if="form.uid.$error.required && form.$submitted">Email is required</p>
+          <p class="help-block" ng-if="form.uid.$error.email && form.$submitted">Email is invaid</p>
+        </div>
+        <div class="form-group" ng-class="{'has-error': form.firstName.$invalid && form.$submitted}">
+          <label>First Name <span class="required">*</span></label>
+          <input class="form-control" type="text" name="firstName" ng-model="data.firstName" required placeholder="First Name">
+          <p class="help-block" ng-if="form.firstName.$error.required && form.$submitted">First Name is required</p>
+        </div>
+        <div class="form-group" ng-class="{'has-error': form.lastName.$invalid && form.$submitted}">
+          <label>Last Name <span class="required">*</span></label>
+          <input class="form-control" type="text" name="lastName" ng-model="data.lastName" required placeholder="Last Name">
+          <p class="help-block" ng-if="form.lastName.$error.required && form.$submitted">Last Name is required</p>
+        </div>
+        <div class="form-group" ng-class="{'has-error': form.password.$invalid && form.$submitted}">
+          <label>Password <span class="required">*</span></label>
+          <input class="form-control" type="password" name="password" id="password" ng-model="data.password" required placeholder="Password">
+          <p class="help-block" ng-if="form.password.$error.required && form.$submitted">Password is required</p>
+        </div>
+        <div class="form-group" ng-class="{'has-error': form.confirmPassword.$invalid && form.$submitted}">
+          <label>Confirm Password <span class="required">*</span></label>
+          <input class="form-control" type="password" name="confirmPassword" ng-model="data.confirmPassword" required placeholder="Confirm Password" pw-check="password">
+          <p class="help-block" ng-if="form.confirmPassword.$error.required && form.$submitted">Confirm Password is required</p>
+          <p class="help-block" ng-if="form.confirmPassword.$error.pwmatch && form.$submitted">Password does not match</p>
+        </div>
+        <div class="form-group">
+          <button ng-disabled="submitted" type="submit" class="btn btn-primary">Submit</button>
+          <button type="button" class="btn btn-warning" ui-sref="app.partner.list">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

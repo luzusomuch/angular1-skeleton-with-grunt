@@ -9,16 +9,27 @@
           <p class="help-block" ng-if="form.title.$error.required && form.$submitted">Title is required</p>
           <p class="help-block" ng-if="form.title.$error.maxlength && form.$submitted">Title exceeds the allowable limit (30 characters)</p>
         </div>
-        <div class="form-group" ng-class="{'has-error': form.video.$invalid}">
-          <label>Video Show <span class="required">*</span></label>
-          <input name="video" class="form-control" type="file" ngf-max-size="40MB" ng-model="file" uploader="uploader" ngf-pattern="'video/*'" ngf-accept="'video/*'" ng-required="!data.video || !data.video._id" ngf-select="upload($file)"/>
-          <p class="help-block" ng-if="form.video.$error.required && !form.video.$error.maxSize && !form.video.$error.pattern">Video Show is required</p>
-          <p class="help-block" ng-if="form.video.$error.maxSize">Video size exceeds the allowable limit (40MB)</p>
-          <p class="help-block" ng-if="form.video.$error.pattern">Only allow video format</p>
+        <div class="form-group" ng-class="{'has-error': form.brightcoveId.$invalid && form.$submitted}">
+          <label>BrightCove ID <span class="required">*</span></label>
+          <input class="form-control" type="text" name="brightcoveId" ng-model="data.brightcoveId" placeholder="BrightCove ID" required disabled>
+          <p class="help-block" ng-if="form.brightcoveId.$error.required && form.$submitted">BrightCove ID is required</p>
+        </div>
+        <div class="form-group" ng-class="{'has-error': form.thumbnail.$invalid && form.$submitted}">
+          <label>Show Thumbnail <span class="required">*</span></label>
+          <input name="thumbnail" class="form-control" type="file" ngf-max-size="40MB" ng-model="file" uploader="uploader" ngf-pattern="'image/*'" ngf-accept="'image/*'" ng-required="!data.thumbnailUrl" ngf-select="upload($file)"/>
+          <p class="help-block" ng-if="form.thumbnail.$error.required && !form.thumbnail.$error.maxSize && !form.thumbnail.$error.pattern">Show thumbnail is required</p>
+          <p class="help-block" ng-if="form.thumbnail.$error.maxSize">Thumbnail size exceeds the allowable limit (40MB)</p>
+          <p class="help-block" ng-if="form.thumbnail.$error.pattern">Only allow image format</p>
           <p ng-if="isUploading">
             <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
             <span class="sr-only">Loading...</span>
           </p>
+        </div>
+        <div class="form-group" ng-class="{'has-error': form.duration.$invalid && form.$submitted}">
+          <label>Duration(s) <span class="required">*</span></label>
+          <input class="form-control" type="text" name="duration" ng-model="data.duration" placeholder="Duration" required pattern="\d+">
+          <p class="help-block" ng-if="form.duration.$error.required && form.$submitted">Duration is required</p>
+          <p class="help-block" ng-if="form.duration.$error.pattern && form.$submitted">Duration must be a positive number</p>
         </div>
         <div class="form-group" ng-class="{'has-error': form.expiresAt.$invalid && form.$submitted}">
           <label>End Date <span class="required">*</span></label>
