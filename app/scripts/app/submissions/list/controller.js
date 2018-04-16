@@ -148,8 +148,10 @@
               growl.success('Sent notification to winner successfully');  
             });
           } else {
-            growl.error('Error when send notification to winner');
+            growl.success('Sent notification to winner successfully');  
           }
+        }).catch(function() {
+          growl.error('Error when send notification to winner');
         });
       }
     };
