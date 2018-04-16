@@ -78,19 +78,26 @@
 
     $scope.sendNotification = function(item) {
       if (item.status === 'closed') {
-        var promises = [];
-        _.each(item.prizes, function(prize, $index) {
-          promises.push(ChallengeService.otherWinnerhNotifications({
+        var prizes = angular.copy($scope.challengeDetail.prizes);
+        if (prizes[0]) {
+          ChallengeService.otherWinnerhNotifications({
             showId: $stateParams.showId,
             id: item._id,
-            prizeIndex: $index,
-          }).$promise);
-        });
-        $q.all(promises).then(function() {
-          growl.success('Sent winner announcement notification successfully');
-        }).catch(function() {
-          growl.error('Error when send winner announcement notification');
-        });
+            prizeIndex: 0,
+          }, {}).$promise.then(function() {
+            if (prizes[1]) {
+              ChallengeService.otherWinnerhNotifications({
+                showId: $stateParams.showId,
+                id: item._id,
+                prizeIndex: 1,
+              }, {}).$promise.then(function() {
+                growl.success('Sent winner announcement notification successfully');
+              });
+            } else {
+              growl.success('Sent winner announcement notification successfully');
+            }
+          });
+        }
       }
     };
   }
