@@ -3,7 +3,7 @@
   angular.module('measureApp').controller('SubmissionsListController', SubmissionsListController);
 
   /* @ngInject */
-  function SubmissionsListController($scope, $state, $stateParams, SubmissionService, ChallengeService, growl, $uibModal, PushNotificationService) {
+  function SubmissionsListController($scope, $state, $stateParams, SubmissionService, ChallengeService, growl, $uibModal) {
     $scope.pagination = {
       page: 1,
       limit: 20,
@@ -13,9 +13,12 @@
     $scope.total = 0;
 
     $scope.challengeDetail = {};
-    ChallengeService.get({showId: $stateParams.showId, id: $stateParams.challengeId}).$promise.then(function(resp) {
-      $scope.challengeDetail = resp;
-    });
+
+    function getChallengeDetail() {
+      ChallengeService.get({showId: $stateParams.showId, id: $stateParams.challengeId}).$promise.then(function(resp) {
+        $scope.challengeDetail = resp;
+      });
+    }
 
     function search(params) {
       params = params || {};
@@ -33,6 +36,7 @@
     }
 
     search();
+    getChallengeDetail();
 
     $scope.pageChanged = function() {
       search();
@@ -76,6 +80,7 @@
           id: item._id,
         }, {prizeIndexes: prizeIndexes}).$promise.then(function() {
           search();
+          getChallengeDetail();
           growl.success('Select winner submission successfully');
         }).catch(function() {
           growl.error('Error when select winner submission');
@@ -97,7 +102,10 @@
     };
 
     $scope.notificationWinnerAnnouncement = function() {
-      PushNotificationService.sendPush().$promise.then(function() {
+      ChallengeService.otherWinnerhNotifications({
+        showId: $stateParams.showId,
+        id: $stateParams.challengeId,
+      }).$promise.then(function() {
         growl.success('Sent winner announcement notification successfully');
       }).catch(function() {
         growl.error('Error when send winner announcement notification');
@@ -105,7 +113,10 @@
     };
 
     $scope.notificationToWinner = function() {
-      PushNotificationService.sendPush().$promise.then(function() {
+      ChallengeService.selfWinnerhNotifications({
+        showId: $stateParams.showId,
+        id: $stateParams.challengeId,
+      }).$promise.then(function() {
         growl.success('Sent notification to winner successfully');
       }).catch(function() {
         growl.error('Error when send notification to winner');

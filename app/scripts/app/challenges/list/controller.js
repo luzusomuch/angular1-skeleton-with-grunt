@@ -3,7 +3,7 @@
   angular.module('measureApp').controller('ChallengesListController', ChallengesListController);
 
   /* @ngInject */
-  function ChallengesListController($scope, ChallengeService, showDetail, $stateParams, $uibModal, growl, $state, pageSettings, PushNotificationService) {
+  function ChallengesListController($scope, ChallengeService, showDetail, $stateParams, $uibModal, growl, $state, pageSettings) {
     $scope.showId = $stateParams.showId;
     $scope.isAllowCreateChallenge = showDetail.numberOfChallenges !== pageSettings['SHOW']['MAX_NUMBER_OF_CHALLENGES'] && showDetail.status === 'unpublished';
     $scope.pagination = {
@@ -78,10 +78,13 @@
 
     $scope.sendNotification = function(item) {
       if (item.status === 'closed') {
-        PushNotificationService.sendPush().$promise.then(function() {
-          growl.success('Sent winner announcement push notification successfully');
+        ChallengeService.otherWinnerhNotifications({
+          showId: $stateParams.showId,
+          id: item._id,
+        }).$promise.then(function() {
+          growl.success('Sent winner announcement notification successfully');
         }).catch(function() {
-          growl.error('Error when send winner announcement push notification');
+          growl.error('Error when send winner announcement notification');
         });
       }
     };
