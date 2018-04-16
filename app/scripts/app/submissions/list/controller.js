@@ -3,7 +3,7 @@
   angular.module('measureApp').controller('SubmissionsListController', SubmissionsListController);
 
   /* @ngInject */
-  function SubmissionsListController($scope, $state, $stateParams, SubmissionService, ChallengeService, growl, $uibModal) {
+  function SubmissionsListController($scope, $state, $stateParams, $q, SubmissionService, ChallengeService, growl, $uibModal) {
     $scope.pagination = {
       page: 1,
       limit: 20,
@@ -102,10 +102,17 @@
     };
 
     $scope.notificationWinnerAnnouncement = function() {
-      ChallengeService.otherWinnerhNotifications({
-        showId: $stateParams.showId,
-        id: $stateParams.challengeId,
-      }).$promise.then(function() {
+      var promises = [];
+      _.each($scope.challengeDetail.prizes, function(prize, $index) {
+        if (prize.winner && prize.winner._id) {
+          promises.push(ChallengeService.otherWinnerhNotifications({
+            showId: $stateParams.showId,
+            id: $stateParams.challengeId,
+            prizeIndex: $index,
+          }).$promise);
+        }
+      });
+      $q.all(promises).then(function() {
         growl.success('Sent winner announcement notification successfully');
       }).catch(function() {
         growl.error('Error when send winner announcement notification');
@@ -113,10 +120,17 @@
     };
 
     $scope.notificationToWinner = function() {
-      ChallengeService.selfWinnerhNotifications({
-        showId: $stateParams.showId,
-        id: $stateParams.challengeId,
-      }).$promise.then(function() {
+      var promises = [];
+      _.each($scope.challengeDetail.prizes, function(prize, $index) {
+        if (prize.winner && prize.winner._id) {
+          promises.push(ChallengeService.selfWinnerhNotifications({
+            showId: $stateParams.showId,
+            id: $stateParams.challengeId,
+            prizeIndex: $index,
+          }).$promise);
+        }
+      });
+      $q.all(promises).then(function() {
         growl.success('Sent notification to winner successfully');
       }).catch(function() {
         growl.error('Error when send notification to winner');
