@@ -21,8 +21,7 @@ angular.module('measureApp').factory('UploadService', function ($http, $q, $root
       var ext = getExtension(file.name);
       switch (ext.toLowerCase()) {
         case 'jpg':
-        case 'gif':
-        case 'bmp':
+        case 'jpeg':
         case 'png':
           return true;
       }
