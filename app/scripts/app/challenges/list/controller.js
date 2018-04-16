@@ -80,13 +80,11 @@
       if (item.status === 'closed') {
         var promises = [];
         _.each(item.prizes, function(prize, $index) {
-          if (prize.winner && prize.winner._id) {
-            promises.push(ChallengeService.otherWinnerhNotifications({
-              showId: $stateParams.showId,
-              id: $stateParams.challengeId,
-              prizeIndex: $index,
-            }).$promise);
-          }
+          promises.push(ChallengeService.otherWinnerhNotifications({
+            showId: $stateParams.showId,
+            id: item._id,
+            prizeIndex: $index,
+          }).$promise);
         });
         $q.all(promises).then(function() {
           growl.success('Sent winner announcement notification successfully');

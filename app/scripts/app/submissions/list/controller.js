@@ -13,10 +13,14 @@
     $scope.total = 0;
 
     $scope.challengeDetail = {};
+    $scope.hasWinner = false;
 
     function getChallengeDetail() {
       ChallengeService.get({showId: $stateParams.showId, id: $stateParams.challengeId}).$promise.then(function(resp) {
         $scope.challengeDetail = resp;
+        $scope.hasWinner = _.filter($scope.challengeDetail.prizes, function(prize) {
+          return prize.winner && prize.winner._id
+        }).length;
       });
     }
 
