@@ -19,7 +19,7 @@
       ChallengeService.get({showId: $stateParams.showId, id: $stateParams.challengeId}).$promise.then(function(resp) {
         $scope.challengeDetail = resp;
         $scope.hasWinner = _.filter($scope.challengeDetail.prizes, function(prize) {
-          return prize.winner && prize.winner._id
+          return prize.winner && prize.winner._id;
         }).length;
       });
     }
@@ -113,7 +113,7 @@
             showId: $stateParams.showId,
             id: $stateParams.challengeId,
             prizeIndex: $index,
-          }).$promise);
+          }, {}).$promise);
         }
       });
       $q.all(promises).then(function() {
@@ -131,7 +131,7 @@
             showId: $stateParams.showId,
             id: $stateParams.challengeId,
             prizeIndex: $index,
-          }).$promise);
+          }, {}).$promise);
         }
       });
       $q.all(promises).then(function() {

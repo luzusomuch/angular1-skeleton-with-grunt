@@ -33,7 +33,7 @@ angular.module('measureApp').factory('ChallengeService', function($resource, api
     },
     otherWinnerhNotifications: {
       method: 'POST',
-      url: apiUrl + '/api/shows/:showId/challenges/:id/prizes/:prizeIndex/otherwinnerhnotifications',
+      url: apiUrl + '/api/shows/:showId/challenges/:id/prizes/:prizeIndex/otherwinnernotifications',
       params: {
         showId: '@showId',
         id: '@id',
@@ -42,7 +42,7 @@ angular.module('measureApp').factory('ChallengeService', function($resource, api
     },
     selfWinnerhNotifications: {
       method: 'POST',
-      url: apiUrl + '/api/shows/:showId/challenges/:id/prizes/:prizeIndex/selfwinnerhnotifications',
+      url: apiUrl + '/api/shows/:showId/challenges/:id/prizes/:prizeIndex/selfwinnernotifications',
       params: {
         showId: '@showId',
         id: '@id',
