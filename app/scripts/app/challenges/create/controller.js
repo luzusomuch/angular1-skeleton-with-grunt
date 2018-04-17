@@ -15,7 +15,7 @@
       expiresAt: new Date(),
       prizes: [],
       showId: $stateParams.showId,
-      campaignId: '00000',
+      campaignId: pageSettings['WEBHOOK']['TEST_CAMPAIGN_ID'],
     };
     $scope.dateOptions = {
       minDate: new Date()
@@ -119,9 +119,6 @@
     };
 
     $scope.submit = function(form) {
-      if (showDetail.status !== 'unpublished') {
-        return growl.error('Cannot create challenge which has show status is Published/Closed');
-      }
       if (showDetail.numberOfChallenges >= maximumChallenge) {
         return growl.error('This show has reached maximum number of challenges');
       }
@@ -144,7 +141,7 @@
             expiresAt: new Date(),
             prizes: [],
             showId: $stateParams.showId,
-            campaignId: '00000',
+            campaignId: pageSettings['WEBHOOK']['TEST_CAMPAIGN_ID'],
           };
           $scope.file = null;
           showDetail.numberOfChallenges++;

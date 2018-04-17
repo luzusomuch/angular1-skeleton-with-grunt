@@ -5,7 +5,6 @@
   /* @ngInject */
   function ChallengesListController($scope, $q, ChallengeService, showDetail, $stateParams, $uibModal, growl, $state, pageSettings) {
     $scope.showId = $stateParams.showId;
-    $scope.isAllowCreateChallenge = showDetail.numberOfChallenges !== pageSettings['SHOW']['MAX_NUMBER_OF_CHALLENGES'] && showDetail.status === 'unpublished';
     $scope.pagination = {
       page: 1,
       limit: 20,
@@ -23,13 +22,21 @@
 
     search($scope.pagination);
 
+    $scope.addNewChallenge = function() {
+      if (showDetail.numberOfChallenges < pageSettings['SHOW']['MAX_NUMBER_OF_CHALLENGES']) {
+        $state.go('app.challenge.create', {showId: $scope.showId});
+      } else {
+        growl.error('Cannot add more challenges because show has enough required challenges');
+      }
+    };
+
     $scope.editChallenge = function(item) {
-      if (item.status === 'closed') {
-        return growl.error('Cannot edit Closed challenge');
-      }
-      if (showDetail.status !== 'unpublished') {
-        return growl.error('Cannot edit challenge which has show status is Published/Closed');
-      }
+      // if (item.status === 'closed') {
+      //   return growl.error('Cannot edit Closed challenge');
+      // }
+      // if (showDetail.status !== 'unpublished') {
+      //   return growl.error('Cannot edit challenge which has show status is Published/Closed');
+      // }
       $state.go('app.challenge.update', {showId: $scope.showId, id: item._id});
     };
 
@@ -54,6 +61,7 @@
           ChallengeService.delete({showId: $scope.showId, id: item._id}).$promise.then(function() {
             $scope.items.splice(index, 1);
             $scope.total--;
+            growl.success('Deleted a challenge successfully');
           }).catch(function() {
             growl.error('Error when delete a challenge. Please try again');
           });
@@ -78,26 +86,43 @@
 
     $scope.sendNotification = function(item) {
       if (item.status === 'closed') {
-        var prizes = angular.copy($scope.challengeDetail.prizes);
-        if (prizes[0]) {
-          ChallengeService.otherWinnerhNotifications({
-            showId: $stateParams.showId,
-            id: item._id,
-            prizeIndex: 0,
-          }, {}).$promise.then(function() {
-            if (prizes[1]) {
-              ChallengeService.otherWinnerhNotifications({
-                showId: $stateParams.showId,
-                id: item._id,
-                prizeIndex: 1,
-              }, {}).$promise.then(function() {
-                growl.success('Sent winner announcement notification successfully');
-              });
-            } else {
-              growl.success('Sent winner announcement notification successfully');
+        $uibModal.open({
+          controller: 'ConfirmModalController',
+          controllerAs: 'cm',
+          templateUrl: 'scripts/components/confirmModal/view.html',
+          resolve: {
+            title: function() {
+              return 'Winner announcement confirmation';
+            },
+            description: function() {
+              return 'Do you want to announce winners to everybody who joined the challenge?';
+            },
+            confirmButton: function() {
+              return 'Send';
             }
-          });
-        }
+          }
+        }).result.then(function() {
+          var prizes = angular.copy($scope.challengeDetail.prizes);
+          if (prizes[0]) {
+            ChallengeService.otherWinnerhNotifications({
+              showId: $stateParams.showId,
+              id: item._id,
+              prizeIndex: 0,
+            }, {}).$promise.then(function() {
+              if (prizes[1]) {
+                ChallengeService.otherWinnerhNotifications({
+                  showId: $stateParams.showId,
+                  id: item._id,
+                  prizeIndex: 1,
+                }, {}).$promise.then(function() {
+                  growl.success('Sent winner announcement notification successfully');
+                });
+              } else {
+                growl.success('Sent winner announcement notification successfully');
+              }
+            });
+          }
+        });
       }
     };
   }

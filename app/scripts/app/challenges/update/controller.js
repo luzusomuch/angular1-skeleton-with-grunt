@@ -114,12 +114,6 @@
     };
 
     $scope.submit = function(form) {
-      if (challengeDetail.status === 'closed') {
-        return growl.error('Cannot edit Closed challenge');
-      }
-      if (showDetail.status !== 'unpublished') {
-        return growl.error('Cannot edit challenge which has show status is Published/Closed');
-      }
       if ($scope.data.prizes.length > $scope.maximumPrize || $scope.data.prizes.length < $scope.minimumPrize) {
         return true;
       }

@@ -1,9 +1,9 @@
 <div class="content">
   <div class="notifications-list">
     <div class="row">
-      <h1 class="col-sm-10">Notifications List</h1>
+      <h1 class="col-sm-10">Contents List</h1>
       <div class="col-sm-2">
-        <button ui-sref="app.notification.create" class="btn btn-primary add-new-show-button"><i class="fa fa-plus"></i> Add New Notification</button>
+        <!-- <button ui-sref="app.notification.create" class="btn btn-primary add-new-show-button"><i class="fa fa-plus"></i> Add New Notification</button> -->
       </div>
     </div>
     <!-- <div class="row filter-content">
@@ -36,7 +36,7 @@
           <td>{{item.type}}</td>
           <td>{{item.createdAt | date: 'dd MMM yyyy'}}</td>
           <td>{{item.status | capitalize}}</td>
-          <td class="text-right">
+          <td class="text-right action">
             <a title="Edit Notification" class="table-icon" href="javascript:void(0)" ng-click="editNotification(item)">
               <i class="fa fa-pencil"></i>
             </a>

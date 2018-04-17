@@ -23,7 +23,7 @@
           <td class="text-left">Title</td>
           <td>Creator</td>
           <td>Total Challenges</td>
-          <td>End Date</td>
+          <td>Show Date</td>
           <td>Status</td>
           <td>Uploaded Thumbnail</td>
           <td class="text-right">Action</td>
@@ -38,7 +38,7 @@
           <td>{{item.expiresAt | date: 'dd MMM yyyy'}}</td>
           <td>{{item.status | capitalize}}</td>
           <td><a href="javascript:void(0)" ng-click="viewThumbnail(item)">View thumbnail</a></td>
-          <td class="text-right">
+          <td class="text-right action">
             <a ng-if="!item.notifiedOnPublish && item.status === 'published'" href="javascript:void(0)" title="Send Notification" class="table-icon" ng-click="sendNotification(item)">
               <i class="fa fa-bell"></i>
             </a>
@@ -48,7 +48,7 @@
             <a title="Delete Show" class="table-icon" href="javascript:void(0)" ng-click="deleteShow(item, $index)">
               <i class="fa fa-trash-o"></i>
             </a>
-            <a ng-if="isAllowCreateChallenge(item)" title="Add Challenge" class="table-icon" ui-sref="app.challenge.create({showId: item._id})">
+            <a ng-click="addNewChallange(item)" href="javascript:void(0)" title="Add Challenge" class="table-icon">
               <i class="fa fa-plus"></i>
             </a>
           </td>
