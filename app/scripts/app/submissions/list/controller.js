@@ -194,5 +194,18 @@
         }
       });
     };
+
+    $scope.getProScore = function(submission) {
+      SubmissionService.getProScore({
+        showId: $stateParams.showId,
+        challengeId: $stateParams.challengeId,
+        id: submission._id,
+      }).$promise.then(function(resp) {
+        submission.content.proScore = resp.content.proScore;
+        growl.success('Get pro-score successfully');
+      }).catch(function() {
+        growl.error('Error when get pro-score');
+      });
+    };
   }
 })();
