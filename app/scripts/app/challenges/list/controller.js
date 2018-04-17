@@ -78,26 +78,43 @@
 
     $scope.sendNotification = function(item) {
       if (item.status === 'closed') {
-        var prizes = angular.copy($scope.challengeDetail.prizes);
-        if (prizes[0]) {
-          ChallengeService.otherWinnerhNotifications({
-            showId: $stateParams.showId,
-            id: item._id,
-            prizeIndex: 0,
-          }, {}).$promise.then(function() {
-            if (prizes[1]) {
-              ChallengeService.otherWinnerhNotifications({
-                showId: $stateParams.showId,
-                id: item._id,
-                prizeIndex: 1,
-              }, {}).$promise.then(function() {
-                growl.success('Sent winner announcement notification successfully');
-              });
-            } else {
-              growl.success('Sent winner announcement notification successfully');
+        $uibModal.open({
+          controller: 'ConfirmModalController',
+          controllerAs: 'cm',
+          templateUrl: 'scripts/components/confirmModal/view.html',
+          resolve: {
+            title: function() {
+              return 'Notification to winner(s)';
+            },
+            description: function() {
+              return 'Do you want to send notification to winner(s) submission?';
+            },
+            confirmButton: function() {
+              return 'Send';
             }
-          });
-        }
+          }
+        }).result.then(function() {
+          var prizes = angular.copy($scope.challengeDetail.prizes);
+          if (prizes[0]) {
+            ChallengeService.otherWinnerhNotifications({
+              showId: $stateParams.showId,
+              id: item._id,
+              prizeIndex: 0,
+            }, {}).$promise.then(function() {
+              if (prizes[1]) {
+                ChallengeService.otherWinnerhNotifications({
+                  showId: $stateParams.showId,
+                  id: item._id,
+                  prizeIndex: 1,
+                }, {}).$promise.then(function() {
+                  growl.success('Sent winner announcement notification successfully');
+                });
+              } else {
+                growl.success('Sent winner announcement notification successfully');
+              }
+            });
+          }
+        });
       }
     };
   }
