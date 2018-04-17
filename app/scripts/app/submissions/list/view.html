@@ -49,7 +49,10 @@
             </span>
           </td>
           <td class="td-item">
-            {{item.prizesTitle.toString()}}
+            <span ng-repeat="prizeTitle in item.prizesTitle">
+              {{prizeTitle}} <br>
+            </span>
+            <!-- {{item.prizesTitle.toString()}} -->
           </td>
           <td class="text-right td-item">
             <a ng-if="challengeDetail.status !== 'closed'" title="Set Prize" class="table-icon" href="javascript:void(0)" ng-click="setPrize(item)">

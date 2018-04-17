@@ -81,6 +81,7 @@
           ShowService.delete({id: item._id}).$promise.then(function() {
             $scope.items.splice(index, 1);
             $scope.total--;
+            growl.success('Deleted a show successfully');
           }).catch(function() {
             growl.error('Error when delete a show. Please try again');
           });
