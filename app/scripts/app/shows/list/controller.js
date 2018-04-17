@@ -52,11 +52,12 @@
     };
 
     $scope.editShow = function(item) {
-      if (showStatusesUnableToUpdate.indexOf(item.status) === -1) {
-        $state.go('app.show.update', {id: item._id});
-      } else {
-        growl.error('Cannot edit Published/Closed show');
-      }
+      // if (showStatusesUnableToUpdate.indexOf(item.status) === -1) {
+      //   $state.go('app.show.update', {id: item._id});
+      // } else {
+      //   growl.error('Cannot edit Published/Closed show');
+      // }
+      $state.go('app.show.update', {id: item._id});
     };
 
     $scope.deleteShow = function(item, index) {
