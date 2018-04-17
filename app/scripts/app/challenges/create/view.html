@@ -99,7 +99,7 @@
           <p class="help-block" ng-if="form.url.$error.required && form.$submitted">Video Challenge or Video URL is required</p>
           <p class="help-block" ng-if="contentTypeError && form.$submitted">Video size exceeds the allowable limit (40MB)</p>
           <p class="help-block" ng-if="contentLengthError && form.$submitted">Only allow video format</p>
-          <p class="help-block" ng-if="videoUrlError && form.$submitted">Invalid video url</p>
+          <p class="help-block" ng-if="(videoUrlError || form.url.$error.url ) && form.$submitted">Invalid video url</p>
         </div>
         <div class="form-group">
           <button ng-disabled="submitted" type="submit" class="btn btn-primary">Submit</button>
