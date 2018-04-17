@@ -541,6 +541,8 @@ textarea {
     font-size: 17px; }
     .table .fa-gift.active {
       color: #337ab7; }
+  .table .action i.fa {
+    font-size: 17px; }
 
 .submissions-list .td-item {
   padding-top: 15px; }
