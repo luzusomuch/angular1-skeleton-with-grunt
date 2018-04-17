@@ -106,54 +106,88 @@
     };
 
     $scope.notificationWinnerAnnouncement = function() {
-      var prizes = angular.copy($scope.challengeDetail.prizes);
-      if (prizes[0]) {
-        ChallengeService.otherWinnerhNotifications({
-          showId: $stateParams.showId,
-          id: $stateParams.challengeId,
-          prizeIndex: 0,
-        }, {}).$promise.then(function() {
-          if (prizes[1]) {
-            ChallengeService.otherWinnerhNotifications({
-              showId: $stateParams.showId,
-              id: $stateParams.challengeId,
-              prizeIndex: 1,
-            }, {}).$promise.then(function() {
-              growl.success('Sent winner announcement notification successfully');
-            });
-          } else {
-            growl.success('Sent winner announcement notification successfully');
+      $uibModal.open({
+        controller: 'ConfirmModalController',
+        controllerAs: 'cm',
+        templateUrl: 'scripts/components/confirmModal/view.html',
+        resolve: {
+          title: function() {
+            return 'Winner announcement';
+          },
+          description: function() {
+            return 'Do you want to send winner announcement notification to everybody?';
+          },
+          confirmButton: function() {
+            return 'Send';
           }
-        });
-      }
+        }
+      }).result.then(function() {
+        var prizes = angular.copy($scope.challengeDetail.prizes);
+        if (prizes[0]) {
+          ChallengeService.otherWinnerhNotifications({
+            showId: $stateParams.showId,
+            id: $stateParams.challengeId,
+            prizeIndex: 0,
+          }, {}).$promise.then(function() {
+            if (prizes[1]) {
+              ChallengeService.otherWinnerhNotifications({
+                showId: $stateParams.showId,
+                id: $stateParams.challengeId,
+                prizeIndex: 1,
+              }, {}).$promise.then(function() {
+                growl.success('Sent winner announcement notification successfully');
+              });
+            } else {
+              growl.success('Sent winner announcement notification successfully');
+            }
+          });
+        }
+      });
     };
 
     $scope.notificationToWinner = function() {
-      var prizes = angular.copy(_.filter($scope.challengeDetail.prizes, function(prize, $index) {
-        prize.index = $index;
-        return prize.winner && prize.winner._id;
-      }));
-      if (prizes[0]) {
-        ChallengeService.selfWinnerhNotifications({
-          showId: $stateParams.showId,
-          id: $stateParams.challengeId,
-          prizeIndex: prizes[0].index,
-        }, {}).$promise.then(function() {
-          if (prizes[1]) {
-            ChallengeService.selfWinnerhNotifications({
-              showId: $stateParams.showId,
-              id: $stateParams.challengeId,
-              prizeIndex: prizes[1].index,
-            }, {}).$promise.then(function() {
-              growl.success('Sent notification to winner successfully');  
-            });
-          } else {
-            growl.success('Sent notification to winner successfully');  
+      $uibModal.open({
+        controller: 'ConfirmModalController',
+        controllerAs: 'cm',
+        templateUrl: 'scripts/components/confirmModal/view.html',
+        resolve: {
+          title: function() {
+            return 'Notification to winner(s)';
+          },
+          description: function() {
+            return 'Do you want to send notification to winner(s) submission?';
+          },
+          confirmButton: function() {
+            return 'Send';
           }
-        }).catch(function() {
-          growl.error('Error when send notification to winner');
-        });
-      }
+        }
+      }).result.then(function() {
+        var prizes = angular.copy(_.filter($scope.challengeDetail.prizes, function(prize, $index) {
+          prize.index = $index;
+          return prize.winner && prize.winner._id;
+        }));
+        if (prizes[0]) {
+          ChallengeService.selfWinnerhNotifications({
+            showId: $stateParams.showId,
+            id: $stateParams.challengeId,
+            prizeIndex: prizes[0].index,
+          }, {}).$promise.then(function() {
+            if (prizes[1]) {
+              ChallengeService.selfWinnerhNotifications({
+                showId: $stateParams.showId,
+                id: $stateParams.challengeId,
+                prizeIndex: prizes[1].index,
+              }, {}).$promise.then(function() {
+                growl.success('Sent notification to winner successfully');  
+              });
+            } else {
+              growl.success('Sent notification to winner successfully');  
+            }
+          }).catch(function() {
+            growl.error('Error when send notification to winner');
+          });
+        }
+      });
     };
   }
 })();
