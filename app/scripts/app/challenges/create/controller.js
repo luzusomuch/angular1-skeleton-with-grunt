@@ -15,7 +15,7 @@
       expiresAt: new Date(),
       prizes: [],
       showId: $stateParams.showId,
-      campaignId: '00000',
+      campaignId: pageSettings['WEBHOOK']['TEST_CAMPAIGN_ID'],
     };
     $scope.dateOptions = {
       minDate: new Date()
@@ -141,7 +141,7 @@
             expiresAt: new Date(),
             prizes: [],
             showId: $stateParams.showId,
-            campaignId: '00000',
+            campaignId: pageSettings['WEBHOOK']['TEST_CAMPAIGN_ID'],
           };
           $scope.file = null;
           showDetail.numberOfChallenges++;
