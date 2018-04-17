@@ -34,6 +34,11 @@
       params.likeNumber = $scope.filter.likeNumber;
       params.proScore = $scope.filter.proScore;
       SubmissionService.list(params).$promise.then(function(resp) {
+        _.each(resp.items, function(item) {
+          item.prizesTitle = _.map(item.prizes, function(prize) {
+            return prize && prize.title;
+          });
+        });
         $scope.items = resp.items;
         $scope.total = resp.total;
       });
