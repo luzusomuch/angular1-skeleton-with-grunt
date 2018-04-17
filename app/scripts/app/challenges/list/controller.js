@@ -91,10 +91,10 @@
           templateUrl: 'scripts/components/confirmModal/view.html',
           resolve: {
             title: function() {
-              return 'Notification to winner(s)';
+              return 'Winner announcement confirmation';
             },
             description: function() {
-              return 'Do you want to send notification to winner(s) submission?';
+              return 'Do you want to announce winners to everybody who joined the challenge?';
             },
             confirmButton: function() {
               return 'Send';

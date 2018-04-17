@@ -117,7 +117,7 @@
         templateUrl: 'scripts/components/confirmModal/view.html',
         resolve: {
           title: function() {
-            return 'Winner announcement';
+            return 'Winner announcement confirmation';
           },
           description: function() {
             return 'Do you want to announce winners to everybody who joined the challenge?';
@@ -157,7 +157,7 @@
         templateUrl: 'scripts/components/confirmModal/view.html',
         resolve: {
           title: function() {
-            return 'Do you want to send a notification to winners?';
+            return 'Notification to winner(s) confirmation';
           },
           description: function() {
             return 'Do you want to send notification to winner(s) submission?';
