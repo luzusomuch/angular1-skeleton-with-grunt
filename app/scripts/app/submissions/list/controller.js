@@ -120,7 +120,7 @@
             return 'Winner announcement';
           },
           description: function() {
-            return 'Do you want to send winner announcement notification to everybody?';
+            return 'Do you want to announce winners to everybody who joined the challenge?';
           },
           confirmButton: function() {
             return 'Send';
@@ -157,7 +157,7 @@
         templateUrl: 'scripts/components/confirmModal/view.html',
         resolve: {
           title: function() {
-            return 'Notification to winner(s)';
+            return 'Do you want to send a notification to winners?';
           },
           description: function() {
             return 'Do you want to send notification to winner(s) submission?';

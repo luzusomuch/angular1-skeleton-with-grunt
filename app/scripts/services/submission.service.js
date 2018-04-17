@@ -30,7 +30,7 @@ angular.module('measureApp').factory('SubmissionService', function($resource, ap
     },
     getProScore: {
       method: 'POST',
-      url: apiUrl + '/api/shows/:showId/challenges/:challengeId/submissions/:id/score',
+      url: apiUrl + '/api/shows/:showId/challenges/:challengeId/submissions/:id/getScore',
       params: {
         showId: '@showId',
         challengeId: '@challengeId',

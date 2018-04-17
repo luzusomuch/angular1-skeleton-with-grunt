@@ -102,8 +102,12 @@
       });
     };
 
-    $scope.isAllowCreateChallenge = function(item) {
-      return item.numberOfChallenges !== pageSettings['SHOW']['MAX_NUMBER_OF_CHALLENGES'] && item.status === 'unpublished';
+    $scope.addNewChallange = function(item) {
+      if (item.numberOfChallenges < pageSettings['SHOW']['MAX_NUMBER_OF_CHALLENGES']) {
+        $state.go('app.challenge.create', {showId: item._id});
+      } else {
+        growl.error('Cannot add more challenges because show has enough required challenges');
+      }
     };
 
     $scope.sendNotification = function(item) {

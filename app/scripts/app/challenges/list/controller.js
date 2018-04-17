@@ -5,7 +5,6 @@
   /* @ngInject */
   function ChallengesListController($scope, $q, ChallengeService, showDetail, $stateParams, $uibModal, growl, $state, pageSettings) {
     $scope.showId = $stateParams.showId;
-    $scope.isAllowCreateChallenge = showDetail.numberOfChallenges !== pageSettings['SHOW']['MAX_NUMBER_OF_CHALLENGES'] && showDetail.status === 'unpublished';
     $scope.pagination = {
       page: 1,
       limit: 20,
@@ -22,6 +21,14 @@
     }
 
     search($scope.pagination);
+
+    $scope.addNewChallenge = function() {
+      if (showDetail.numberOfChallenges < pageSettings['SHOW']['MAX_NUMBER_OF_CHALLENGES']) {
+        $state.go('app.challenge.create', {showId: $scope.showId});
+      } else {
+        growl.error('Cannot add more challenges because show has enough required challenges');
+      }
+    };
 
     $scope.editChallenge = function(item) {
       if (item.status === 'closed') {
