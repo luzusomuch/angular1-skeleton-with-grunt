@@ -93,7 +93,7 @@
             <span class="sr-only">Loading...</span>
           </p>
         </div>
-        <div class="form-group" ng-class="{'has-error': (form.url.$invalid || contentTypeError || contentLengthError || videoUrlError) && form.$submitted}">
+        <!-- <div class="form-group" ng-class="{'has-error': (form.url.$invalid || contentTypeError || contentLengthError || videoUrlError) && form.$submitted}">
           <label>Video URL</label>
           <input class="form-control" type="url" name="url" ng-model="data.videoUrl" ng-blur="onBlurVideoUrl()" ng-required="(!data.video || !data.video._id) && !data.videoUrl">
           <p class="help-block" ng-if="form.url.$error.required && form.$submitted">Video Challenge or Video URL is required</p>
@@ -111,7 +111,7 @@
             <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
             <span class="sr-only">Loading...</span>
           </p>
-        </div>
+        </div> -->
         <div class="form-group">
           <button ng-disabled="submitted" type="submit" class="btn btn-primary">Submit</button>
           <button type="button" class="btn btn-warning" ui-sref="app.challenge.list({showId: showId})">Cancel</button>
