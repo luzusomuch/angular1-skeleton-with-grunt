@@ -51,7 +51,7 @@
         $scope.prizeDescLengthError = true;
       }
       if ($scope.prizeTitleError || $scope.prizeDescError || $scope.prizeTitleLengthError || $scope.prizeDescLengthError) {
-        growl.error('Please check your prize data.');
+        return false;
       } else {
         $scope.data.prizes.push($scope.prize);
         $scope.prize = {
@@ -75,6 +75,8 @@
             $scope.isUploading = false;
             $scope.videoUrlError = false;
             delete $scope.data.videoUrl;
+            delete $scope.data.thumbnailUrl;
+            $scope.thumbnail = null;
           }).catch(function(err) {
             growl.error('Failed to upload video');
             $scope.isUploading = false;
