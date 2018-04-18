@@ -83,7 +83,7 @@
           </table>
         </div>
         <div class="form-group" ng-class="{'has-error': form.video.$invalid}">
-          <label>Video Challenge <span class="required">*</span></label>
+          <label>Video Challenge</label>
           <input name="video" class="form-control" type="file" ngf-max-size="40MB" ng-model="file" uploader="uploader" ngf-pattern="'video/*'" ngf-accept="'video/*'" ng-required="(!data.video || !data.video._id) && !data.videoUrl" ngf-select="upload($file)"/>
           <p class="help-block" ng-if="form.video.$error.required && !form.video.$error.maxSize && !form.video.$error.pattern">Video Challenge is required</p>
           <p class="help-block" ng-if="form.video.$error.maxSize">Video size exceeds the allowable limit (40MB)</p>
@@ -100,6 +100,17 @@
           <p class="help-block" ng-if="contentTypeError && form.$submitted">Video size exceeds the allowable limit (40MB)</p>
           <p class="help-block" ng-if="contentLengthError && form.$submitted">Only allow video format</p>
           <p class="help-block" ng-if="(videoUrlError || form.url.$error.url ) && form.$submitted">Invalid video url</p>
+        </div>
+        <div class="form-group" ng-class="{'has-error': form.thumbnail.$invalid && form.$submitted}">
+          <label>Challenge Thumbnail</label>
+          <input name="thumbnail" class="form-control" type="file" ngf-max-size="40MB" ng-model="thumbnail" uploader="uploader" ngf-pattern="'image/*'" ngf-accept="'image/*'" ng-required="!file && data.videoUrl !== originalVideoUrl" ngf-select="uploadThumbnail($file)"/>
+          <p class="help-block" ng-if="form.thumbnail.$error.required && !form.thumbnail.$error.maxSize && !form.thumbnail.$error.pattern && form.$submitted">Challenge thumbnail is required</p>
+          <p class="help-block" ng-if="form.thumbnail.$error.maxSize && form.$submitted">Thumbnail size exceeds the allowable limit (40MB)</p>
+          <p class="help-block" ng-if="form.thumbnail.$error.pattern && form.$submitted">Only allow image format</p>
+          <p ng-if="isUploadingThumbnail">
+            <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+            <span class="sr-only">Loading...</span>
+          </p>
         </div>
         <div class="form-group">
           <button ng-disabled="submitted" type="submit" class="btn btn-primary">Submit</button>
