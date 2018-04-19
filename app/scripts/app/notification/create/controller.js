@@ -13,6 +13,9 @@
         $scope.data.category = 'NOTIFICATION';
         ConfigService.create($scope.data).$promise.then(function() {
           $scope.submitted = false;
+          form.$setDirty();
+          form.$setUntouched();
+          form.$setPristine();
           $scope.data = {};
           growl.success('Created new content successfully');
         }).catch(function() {
