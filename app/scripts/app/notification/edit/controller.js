@@ -7,7 +7,7 @@
     $scope.data = contentDetail;
     $scope.data.value = {
       title: $scope.data.value.title,
-      content: $scope.data.value.content
+      body: $scope.data.value.body
     };
     $scope.submitted = false;
 

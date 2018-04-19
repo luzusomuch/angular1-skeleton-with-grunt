@@ -16,7 +16,7 @@
         </div>
         <div class="form-group" ng-class="{'has-error': form.content.$invalid && form.$submitted}">
           <label>Content <span class="required">*</span> <i class="fa fa-info-circle" uib-tooltip="Notification Content. Eg: Show <=% title %> has been published"></i></label>
-          <textarea ng-model="data.value.content" name="content" class="form-control" required placeholder="Notification Content. Eg: Show <=% title %> has been published"></textarea>
+          <textarea ng-model="data.value.body" name="content" class="form-control" required placeholder="Notification Content. Eg: Show <=% title %> has been published"></textarea>
           <p class="help-block" ng-if="form.content.$error.required && form.$submitted">Content is required</p>
         </div>
         <div class="form-group">
