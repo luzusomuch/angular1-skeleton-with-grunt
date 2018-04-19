@@ -10,7 +10,7 @@
     $scope.submit = function(form) {
       if (form.$valid) {
         $scope.submitted = true;
-        var data = _.pick($scope.data, ['title', 'content', 'type']);
+        var data = _.pick($scope.data, ['key', 'value']);
         PushNotificationService.update({id: $stateParams.id}, data).$promise.then(function() {
           $scope.submitted = false;
           growl.success('Updated notification successfully');
