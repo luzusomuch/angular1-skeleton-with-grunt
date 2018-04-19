@@ -13,7 +13,7 @@ angular.module('measureApp').factory('ConfigService', function($resource, apiUrl
       isArray: false
     },
     get: {
-      method: 'PUT',
+      method: 'GET',
       params: {
         id: '@id'
       },

@@ -30,12 +30,12 @@
       <tbody>
         <tr ng-repeat="item in items">
           <td>{{$index + 1}}</td>
-          <td class="text-left"><a ui-sref="app.challenge.list({showId: item._id})">{{item.title}}</a></td>
-          <td>{{item.content}}</td>
+          <td class="text-left"><a ui-sref="app.challenge.list({showId: item._id})">{{item.key}}</a></td>
+          <td>{{item.value}}</td>
           <td>{{item.category}}</td>
           <td>{{item.createdAt | date: 'dd MMM yyyy'}}</td>
           <td class="text-right action">
-            <a title="Edit Notification" class="table-icon" href="javascript:void(0)" ng-click="editNotification(item)">
+            <a title="Edit Notification" class="table-icon" href="javascript:void(0)" ng-click="editContent(item)">
               <i class="fa fa-pencil"></i>
             </a>
           </td>

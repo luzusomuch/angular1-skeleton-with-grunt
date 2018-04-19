@@ -3,7 +3,7 @@
   angular.module('measureApp').controller('NotificationsListController', NotificationsListController);
 
   /* @ngInject */
-  function NotificationsListController($scope, ConfigService) {
+  function NotificationsListController($scope, ConfigService, $state) {
     $scope.pagination = {
       page: 1,
       limit: 20
@@ -16,7 +16,6 @@
       params.page--;
       params.category = 'NOTIFICATION';
       ConfigService.list(params).$promise.then(function(resp) {
-        console.log(resp);
         $scope.items = resp.items;
         $scope.total = resp.total;
       });
@@ -28,8 +27,8 @@
       search();
     };
 
-    $scope.editNotification = function() {
-
+    $scope.editContent = function(item) {
+      $state.go('app.notification.update', {id: item._id});
     };
   }
 })();

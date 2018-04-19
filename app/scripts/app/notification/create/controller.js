@@ -14,9 +14,9 @@
         ConfigService.create($scope.data).$promise.then(function() {
           $scope.submitted = false;
           $scope.data = {};
-          growl.success('Created new notification successfully');
+          growl.success('Created new content successfully');
         }).catch(function() {
-          growl.error('Error when create new notification');
+          growl.error('Error when create new content');
           $scope.submitted = false;
         }); 
       }
