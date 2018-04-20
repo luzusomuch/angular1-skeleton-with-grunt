@@ -3,7 +3,7 @@
   angular.module('measureApp').controller('EditNotificationController', EditNotificationController);
 
   /* @ngInject */
-  function EditNotificationController($scope, $stateParams, contentDetail, growl, ConfigService) {
+  function EditNotificationController($scope, $stateParams, $state, contentDetail, growl, ConfigService) {
     $scope.data = contentDetail;
     $scope.data.value = {
       title: $scope.data.value.title,
@@ -18,6 +18,7 @@
         ConfigService.update({id: $stateParams.id}, data).$promise.then(function() {
           $scope.submitted = false;
           growl.success('Updated content successfully');
+          $state.go('app.notification.list');
         }).catch(function() {
           $scope.submitted = false;
           growl.error('Error when update content');
