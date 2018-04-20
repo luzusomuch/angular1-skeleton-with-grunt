@@ -225,21 +225,21 @@
           }
         }
       }).result.then(function() {
-        if ($scope.challengeDetail.status === 'closed' && submission.prizes.length > 0) {
-          // show popup for admin choose new winner
-          $uibModal.open({
-            controller: 'ChooseNewWinnerModalController',
-            controllerAs: 'cnwm',
-            templateUrl: 'scripts/components/chooseNewWinnerModal/view.html',
-            resolve: {
-              currentSubmission: function() {
-                return submission;
-              }
-            }
-          }).result.then(function(selectedSubmission) {
-            console.log(selectedSubmission);
-          });
-        } else {
+        // if ($scope.challengeDetail.status === 'closed' && submission.prizes.length > 0) {
+        //   // show popup for admin choose new winner
+        //   $uibModal.open({
+        //     controller: 'ChooseNewWinnerModalController',
+        //     controllerAs: 'cnwm',
+        //     templateUrl: 'scripts/components/chooseNewWinnerModal/view.html',
+        //     resolve: {
+        //       currentSubmission: function() {
+        //         return submission;
+        //       }
+        //     }
+        //   }).result.then(function(selectedSubmission) {
+        //     console.log(selectedSubmission);
+        //   });
+        // } else {
           SubmissionService.delete({
             showId: $stateParams.showId,
             challengeId: $stateParams.challengeId,
@@ -251,7 +251,7 @@
           }).catch(function() {
             growl.error('Error when deleting submission');
           });
-        }
+        // }
       });
     };
   }
