@@ -143,7 +143,7 @@
 
     $scope.submit = function(form) {
       if (showDetail.numberOfChallenges >= maximumChallenge) {
-        return growl.error('This show has reached maximum number of challenges');
+        return growl.error('Cannot add more challenges because show has enough required challenges');
       }
       if ($scope.data.prizes.length > $scope.maximumPrize || $scope.data.prizes.length < $scope.minimumPrize) {
         return true;
