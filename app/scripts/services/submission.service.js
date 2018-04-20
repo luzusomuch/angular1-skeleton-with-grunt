@@ -1,6 +1,6 @@
 'use strict';
 angular.module('measureApp').factory('SubmissionService', function($resource, apiUrl){
-  return $resource(apiUrl + '/api/shows/:showId/challenges/:challengeId/submissions/:id', {}, {
+  return $resource(apiUrl + '/api/shows/:showId/challenges/:challengeId/submissions/:id/:route', {}, {
     list: {
       method: 'GET',
       params: {
@@ -15,6 +15,16 @@ angular.module('measureApp').factory('SubmissionService', function($resource, ap
         showId: '@showId',
         challengeId: '@challengeId',
         id: '@id',
+      },
+      isArray: false,
+    },
+    delete: {
+      method: 'POST',
+      params: {
+        showId: '@showId',
+        challengeId: '@challengeId',
+        id: '@id',
+        route: 'delete'
       },
       isArray: false,
     },

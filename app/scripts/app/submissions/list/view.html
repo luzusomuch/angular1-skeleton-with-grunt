@@ -43,8 +43,6 @@
           <td class="td-item">
             <span ng-if="item.content.proScore >= 0">{{item.content.proScore}}%</span>
             <span ng-if="item.content.proScore < 0">
-              <!-- <i class="fa fa-spinner fa-spin fa-1x fa-fw"></i>
-              <span class="sr-only">Loading...</span> -->
               <a href="javascript:void(0)" ng-click="getProScore(item)">Get Pro-Score</a>
             </span>
           </td>
@@ -52,11 +50,13 @@
             <span ng-repeat="prizeTitle in item.prizesTitle">
               {{prizeTitle}} <br>
             </span>
-            <!-- {{item.prizesTitle.toString()}} -->
           </td>
-          <td class="text-right td-item">
+          <td class="text-right td-item action">
             <a ng-if="challengeDetail.status !== 'closed'" title="Set Prize" class="table-icon" href="javascript:void(0)" ng-click="setPrize(item)">
               <i ng-class="{'active': item.prizes && item.prizes.length > 0}" class="fa fa-gift"></i>
+            </a>
+            <a class="table-icon" href="javascript:void(0)" title="Delete submission" ng-click="deleteSubmission(item)">
+              <i class="fa fa-trash"></i>
             </a>
           </td>
         </tr>
