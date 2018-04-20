@@ -14,7 +14,7 @@
         AuthService.login($scope.user).then(function() {
           $state.go('app.show.list');
         }).catch(function(err) {
-          growl.error('Something wrong');
+          growl.error('Invalid email or password');
         });
       }
     };

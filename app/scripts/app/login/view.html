@@ -4,10 +4,10 @@
       <div class="login-page">
         <h1 class="text-center">MEASUREUP</h1>
         <form name="form" class="login-form" ng-submit="submit(form)" novalidate>
-          <div class="form-group" ng-class="{'has-error': form.email.$invalid && form.$submitted}">
+          <div class="form-group" ng-class="{'has-error': form.uid.$invalid && form.$submitted}">
             <label>Email</label>
             <input class="form-control" type="text" name="uid" ng-model="user.uid" required>
-            <p class="help-block" ng-if="form.email.$error.required && form.$submitted">Email is required</p>
+            <p class="help-block" ng-if="form.uid.$error.required && form.$submitted">Email is required</p>
           </div>
           <div class="form-group" ng-class="{'has-error': form.password.$invalid && form.$submitted}">
             <label>Password</label>
