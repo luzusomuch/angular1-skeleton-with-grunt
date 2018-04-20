@@ -31,16 +31,16 @@
           <p class="help-block" ng-if="form.announcement.$error.maxlength && form.$submitted">Announcement exceeds the allowable limit (60 characters)</p>
         </div>
         <div class="form-group" ng-class="{'has-error': form.expiresAt.$invalid && form.$submitted}">
-          <label>End Date <span class="required">*</span></label>
+          <label>Closing Date <span class="required">*</span></label>
           <p class="input-group">
             <input name="expiresAt" type="text" class="form-control" uib-datepicker-popup="dd-MMM-yyyy" ng-model="data.expiresAt" is-open="openEndDate" datepicker-options="dateOptions" close-text="Close" required readonly/>
             <span class="input-group-btn">
               <button type="button" class="btn btn-default" ng-click="openEndDate=!openEndDate"><i class="glyphicon glyphicon-calendar"></i></button>
             </span>
           </p>
-          <p class="help-block" ng-if="form.expiresAt.$error.required && form.$submitted">End date is required</p>
+          <p class="help-block" ng-if="form.expiresAt.$error.required && form.$submitted">Closing Date is required</p>
           <p class="help-block" ng-if="form.expiresAt.$error.date && form.$submitted">Invalid date</p>
-          <p class="help-block" ng-if="form.expiresAt.$error.endTime && form.$submitted">End Date must be less than End Date of Show</p>
+          <p class="help-block" ng-if="form.expiresAt.$error.endTime && form.$submitted">Closing Date must be less than Show Date</p>
         </div>
         <div class="form-group" ng-class="{'has-error': data.prizes.length < 2 && form.$submitted}">
           <label>Prizes <span class="required">*</span></label>
