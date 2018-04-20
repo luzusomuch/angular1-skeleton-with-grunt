@@ -4,6 +4,7 @@
 
   /* @ngInject */
   function SubmissionsListController($scope, $state, $stateParams, $q, SubmissionService, ChallengeService, growl, $uibModal) {
+    $scope.stateParams = $stateParams;
     $scope.pagination = {
       page: 1,
       limit: 20,

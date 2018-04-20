@@ -1,7 +1,10 @@
 <div class="content">
   <div class="submissions-list">
     <div class="row">
-      <h1 class="col-sm-7">Submissions List</h1>
+      <h1 class="col-sm-5">Submissions List</h1>
+      <div class="col-sm-2">
+        <button ui-sref="app.challenge.list({showId: stateParams.showId})" class="btn btn-primary add-new-challenge-button"><i class="fa fa-chevron-left"></i> Back to chalenges list</button>
+      </div>
       <div class="col-sm-2">
         <button ng-disabled="!hasWinner" ng-click="notificationToWinner()" class="btn btn-primary add-new-challenge-button"><i class="fa fa-bell"></i> Notification to winner(s)</button>
       </div>
