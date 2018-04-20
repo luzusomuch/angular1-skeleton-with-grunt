@@ -1,7 +1,10 @@
 <div class="content">
   <div class="submissions-list">
     <div class="row">
-      <h1 class="col-sm-7">Submissions List</h1>
+      <h1 class="col-sm-5">Submissions List</h1>
+      <div class="col-sm-2">
+        <button ui-sref="app.challenge.list({showId: stateParams.showId})" class="btn btn-primary add-new-challenge-button"><i class="fa fa-chevron-left"></i> Back to chalenges list</button>
+      </div>
       <div class="col-sm-2">
         <button ng-disabled="!hasWinner" ng-click="notificationToWinner()" class="btn btn-primary add-new-challenge-button"><i class="fa fa-bell"></i> Notification to winner(s)</button>
       </div>
@@ -43,8 +46,6 @@
           <td class="td-item">
             <span ng-if="item.content.proScore >= 0">{{item.content.proScore}}%</span>
             <span ng-if="item.content.proScore < 0">
-              <!-- <i class="fa fa-spinner fa-spin fa-1x fa-fw"></i>
-              <span class="sr-only">Loading...</span> -->
               <a href="javascript:void(0)" ng-click="getProScore(item)">Get Pro-Score</a>
             </span>
           </td>
@@ -52,11 +53,13 @@
             <span ng-repeat="prizeTitle in item.prizesTitle">
               {{prizeTitle}} <br>
             </span>
-            <!-- {{item.prizesTitle.toString()}} -->
           </td>
-          <td class="text-right td-item">
+          <td class="text-right td-item action">
             <a ng-if="challengeDetail.status !== 'closed'" title="Set Prize" class="table-icon" href="javascript:void(0)" ng-click="setPrize(item)">
               <i ng-class="{'active': item.prizes && item.prizes.length > 0}" class="fa fa-gift"></i>
+            </a>
+            <a class="table-icon" href="javascript:void(0)" title="Delete submission" ng-click="deleteSubmission(item)">
+              <i class="fa fa-trash"></i>
             </a>
           </td>
         </tr>

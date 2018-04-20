@@ -3,7 +3,7 @@
   angular.module('measureApp').controller('CreateChallengeController', CreateChallengeController);
 
   /* @ngInject */
-  function CreateChallengeController($scope, $stateParams, growl, ChallengeService, VideoService, UploadService, pageSettings, showDetail, $http) {
+  function CreateChallengeController($scope, $stateParams, growl, ChallengeService, VideoService, UploadService, pageSettings, showDetail, $http, ImageService) {
     var maximumChallenge = pageSettings['SHOW']['MAX_NUMBER_OF_CHALLENGES'];
     $scope.maximumPrize = pageSettings['CHALLENGE']['MAX_NUMBER_OF_PRIZES'];
     $scope.minimumPrize = pageSettings['CHALLENGE']['MIN_NUMBER_OF_PRIZES'];
@@ -26,6 +26,7 @@
     };
     $scope.submitted = false;
     $scope.isUploading = false;
+    $scope.isUploadingThumbnail = false;
     $scope.isUploadingVideoUrl = false;
     $scope.prizeTitleError = false;
     $scope.prizeTitleLengthError = false;
@@ -54,7 +55,7 @@
         $scope.prizeDescLengthError = true;
       }
       if ($scope.prizeTitleError || $scope.prizeDescError || $scope.prizeTitleLengthError || $scope.prizeDescLengthError) {
-        growl.error('Please check your prize data.');
+        return false;
       } else {
         $scope.data.prizes.push($scope.prize);
         $scope.prize = {
@@ -78,6 +79,8 @@
             $scope.isUploading = false;
             $scope.videoUrlError = false;
             delete $scope.data.videoUrl;
+            delete $scope.data.thumbnailUrl;
+            $scope.thumbnail = null;
           }).catch(function(err) {
             growl.error('Failed to upload video');
             $scope.isUploading = false;
@@ -118,14 +121,34 @@
       }
     };
 
+    $scope.uploadThumbnail = function(file) {
+      if (file) {
+        $scope.isUploadingThumbnail = true;
+        ImageService.create().$promise.then(function(thumbnailData) {
+          UploadService.uploadVideo(thumbnailData, file).then(function() {
+            $scope.data.thumbnailUrl = thumbnailData.originalUrl;
+            $scope.isUploadingThumbnail = false;
+            delete $scope.data.videoId;
+            $scope.file = null;
+          }).catch(function(err) {
+            growl.error('Failed to upload video');
+            $scope.isUploadingThumbnail = false;
+          });
+        }).catch(function() {
+          growl.error('Failed to upload video');
+          $scope.isUploadingThumbnail = false;
+        });
+      }
+    };
+
     $scope.submit = function(form) {
       if (showDetail.numberOfChallenges >= maximumChallenge) {
-        return growl.error('This show has reached maximum number of challenges');
+        return growl.error('Cannot add more challenges because show has enough required challenges');
       }
       if ($scope.data.prizes.length > $scope.maximumPrize || $scope.data.prizes.length < $scope.minimumPrize) {
         return true;
       }
-      if ($scope.isUploading || $scope.isUploadingVideoUrl) {
+      if ($scope.isUploading || $scope.isUploadingVideoUrl || $scope.isUploadingThumbnail) {
         return growl.error('Please wait until upload process done');
       }
       if (form.$valid && !$scope.videoUrlError) {
@@ -144,6 +167,7 @@
             campaignId: pageSettings['WEBHOOK']['TEST_CAMPAIGN_ID'],
           };
           $scope.file = null;
+          $scope.thumbnail = null;
           showDetail.numberOfChallenges++;
           form.$setDirty();
           form.$setUntouched();

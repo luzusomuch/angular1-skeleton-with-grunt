@@ -4,10 +4,10 @@
       <div class="login-page">
         <h1 class="text-center">MEASUREUP</h1>
         <form name="form" class="login-form" ng-submit="submit(form)" novalidate>
-          <div class="form-group" ng-class="{'has-error': form.email.$invalid && form.$submitted}">
+          <div class="form-group" ng-class="{'has-error': form.uid.$invalid && form.$submitted}">
             <label>Email</label>
             <input class="form-control" type="text" name="uid" ng-model="user.uid" required>
-            <p class="help-block" ng-if="form.email.$error.required && form.$submitted">Email is required</p>
+            <p class="help-block" ng-if="form.uid.$error.required && form.$submitted">Email is required</p>
           </div>
           <div class="form-group" ng-class="{'has-error': form.password.$invalid && form.$submitted}">
             <label>Password</label>
@@ -15,7 +15,7 @@
             <p class="help-block" ng-if="form.password.$error.required && form.$submitted">Password is required</p>
           </div>
           <div class="login-button-group">
-            <a ui-sref="forgotPassword">Forgot password?</a>
+            <!-- <a ui-sref="forgotPassword">Forgot password?</a> -->
             <button type="submit" class="btn btn-primary login-btn">Login</button>
           </div>
         </form>

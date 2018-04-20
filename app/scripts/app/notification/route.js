@@ -30,8 +30,8 @@ angular.module('measureApp').config(function ($stateProvider) {
     hideFooter: false,
     pageTitle: 'Update Notification',
     resolve: {
-      notificationDetail: ['PushNotificationService', '$stateParams', 'growl', '$state', function(PushNotificationService, $stateParams, growl, $state) {
-        return PushNotificationService.get({id: $stateParams.id}).$promise.then(function(resp) {
+      contentDetail: ['ConfigService', '$stateParams', 'growl', '$state', function(ConfigService, $stateParams, growl, $state) {
+        return ConfigService.get({id: $stateParams.id}).$promise.then(function(resp) {
           return resp;
         }).catch(function() {
           growl.error('Cannot get notifiaction detail');

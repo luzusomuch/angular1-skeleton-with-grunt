@@ -14,9 +14,9 @@
         </div>
         <div class="form-group" ng-class="{'has-error': form.title.$invalid && form.$submitted}">
           <label>Title <span class="required">*</span></label>
-          <input class="form-control" type="text" name="title" ng-model="data.title" required ng-maxlength="30" placeholder="Challenge Title">
+          <input class="form-control" type="text" name="title" ng-model="data.title" required ng-maxlength="40" placeholder="Challenge Title">
           <p class="help-block" ng-if="form.title.$error.required && form.$submitted">Title is required</p>
-          <p class="help-block" ng-if="form.title.$error.maxlength && form.$submitted">Title exceeds the allowable limit (30 characters)</p>
+          <p class="help-block" ng-if="form.title.$error.maxlength && form.$submitted">Title exceeds the allowable limit (40 characters)</p>
         </div>
         <div class="form-group" ng-class="{'has-error': form.description.$invalid && form.$submitted}">
           <label>Description <span class="required">*</span></label>
@@ -31,16 +31,16 @@
           <p class="help-block" ng-if="form.announcement.$error.maxlength && form.$submitted">Announcement exceeds the allowable limit (60 characters)</p>
         </div>
         <div class="form-group" ng-class="{'has-error': form.expiresAt.$invalid && form.$submitted}">
-          <label>End Date <span class="required">*</span></label>
+          <label>Closing Date <span class="required">*</span></label>
           <p class="input-group">
             <input name="expiresAt" type="text" class="form-control" uib-datepicker-popup="dd-MMM-yyyy" ng-model="data.expiresAt" is-open="openEndDate" datepicker-options="dateOptions" close-text="Close" required readonly/>
             <span class="input-group-btn">
               <button type="button" class="btn btn-default" ng-click="openEndDate=!openEndDate"><i class="glyphicon glyphicon-calendar"></i></button>
             </span>
           </p>
-          <p class="help-block" ng-if="form.expiresAt.$error.required && form.$submitted">End date is required</p>
+          <p class="help-block" ng-if="form.expiresAt.$error.required && form.$submitted">Closing Date is required</p>
           <p class="help-block" ng-if="form.expiresAt.$error.date && form.$submitted">Invalid date</p>
-          <p class="help-block" ng-if="form.expiresAt.$error.endTime && form.$submitted">End Date must be less than End Date of Show</p>
+          <p class="help-block" ng-if="form.expiresAt.$error.endTime && form.$submitted">Closing Date must be less than Show Date</p>
         </div>
         <div class="form-group" ng-class="{'has-error': data.prizes.length < minimumPrize && form.$submitted}">
           <label>Prizes <span class="required">*</span></label>
@@ -83,7 +83,7 @@
           </table>
         </div>
         <div class="form-group" ng-class="{'has-error': form.video.$invalid && form.$submitted}">
-          <label>Video Challenge </label>
+          <label>Video Challenge <span class="required">*</span></label>
           <input name="video" class="form-control" type="file" ngf-select="upload($file)" ngf-max-size="40MB" ng-model="file" uploader="uploader" ngf-pattern="'video/*'" ngf-accept="'video/*'" ng-required="!file && !data.videoUrl"/>
           <p class="help-block" ng-if="form.video.$error.required && !form.video.$error.maxSize && !form.video.$error.pattern && form.$submitted">Video Challenge or Video URL is required</p>
           <p class="help-block" ng-if="form.video.$error.maxSize && form.$submitted">Video size exceeds the allowable limit (40MB)</p>
@@ -93,7 +93,7 @@
             <span class="sr-only">Loading...</span>
           </p>
         </div>
-        <div class="form-group" ng-class="{'has-error': (form.url.$invalid || contentTypeError || contentLengthError || videoUrlError) && form.$submitted}">
+        <!-- <div class="form-group" ng-class="{'has-error': (form.url.$invalid || contentTypeError || contentLengthError || videoUrlError) && form.$submitted}">
           <label>Video URL</label>
           <input class="form-control" type="url" name="url" ng-model="data.videoUrl" ng-blur="onBlurVideoUrl()" ng-required="!file && !data.videoUrl">
           <p class="help-block" ng-if="form.url.$error.required && form.$submitted">Video Challenge or Video URL is required</p>
@@ -101,6 +101,17 @@
           <p class="help-block" ng-if="contentLengthError && form.$submitted">Only allow video format</p>
           <p class="help-block" ng-if="(videoUrlError || form.url.$error.url ) && form.$submitted">Invalid video url</p>
         </div>
+        <div class="form-group" ng-class="{'has-error': form.thumbnail.$invalid && form.$submitted}">
+          <label>Challenge Thumbnail</label>
+          <input name="thumbnail" class="form-control" type="file" ngf-max-size="40MB" ng-model="thumbnail" uploader="uploader" ngf-pattern="'image/*'" ngf-accept="'image/*'" ng-required="data.videoUrl" ngf-select="uploadThumbnail($file)"/>
+          <p class="help-block" ng-if="form.thumbnail.$error.required && !form.thumbnail.$error.maxSize && !form.thumbnail.$error.pattern && form.$submitted">Challenge thumbnail is required</p>
+          <p class="help-block" ng-if="form.thumbnail.$error.maxSize && form.$submitted">Thumbnail size exceeds the allowable limit (40MB)</p>
+          <p class="help-block" ng-if="form.thumbnail.$error.pattern && form.$submitted">Only allow image format</p>
+          <p ng-if="isUploadingThumbnail">
+            <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+            <span class="sr-only">Loading...</span>
+          </p>
+        </div> -->
         <div class="form-group">
           <button ng-disabled="submitted" type="submit" class="btn btn-primary">Submit</button>
           <button type="button" class="btn btn-warning" ui-sref="app.show.list">Cancel</button>

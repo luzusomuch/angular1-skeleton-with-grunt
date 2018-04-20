@@ -18,6 +18,15 @@ angular.module('measureApp').factory('SubmissionService', function($resource, ap
       },
       isArray: false,
     },
+    delete: {
+      method: 'delete',
+      params: {
+        showId: '@showId',
+        challengeId: '@challengeId',
+        id: '@id',
+      },
+      isArray: false,
+    },
     setAsWinner: {
       method: 'POST',
       url: apiUrl + '/api/shows/:showId/challenges/:challengeId/submissions/:id/win',

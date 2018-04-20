@@ -1,22 +1,23 @@
 <div class="content">
   <div class="row">
     <div class="col-sm-8 col-sm-offset-2">
-      <h1>Create New Notification</h1>
+      <h1>Create New Content</h1>
       <form class="create-show-form" ng-submit="submit(form)" name="form" novalidate>
+        <div class="form-group" ng-class="{'has-error': form.key.$invalid && form.$submitted}">
+          <label>Key <span class="required">*</span></label>
+          <input class="form-control" type="text" name="key" ng-model="data.key" required placeholder="Key" ng-pattern="/^[a-zA-Z0-9_]*$/">
+          <p class="help-block" ng-if="form.key.$error.required && form.$submitted">Key is required</p>
+          <p class="help-block" ng-if="form.key.$error.pattern && form.$submitted">Invalid key</p>
+        </div>
         <div class="form-group" ng-class="{'has-error': form.title.$invalid && form.$submitted}">
           <label>Title <span class="required">*</span></label>
-          <input class="form-control" type="text" name="title" ng-model="data.title" required ng-maxlength="30" placeholder="Notification Title">
+          <input class="form-control" type="text" name="title" ng-model="data.value.title" required placeholder="Title">
           <p class="help-block" ng-if="form.title.$error.required && form.$submitted">Title is required</p>
-          <p class="help-block" ng-if="form.title.$error.maxlength && form.$submitted">Title exceeds the allowable limit (30 characters)</p>
         </div>
         <div class="form-group" ng-class="{'has-error': form.content.$invalid && form.$submitted}">
-          <label>Content <span class="required">*</span></label>
-          <textarea ng-model="data.content" name="content" class="form-control" required placeholder="Notification Content"></textarea>
-          <p class="help-block" ng-if="form.content.$error.required && form.$submitted">Thumbnail is required</p>
-        </div>
-        <div class="form-group" ng-class="{'has-error': form.type.$invalid && form.$submitted}">
-          <label>Type <span class="required">*</span></label>
-          <input type="text" name="type" ng-model="data.type" required class="form-control" placeholder="Notification Type">
+          <label>Content <span class="required">*</span> <i class="fa fa-info-circle" uib-tooltip="Notification Content. Eg: Show <=% title %> has been published"></i></label>
+          <textarea ng-model="data.value.body" name="content" class="form-control" required placeholder="Notification Content. Eg: Show <=% title %> has been published"></textarea>
+          <p class="help-block" ng-if="form.content.$error.required && form.$submitted">Content is required</p>
         </div>
         <div class="form-group">
           <button ng-disabled="submitted" type="submit" class="btn btn-primary">Submit</button>

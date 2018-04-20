@@ -4,6 +4,7 @@
 
   /* @ngInject */
   function SubmissionsListController($scope, $state, $stateParams, $q, SubmissionService, ChallengeService, growl, $uibModal) {
+    $scope.stateParams = $stateParams;
     $scope.pagination = {
       page: 1,
       limit: 20,
@@ -205,6 +206,53 @@
         growl.success('Get pro-score successfully');
       }).catch(function() {
         growl.error('Error when get pro-score');
+      });
+    };
+
+    $scope.deleteSubmission = function(submission) {
+      $uibModal.open({
+        controller: 'ConfirmModalController',
+        controllerAs: 'cm',
+        templateUrl: 'scripts/components/confirmModal/view.html',
+        resolve: {
+          title: function() {
+            return 'Delete submission confirmation';
+          },
+          description: function() {
+            return 'Do you want to delete this submission?';
+          },
+          confirmButton: function() {
+            return 'Delete';
+          }
+        }
+      }).result.then(function() {
+        // if ($scope.challengeDetail.status === 'closed' && submission.prizes.length > 0) {
+        //   // show popup for admin choose new winner
+        //   $uibModal.open({
+        //     controller: 'ChooseNewWinnerModalController',
+        //     controllerAs: 'cnwm',
+        //     templateUrl: 'scripts/components/chooseNewWinnerModal/view.html',
+        //     resolve: {
+        //       currentSubmission: function() {
+        //         return submission;
+        //       }
+        //     }
+        //   }).result.then(function(selectedSubmission) {
+        //     console.log(selectedSubmission);
+        //   });
+        // } else {
+          SubmissionService.delete({
+            showId: $stateParams.showId,
+            challengeId: $stateParams.challengeId,
+            id: submission._id,
+          }).$promise.then(function() {
+            search();
+            getChallengeDetail();
+            growl.success('Deleted submission successfully');
+          }).catch(function() {
+            growl.error('Error when deleting submission');
+          });
+        // }
       });
     };
   }

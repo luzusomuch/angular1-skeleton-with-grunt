@@ -2,9 +2,9 @@
   <div class="notifications-list">
     <div class="row">
       <h1 class="col-sm-10">Contents List</h1>
-      <div class="col-sm-2">
-        <!-- <button ui-sref="app.notification.create" class="btn btn-primary add-new-show-button"><i class="fa fa-plus"></i> Add New Notification</button> -->
-      </div>
+      <!-- <div class="col-sm-2">
+        <button ui-sref="app.notification.create" class="btn btn-primary add-new-show-button"><i class="fa fa-plus"></i> Add New Notification</button>
+      </div> -->
     </div>
     <!-- <div class="row filter-content">
       <div class="col-sm-3">
@@ -20,28 +20,25 @@
       <thead>
         <tr>
           <td>#</td>
-          <td class="text-left">Title</td>
+          <td class="text-left">key</td>
+          <td>Title</td>
           <td>Content</td>
-          <td>Type</td>
+          <td>Category</td>
           <td>Created Date</td>
-          <td>Status</td>
           <td class="text-right">Action</td>
         </tr>
       </thead>
       <tbody>
         <tr ng-repeat="item in items">
           <td>{{$index + 1}}</td>
-          <td class="text-left"><a ui-sref="app.challenge.list({showId: item._id})">{{item.title}}</a></td>
-          <td>{{item.content}}</td>
-          <td>{{item.type}}</td>
+          <td class="text-left">{{item.key}}</td>
+          <td>{{item.value.title}}</td>
+          <td>{{item.value.body}}</td>
+          <td>{{item.category}}</td>
           <td>{{item.createdAt | date: 'dd MMM yyyy'}}</td>
-          <td>{{item.status | capitalize}}</td>
           <td class="text-right action">
-            <a title="Edit Notification" class="table-icon" href="javascript:void(0)" ng-click="editNotification(item)">
+            <a title="Edit Notification" class="table-icon" href="javascript:void(0)" ng-click="editContent(item)">
               <i class="fa fa-pencil"></i>
-            </a>
-            <a title="Delete Notification" class="table-icon" href="javascript:void(0)" ng-click="deleteNotification(item, index)">
-              <i class="fa fa-trash-o"></i>
             </a>
           </td>
         </tr>
