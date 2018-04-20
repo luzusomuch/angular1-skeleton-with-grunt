@@ -6,9 +6,17 @@
   function EditNotificationController($scope, $stateParams, $state, contentDetail, growl, ConfigService) {
     $scope.data = contentDetail;
     $scope.data.value = {
-      title: $scope.data.value.title,
-      body: $scope.data.value.body
+      title: $scope.data.value ? $scope.data.value.title : null,
+      body: $scope.data.value ? $scope.data.value.body : null
     };
+    $scope.hints = [];
+    if (contentDetail.attributes) {
+      _.each(contentDetail.attributes.variables, function(variable) {
+        if (variable) {
+          $scope.hints.push('<%= '+variable+' %>');
+        }
+      });
+    }
     $scope.submitted = false;
 
     $scope.submit = function(form) {
