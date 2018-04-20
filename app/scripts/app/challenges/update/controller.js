@@ -156,6 +156,9 @@
         if (!$scope.data.thumbnailUrl) {
           delete data.thumbnailUrl;
         }
+        _.each(data.prizes, function(prize) {
+          delete prize.winner;
+        });
         ChallengeService.update({showId: $stateParams.showId, id: $stateParams.id}, data).$promise.then(function(resp) {
           $scope.submitted = false;
           growl.success('Updated challenge successfully');
