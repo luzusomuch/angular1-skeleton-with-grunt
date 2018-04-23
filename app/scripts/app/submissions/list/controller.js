@@ -255,5 +255,23 @@
         // }
       });
     };
+
+    $scope.approveSubmission = function(submission) {
+      if (!submission.approved) {
+        SubmissionService.approve({
+          showId: $stateParams.showId,
+          challengeId: $stateParams.challengeId,
+          id: submission._id,
+        }).$promise.then(function() {
+          search();
+          getChallengeDetail();
+          growl.success('Approved submission successfully');
+        }).catch(function() {
+          growl.error('Error when approve submission');
+        });
+      } else {
+        growl.error('This submission was approved');
+      }
+    };
   }
 })();
