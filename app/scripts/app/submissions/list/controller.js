@@ -34,6 +34,7 @@
       params.userName = $scope.filter.userName;
       params.likeNumber = $scope.filter.likeNumber;
       params.proScore = $scope.filter.proScore;
+      params.viewDisapproved = true;
       SubmissionService.list(params).$promise.then(function(resp) {
         _.each(resp.items, function(item) {
           item.prizesTitle = _.map(item.prizes, function(prize) {
