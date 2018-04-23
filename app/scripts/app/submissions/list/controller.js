@@ -248,7 +248,8 @@
           challengeId: $stateParams.challengeId,
           id: submission._id,
         }).$promise.then(function() {
-          search();
+          submission.approved = !submission.approved;
+          $scope.getProScore(submission);
           growl.success('Approved submission successfully');
         }).catch(function() {
           growl.error('Error when approve submission');
@@ -259,7 +260,8 @@
           challengeId: $stateParams.challengeId,
           id: submission._id,
         }).$promise.then(function() {
-          search();
+          // search();
+          submission.approved = !submission.approved;
           growl.success('Disapprove submission successfully');
         }).catch(function() {
           growl.error('Error when disapprove submission');
