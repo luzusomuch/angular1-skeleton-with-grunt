@@ -58,7 +58,7 @@
             <a ng-if="challengeDetail.status !== 'closed'" title="Set Prize" class="table-icon" href="javascript:void(0)" ng-click="setPrize(item)">
               <i ng-class="{'active': item.prizes && item.prizes.length > 0}" class="fa fa-gift"></i>
             </a>
-            <a class="table-icon" href="javascript:void(0)" title="{{!item.approved ? 'Approve submission' : 'Unapprove submission'}}" ng-click="approveSubmission(item)">
+            <a class="table-icon" href="javascript:void(0)" title="{{!item.approved ? 'Approve submission' : 'Disapprove submission'}}" ng-click="approveSubmission(item)">
               <i class="fa fa-check" ng-class="{'active': item.approved}"></i>
             </a>
             <a class="table-icon" href="javascript:void(0)" title="Delete submission" ng-click="deleteSubmission(item)">

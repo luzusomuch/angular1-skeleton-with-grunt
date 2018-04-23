@@ -59,7 +59,7 @@ angular.module('measureApp').factory('SubmissionService', function($resource, ap
     },
     unapprove: {
       method: 'POST',
-      url: apiUrl + '/api/shows/:showId/challenges/:challengeId/submissions/:id/unapprove',
+      url: apiUrl + '/api/shows/:showId/challenges/:challengeId/submissions/:id/disapprove',
       params: {
         showId: '@showId',
         challengeId: '@challengeId',

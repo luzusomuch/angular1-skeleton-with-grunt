@@ -57,7 +57,7 @@ body {
 }
 
 .content {
-  min-height: 600px;
+  min-height: calc(100vh - 100px);
   padding: 0 15px;
   background-color: $white;
   color: $black;
@@ -121,7 +121,7 @@ textarea {
   .action {
     i.fa {
       font-size: 17px;
-      
+
       &.active {
         color: #337ab7;
       }

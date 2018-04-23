@@ -259,9 +259,9 @@
           id: submission._id,
         }).$promise.then(function() {
           search();
-          growl.success('Unapprove submission successfully');
+          growl.success('Disapprove submission successfully');
         }).catch(function() {
-          growl.error('Error when unapprove submission');
+          growl.error('Error when disapprove submission');
         });
       }
     };
