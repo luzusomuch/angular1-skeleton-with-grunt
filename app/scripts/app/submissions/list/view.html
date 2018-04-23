@@ -44,10 +44,13 @@
           <td class="td-item"><a href="javascript:void(0)" ng-click="viewVideo(item)">View video</a></td>
           <td class="td-item">{{item.content.numberOfLikes}}</td>
           <td class="td-item">
-            <span ng-if="item.content.proScore >= 0">{{item.content.proScore}}%</span>
-            <span ng-if="item.content.proScore < 0">
-              <a href="javascript:void(0)" ng-click="getProScore(item)">Get Pro-Score</a>
-            </span>
+            <div ng-if="!item.approved">&nbsp;</div>
+            <div ng-if="item.approved">
+              <span ng-if="item.content.proScore >= 0">{{item.content.proScore}}%</span>
+              <span ng-if="item.content.proScore < 0">
+                <a href="javascript:void(0)" ng-click="getProScore(item)">Get Pro-Score</a>
+              </span>
+            </div>
           </td>
           <td class="td-item">
             <span ng-repeat="prizeTitle in item.prizesTitle">
