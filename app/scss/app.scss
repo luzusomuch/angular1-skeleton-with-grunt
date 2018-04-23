@@ -57,7 +57,7 @@ body {
 }
 
 .content {
-  min-height: 600px;
+  min-height: calc(100vh - 100px);
   padding: 0 15px;
   background-color: $white;
   color: $black;
@@ -118,17 +118,13 @@ textarea {
     border-radius: 50%;
   }
 
-  .fa-gift {
-    font-size: 17px;
-
-    &.active {
-      color: #337ab7;
-    }
-  }
-
   .action {
     i.fa {
       font-size: 17px;
+
+      &.active {
+        color: #337ab7;
+      }
     }
   }
 }

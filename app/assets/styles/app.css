@@ -500,7 +500,7 @@ body {
   padding: 0 15px 10px 15px; }
 
 .content {
-  min-height: 600px;
+  min-height: calc(100vh - 100px);
   padding: 0 15px;
   background-color: #FFF;
   color: #151515; }
@@ -537,12 +537,10 @@ textarea {
     width: 35px;
     height: 35px;
     border-radius: 50%; }
-  .table .fa-gift {
-    font-size: 17px; }
-    .table .fa-gift.active {
-      color: #337ab7; }
   .table .action i.fa {
     font-size: 17px; }
+    .table .action i.fa.active {
+      color: #337ab7; }
 
 .submissions-list .td-item {
   padding-top: 15px; }

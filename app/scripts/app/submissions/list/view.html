@@ -44,10 +44,13 @@
           <td class="td-item"><a href="javascript:void(0)" ng-click="viewVideo(item)">View video</a></td>
           <td class="td-item">{{item.content.numberOfLikes}}</td>
           <td class="td-item">
-            <span ng-if="item.content.proScore >= 0">{{item.content.proScore}}%</span>
-            <span ng-if="item.content.proScore < 0">
-              <a href="javascript:void(0)" ng-click="getProScore(item)">Get Pro-Score</a>
-            </span>
+            <div ng-if="!item.approved">&nbsp;</div>
+            <div ng-if="item.approved">
+              <span ng-if="item.content.proScore >= 0">{{item.content.proScore}}%</span>
+              <span ng-if="item.content.proScore < 0">
+                <a href="javascript:void(0)" ng-click="getProScore(item)">Get Pro-Score</a>
+              </span>
+            </div>
           </td>
           <td class="td-item">
             <span ng-repeat="prizeTitle in item.prizesTitle">
@@ -57,6 +60,9 @@
           <td class="text-right td-item action">
             <a ng-if="challengeDetail.status !== 'closed'" title="Set Prize" class="table-icon" href="javascript:void(0)" ng-click="setPrize(item)">
               <i ng-class="{'active': item.prizes && item.prizes.length > 0}" class="fa fa-gift"></i>
+            </a>
+            <a class="table-icon" href="javascript:void(0)" title="{{!item.approved ? 'Approve submission' : 'Disapprove submission'}}" ng-click="approveSubmission(item)">
+              <i class="fa fa-check" ng-class="{'active': item.approved}"></i>
             </a>
             <a class="table-icon" href="javascript:void(0)" title="Delete submission" ng-click="deleteSubmission(item)">
               <i class="fa fa-trash"></i>

@@ -34,6 +34,7 @@
       params.userName = $scope.filter.userName;
       params.likeNumber = $scope.filter.likeNumber;
       params.proScore = $scope.filter.proScore;
+      params.viewDisapproved = true;
       SubmissionService.list(params).$promise.then(function(resp) {
         _.each(resp.items, function(item) {
           item.prizesTitle = _.map(item.prizes, function(prize) {
@@ -226,34 +227,46 @@
           }
         }
       }).result.then(function() {
-        // if ($scope.challengeDetail.status === 'closed' && submission.prizes.length > 0) {
-        //   // show popup for admin choose new winner
-        //   $uibModal.open({
-        //     controller: 'ChooseNewWinnerModalController',
-        //     controllerAs: 'cnwm',
-        //     templateUrl: 'scripts/components/chooseNewWinnerModal/view.html',
-        //     resolve: {
-        //       currentSubmission: function() {
-        //         return submission;
-        //       }
-        //     }
-        //   }).result.then(function(selectedSubmission) {
-        //     console.log(selectedSubmission);
-        //   });
-        // } else {
-          SubmissionService.delete({
-            showId: $stateParams.showId,
-            challengeId: $stateParams.challengeId,
-            id: submission._id,
-          }).$promise.then(function() {
-            search();
-            getChallengeDetail();
-            growl.success('Deleted submission successfully');
-          }).catch(function() {
-            growl.error('Error when deleting submission');
-          });
-        // }
+        SubmissionService.delete({
+          showId: $stateParams.showId,
+          challengeId: $stateParams.challengeId,
+          id: submission._id,
+        }).$promise.then(function() {
+          search();
+          getChallengeDetail();
+          growl.success('Deleted submission successfully');
+        }).catch(function() {
+          growl.error('Error when deleting submission');
+        });
       });
+    };
+
+    $scope.approveSubmission = function(submission) {
+      if (!submission.approved) {
+        SubmissionService.approve({
+          showId: $stateParams.showId,
+          challengeId: $stateParams.challengeId,
+          id: submission._id,
+        }).$promise.then(function() {
+          submission.approved = !submission.approved;
+          $scope.getProScore(submission);
+          growl.success('Approved submission successfully');
+        }).catch(function() {
+          growl.error('Error when approve submission');
+        });
+      } else {
+        SubmissionService.unapprove({
+          showId: $stateParams.showId,
+          challengeId: $stateParams.challengeId,
+          id: submission._id,
+        }).$promise.then(function() {
+          // search();
+          submission.approved = !submission.approved;
+          growl.success('Disapprove submission successfully');
+        }).catch(function() {
+          growl.error('Error when disapprove submission');
+        });
+      }
     };
   }
 })();

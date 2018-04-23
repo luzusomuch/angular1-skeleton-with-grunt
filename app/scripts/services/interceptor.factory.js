@@ -9,6 +9,9 @@ angular.module('measureApp').factory('httpRequestInterceptor', function ($cookie
       }
       return config;
     },
+    response: function(response) {
+      return $q.resolve({data: response.data.data || response.data});
+    },
     // Intercept 401s and redirect you to login
     responseError: function(response) {
       if (response.status === 401) {
