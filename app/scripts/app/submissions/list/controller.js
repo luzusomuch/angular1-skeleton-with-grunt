@@ -248,13 +248,21 @@
           id: submission._id,
         }).$promise.then(function() {
           search();
-          getChallengeDetail();
           growl.success('Approved submission successfully');
         }).catch(function() {
           growl.error('Error when approve submission');
         });
       } else {
-        growl.error('This submission was approved');
+        SubmissionService.unapprove({
+          showId: $stateParams.showId,
+          challengeId: $stateParams.challengeId,
+          id: submission._id,
+        }).$promise.then(function() {
+          search();
+          growl.success('Unapprove submission successfully');
+        }).catch(function() {
+          growl.error('Error when unapprove submission');
+        });
       }
     };
   }

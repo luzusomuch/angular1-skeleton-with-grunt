@@ -57,5 +57,15 @@ angular.module('measureApp').factory('SubmissionService', function($resource, ap
       },
       isArray: false,
     },
+    unapprove: {
+      method: 'POST',
+      url: apiUrl + '/api/shows/:showId/challenges/:challengeId/submissions/:id/unapprove',
+      params: {
+        showId: '@showId',
+        challengeId: '@challengeId',
+        id: '@id'
+      },
+      isArray: false,
+    },
   });
 });

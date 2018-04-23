@@ -118,17 +118,13 @@ textarea {
     border-radius: 50%;
   }
 
-  .fa-gift {
-    font-size: 17px;
-
-    &.active {
-      color: #337ab7;
-    }
-  }
-
   .action {
     i.fa {
       font-size: 17px;
+      
+      &.active {
+        color: #337ab7;
+      }
     }
   }
 }
