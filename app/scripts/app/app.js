@@ -24,12 +24,12 @@ angular.module('measureApp', [
     resolve: {
       pageSettings:['$http', 'apiUrl', '$rootScope', function($http, apiUrl, $rootScope) {
         return $http.get(apiUrl + '/settings').then(function(resp) {
-          return $rootScope.pageSettings = resp.data;
+          $rootScope.pageSettings = resp.data;
+          return $rootScope.pageSettings;
         });
       }]
     }
   });
-  // $locationProvider.html5Mode(true);
   $urlRouterProvider.otherwise('/login');
   $httpProvider.interceptors.push('httpRequestInterceptor');
   growlProvider.globalTimeToLive(3000);
