@@ -27,7 +27,7 @@
               return 'Select Prize Confirmation';
             },
             description: function() {
-              return 'This challenge will be closed if it has enough 2 winners. <br> You have just selected this submission as a winner. Are you sure?';
+              return 'This challenge will be closed if it has 2 winners. <br> You have just selected this submission as a winner. Are you sure?';
             },
             confirmButton: function() {
               return 'Confirm';

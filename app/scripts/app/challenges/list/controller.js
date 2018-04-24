@@ -56,13 +56,13 @@
             $scope.items.splice(index, 1);
             $scope.total--;
             showDetail.numberOfChallenges--;
-            growl.success('Challenge deleted successfully');
+            growl.success('Challenge was deleted successfully');
           }).catch(function() {
             growl.error('Error when delete a challenge. Please try again');
           });
         });
       } else {
-        growl.error('Cannot delete challenge belongs to Published/Closed show');
+        growl.error('Cannot delete challenge because it belongs to Published/Closed show');
       }
     };
 
@@ -90,7 +90,7 @@
               return 'Winner announcement confirmation';
             },
             description: function() {
-              return 'Do you want to announce winners to everybody who joined the challenge?';
+              return 'Do you want to send notification to winner submission(s)?';
             },
             confirmButton: function() {
               return 'Send';
@@ -110,10 +110,10 @@
                   id: item._id,
                   prizeIndex: 1,
                 }, {}).$promise.then(function() {
-                  growl.success('Sent winner announcement notification successfully');
+                  growl.success('Successfully sent notification to winner');
                 });
               } else {
-                growl.success('Sent winner announcement notification successfully');
+                growl.success('Successfully sent notification to winner');
               }
             });
           }

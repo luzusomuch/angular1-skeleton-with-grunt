@@ -66,7 +66,7 @@
               return 'Delete Show Confirmation';
             },
             description: function() {
-              return 'Do you want to delete this show? <br> It will remove all challenges belong to this.';
+              return 'Do you want to delete this show? <br> It will remove all challenges that belong to it.';
             },
             confirmButton: function() {
               return 'Delete';
@@ -76,7 +76,7 @@
           ShowService.delete({id: item._id}).$promise.then(function() {
             $scope.items.splice(index, 1);
             $scope.total--;
-            growl.success('Deleted a show successfully');
+            growl.success('Show was deleted successfully');
           }).catch(function() {
             growl.error('Error when delete a show. Please try again');
           });
