@@ -161,7 +161,7 @@
         });
         ChallengeService.update({showId: $stateParams.showId, id: $stateParams.id}, data).$promise.then(function(resp) {
           $scope.submitted = false;
-          growl.success('Updated challenge successfully');
+          growl.success('Challenge was updated successfully');
           $state.go('app.challenge.list', {showId: $scope.showId});
         }).catch(function() {
           $scope.submitted = false;

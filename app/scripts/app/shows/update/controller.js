@@ -50,7 +50,7 @@
       $scope.submitted = true;
       ShowService.update({id: $stateParams.id}, data).$promise.then(function() {
         $scope.submitted = false;
-        growl.success('Updated show successfully');
+        growl.success('Show was updated successfully');
         $state.go('app.show.list');
       }).catch(function() {
         $scope.submitted = false;

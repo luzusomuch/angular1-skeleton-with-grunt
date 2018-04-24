@@ -56,13 +56,13 @@
             $scope.items.splice(index, 1);
             $scope.total--;
             showDetail.numberOfChallenges--;
-            growl.success('Deleted a challenge successfully');
+            growl.success('Challenge was deleted successfully');
           }).catch(function() {
             growl.error('Error when delete a challenge. Please try again');
           });
         });
       } else {
-        growl.error('Cannot delete challenge belongs to Published/Closed show');
+        growl.error('Cannot delete challenge because it belongs to Published/Closed show');
       }
     };
 
@@ -97,7 +97,7 @@
             }
           }
         }).result.then(function() {
-          var prizes = angular.copy($scope.challengeDetail.prizes);
+          var prizes = angular.copy(item.prizes);
           if (prizes[0]) {
             ChallengeService.otherWinnerhNotifications({
               showId: $stateParams.showId,
