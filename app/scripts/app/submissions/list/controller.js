@@ -92,7 +92,7 @@
         }, {prizeIndexes: prizeIndexes}).$promise.then(function() {
           search();
           getChallengeDetail();
-          growl.success('Select winner submission successfully');
+          growl.success('Successfully selected winner submission');
         }).catch(function() {
           growl.error('Error when select winner submission');
         });
@@ -185,10 +185,10 @@
                 id: $stateParams.challengeId,
                 prizeIndex: prizes[1].index,
               }, {}).$promise.then(function() {
-                growl.success('Sent notification to winner successfully');  
+                growl.success('Successfully sent notification to winner');  
               });
             } else {
-              growl.success('Sent notification to winner successfully');  
+              growl.success('Successfully sent notification to winner');  
             }
           }).catch(function() {
             growl.error('Error when send notification to winner');
@@ -204,7 +204,7 @@
         id: submission._id,
       }).$promise.then(function(resp) {
         submission.content.proScore = resp.content.proScore;
-        growl.success('Get pro-score successfully');
+        growl.success('Got pro-score successfully');
       }).catch(function() {
         growl.error('Error when get pro-score');
       });

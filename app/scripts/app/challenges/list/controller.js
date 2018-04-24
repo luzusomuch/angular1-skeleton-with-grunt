@@ -56,7 +56,7 @@
             $scope.items.splice(index, 1);
             $scope.total--;
             showDetail.numberOfChallenges--;
-            growl.success('Deleted a challenge successfully');
+            growl.success('Challenge deleted successfully');
           }).catch(function() {
             growl.error('Error when delete a challenge. Please try again');
           });
