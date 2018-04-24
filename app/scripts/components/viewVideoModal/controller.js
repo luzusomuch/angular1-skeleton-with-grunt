@@ -8,7 +8,7 @@
 
     this.config = {
       sources: [
-        {src: $sce.trustAsResourceUrl(videoDetail.originalUrl), type: 'video/mp4'},
+        {src: $sce.trustAsResourceUrl(videoDetail.transcodeStatus === 'Complete' ? videoDetail.transcodedUrl : videoDetail.originalUrl), type: 'video/mp4'},
       ],
       plugins: {
         poster: 'http://www.videogular.com/assets/images/videogular.png'
