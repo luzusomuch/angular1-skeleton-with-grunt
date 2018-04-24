@@ -97,7 +97,7 @@
             }
           }
         }).result.then(function() {
-          var prizes = angular.copy($scope.challengeDetail.prizes);
+          var prizes = angular.copy(item.prizes);
           if (prizes[0]) {
             ChallengeService.otherWinnerhNotifications({
               showId: $stateParams.showId,
