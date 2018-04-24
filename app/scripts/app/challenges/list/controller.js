@@ -90,7 +90,7 @@
               return 'Winner announcement confirmation';
             },
             description: function() {
-              return 'Do you want to send notification to winner submission(s)?';
+              return 'Do you want to announce winners to everybody who joined the challenge?';
             },
             confirmButton: function() {
               return 'Send';
@@ -110,10 +110,10 @@
                   id: item._id,
                   prizeIndex: 1,
                 }, {}).$promise.then(function() {
-                  growl.success('Successfully sent notification to winner');
+                  growl.success('Sent winner announcement notification successfully');
                 });
               } else {
-                growl.success('Successfully sent notification to winner');
+                growl.success('Sent winner announcement notification successfully');
               }
             });
           }

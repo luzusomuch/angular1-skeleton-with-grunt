@@ -122,7 +122,7 @@
             return 'Winner announcement confirmation';
           },
           description: function() {
-            return 'Do you want to send notification to winner submission(s)?';
+            return 'Do you want to announce winners to everybody who joined the challenge?';
           },
           confirmButton: function() {
             return 'Send';
@@ -162,7 +162,7 @@
             return 'Notification to winner(s) confirmation';
           },
           description: function() {
-            return 'Do you want to announce winners to everybody who joined the challenge?';
+            return 'Do you want to send notification to winner submission(s)?';
           },
           confirmButton: function() {
             return 'Send';
@@ -185,10 +185,10 @@
                 id: $stateParams.challengeId,
                 prizeIndex: prizes[1].index,
               }, {}).$promise.then(function() {
-                growl.success('Sent winner announcement notification successfully');  
+                growl.success('Successfully sent notification to winner');  
               });
             } else {
-              growl.success('Sent winner announcement notification successfully');  
+              growl.success('Successfully sent notification to winner');  
             }
           }).catch(function() {
             growl.error('Error when send notification to winner');
