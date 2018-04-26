@@ -35,21 +35,19 @@ angular.module('measureApp', [
   growlProvider.globalTimeToLive(3000);
   growlProvider.globalDisableCountDown(true);
 })
-.run(function($rootScope, $cookies, $state, growl) {
+.run(function($rootScope, $cookies, $state, growl, $timeout) {
   $rootScope.$on('$stateChangeStart', function(event, next, nextParams) {
+    $rootScope.pageTitle = next.pageTitle || 'Measure Admin Page';
+    $rootScope.hideHeader = next.hideHeader;
+    $rootScope.hideFooter = next.hideFooter;
     if (next.authenticate) {
       var token = $cookies.get('token');
       if (!token || token.length === 0) {
-        setTimeout(function() {
+        $timeout(function() {
           growl.error('Your token was expired. Please login again');
           window.location.href = '/#/login';
-          return;
         }, 500);
       }
-    } else {
-      $rootScope.pageTitle = next.pageTitle || 'Measure Admin Page';
-      $rootScope.hideHeader = next.hideHeader;
-      $rootScope.hideFooter = next.hideFooter;
     }
   });
 });
