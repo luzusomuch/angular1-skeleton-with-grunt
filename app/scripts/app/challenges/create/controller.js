@@ -17,9 +17,7 @@
       showId: $stateParams.showId,
       campaignId: pageSettings['WEBHOOK']['TEST_CAMPAIGN_ID'],
     };
-    $scope.dateOptions = {
-      minDate: new Date()
-    };
+    $scope.dateOptions = {};
     $scope.prize = {
       title: '',
       description: '',

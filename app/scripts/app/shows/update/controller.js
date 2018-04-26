@@ -13,9 +13,7 @@
     $scope.isUploading = false;
 
     var minDate = new Date();
-    $scope.dateOptions = {
-      minDate: minDate
-    };
+    $scope.dateOptions = {};
 
     $scope.upload = function(file) {
       if (file) {
