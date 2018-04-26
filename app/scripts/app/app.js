@@ -20,7 +20,7 @@ angular.module('measureApp', [
     url: '/app',
     template: '<ui-view/>',
     abstract: true,
-    isAuthenticate: true,
+    authenticate: true,
     resolve: {
       pageSettings:['$http', 'apiUrl', '$rootScope', function($http, apiUrl, $rootScope) {
         return $http.get(apiUrl + '/settings').then(function(resp) {
@@ -35,16 +35,20 @@ angular.module('measureApp', [
   growlProvider.globalTimeToLive(3000);
   growlProvider.globalDisableCountDown(true);
 })
-.run(function($rootScope, $cookies, $state) {
+.run(function($rootScope, $cookies, $state, growl) {
   $rootScope.$on('$stateChangeStart', function(event, next, nextParams) {
-    if (next.isAuthenticate) {
+    if (next.authenticate) {
       var token = $cookies.get('token');
       if (!token || token.length === 0) {
-        return $state.go('login');
+        setTimeout(function() {
+          growl.error('Your token was expired. Please login again');
+          return window.location.href = '/#/login';
+        }, 500);
       }
+    } else {
+      $rootScope.pageTitle = next.pageTitle || 'Measure Admin Page';
+      $rootScope.hideHeader = next.hideHeader;
+      $rootScope.hideFooter = next.hideFooter;
     }
-    $rootScope.pageTitle = next.pageTitle || 'Measure Admin Page';
-    $rootScope.hideHeader = next.hideHeader;
-    $rootScope.hideFooter = next.hideFooter;
   });
 });

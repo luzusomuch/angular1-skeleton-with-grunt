@@ -8,7 +8,10 @@ angular.module('measureApp').factory('AuthService', function ($q, $http, apiUrl,
         uid: credentials.uid,
         password: credentials.password
       }).then(function(resp) {
-        $cookies.put('token', resp.data.token);
+        var expiresDate = new Date();
+        expiresDate.setDate(expiresDate.getDate() + 1);
+        console.log(expiresDate);
+        $cookies.put('token', resp.data.token, {expires: expiresDate});
         // UserService.get({id: 'me'}).$promise.then(function(resp) {
         //   console.log(resp);
         // }).catch(function(err) {
