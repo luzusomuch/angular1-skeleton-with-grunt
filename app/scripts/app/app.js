@@ -42,7 +42,8 @@ angular.module('measureApp', [
       if (!token || token.length === 0) {
         setTimeout(function() {
           growl.error('Your token was expired. Please login again');
-          return window.location.href = '/#/login';
+          window.location.href = '/#/login';
+          return;
         }, 500);
       }
     } else {
