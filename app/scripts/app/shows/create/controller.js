@@ -41,11 +41,11 @@
               });
             }).catch(function(err) {
               $scope.submitted = false;
-              growl.error('Failed to upload video');
+              growl.error('Failed to upload thumbnail');
             });
           }).catch(function() {
             $scope.submitted = false;
-            growl.error('Failed to upload video');
+            growl.error('Failed to upload thumbnail');
           });
         } else {
           growl.error('Invalid File');

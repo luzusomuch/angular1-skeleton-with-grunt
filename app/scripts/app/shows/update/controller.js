@@ -23,11 +23,11 @@
             $scope.data.thumbnailUrl = thumbnailData.originalUrl;
             $scope.isUploading = false;
           }).catch(function(err) {
-            growl.error('Failed to upload video');
+            growl.error('Failed to upload thumbnail');
             $scope.isUploading = false;
           });
         }).catch(function() {
-          growl.error('Failed to upload video');
+          growl.error('Failed to upload thumbnail');
           $scope.isUploading = false;
         });
       }
