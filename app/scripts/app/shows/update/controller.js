@@ -13,9 +13,7 @@
     $scope.isUploading = false;
 
     var minDate = new Date();
-    $scope.dateOptions = {
-      minDate: minDate
-    };
+    $scope.dateOptions = {};
 
     $scope.upload = function(file) {
       if (file) {
@@ -25,11 +23,11 @@
             $scope.data.thumbnailUrl = thumbnailData.originalUrl;
             $scope.isUploading = false;
           }).catch(function(err) {
-            growl.error('Failed to upload video');
+            growl.error('Failed to upload thumbnail');
             $scope.isUploading = false;
           });
         }).catch(function() {
-          growl.error('Failed to upload video');
+          growl.error('Failed to upload thumbnail');
           $scope.isUploading = false;
         });
       }

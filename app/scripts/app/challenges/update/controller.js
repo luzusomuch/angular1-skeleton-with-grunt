@@ -13,9 +13,7 @@
     $scope.data.expiresAt = new Date($scope.data.expiresAt);
     $scope.data.prizes = $scope.data.prizes || [];
     $scope.data.videoUrl = angular.copy(challengeDetail.video.originalUrl);
-    $scope.dateOptions = {
-      minDate: new Date(),
-    };
+    $scope.dateOptions = {};
     $scope.prize = {
       title: '',
       description: '',

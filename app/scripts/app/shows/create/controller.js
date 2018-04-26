@@ -10,9 +10,7 @@
       duration: 10,
       brightcoveId: pageSettings['SHOW']['DEFAULT_BRIGHTCOVE_ID']
     };
-    $scope.dateOptions = {
-      minDate: new Date(),
-    };
+    $scope.dateOptions = {};
     $scope.submitted = false;
 
     $scope.submit = function(form) {
@@ -43,11 +41,11 @@
               });
             }).catch(function(err) {
               $scope.submitted = false;
-              growl.error('Failed to upload video');
+              growl.error('Failed to upload thumbnail');
             });
           }).catch(function() {
             $scope.submitted = false;
-            growl.error('Failed to upload video');
+            growl.error('Failed to upload thumbnail');
           });
         } else {
           growl.error('Invalid File');
