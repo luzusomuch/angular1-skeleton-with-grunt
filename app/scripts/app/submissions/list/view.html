@@ -53,7 +53,7 @@
             </div>
           </td>
           <td class="td-item">
-            <span ng-repeat="prizeTitle in item.prizesTitle">
+            <span ng-repeat="prizeTitle in item.prizesTitle track by $index">
               {{prizeTitle}} <br>
             </span>
           </td>
