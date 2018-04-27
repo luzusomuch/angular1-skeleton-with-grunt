@@ -56,7 +56,7 @@
     };
 
     $scope.deleteShow = function(item, index) {
-      var availableStatuses = ['unpublished', 'inactive']
+      var availableStatuses = ['unpublished', 'inactive'];
       if (availableStatuses.indexOf(item.status) !== -1) {
         $uibModal.open({
           controller: 'ConfirmModalController',
