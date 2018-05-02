@@ -129,26 +129,14 @@
           }
         }
       }).result.then(function() {
-        var prizes = angular.copy($scope.challengeDetail.prizes);
-        if (prizes[0]) {
-          ChallengeService.otherWinnerhNotifications({
-            showId: $stateParams.showId,
-            id: $stateParams.challengeId,
-            prizeIndex: 0,
-          }, {}).$promise.then(function() {
-            if (prizes[1]) {
-              ChallengeService.otherWinnerhNotifications({
-                showId: $stateParams.showId,
-                id: $stateParams.challengeId,
-                prizeIndex: 1,
-              }, {}).$promise.then(function() {
-                growl.success('Sent winner announcement notification successfully');
-              });
-            } else {
-              growl.success('Sent winner announcement notification successfully');
-            }
-          });
-        }
+        ChallengeService.otherWinnerhNotifications({
+          showId: $stateParams.showId,
+          id: $stateParams.challengeId,
+        }, {prizeIndexes: [0,1]}).$promise.then(function() {
+          growl.success('Sent winner announcement notification successfully');
+        }).catch(function() {
+          growl.error('Error when send winner announcement notification');
+        });
       });
     };
 
@@ -169,31 +157,14 @@
           }
         }
       }).result.then(function() {
-        var prizes = angular.copy(_.filter($scope.challengeDetail.prizes, function(prize, $index) {
-          prize.index = $index;
-          return prize.winner && prize.winner._id;
-        }));
-        if (prizes[0]) {
-          ChallengeService.selfWinnerhNotifications({
-            showId: $stateParams.showId,
-            id: $stateParams.challengeId,
-            prizeIndex: prizes[0].index,
-          }, {}).$promise.then(function() {
-            if (prizes[1]) {
-              ChallengeService.selfWinnerhNotifications({
-                showId: $stateParams.showId,
-                id: $stateParams.challengeId,
-                prizeIndex: prizes[1].index,
-              }, {}).$promise.then(function() {
-                growl.success('Successfully sent notification to winner');  
-              });
-            } else {
-              growl.success('Successfully sent notification to winner');  
-            }
-          }).catch(function() {
-            growl.error('Error when send notification to winner');
-          });
-        }
+        ChallengeService.selfWinnerhNotifications({
+          showId: $stateParams.showId,
+          id: $stateParams.challengeId,
+        }, {prizeIndexes: [0,1]}).$promise.then(function() {
+          growl.success('Successfully sent notification to winner');  
+        }).catch(function() {
+          growl.error('Error when send notification to winner');
+        });
       });
     };
 
