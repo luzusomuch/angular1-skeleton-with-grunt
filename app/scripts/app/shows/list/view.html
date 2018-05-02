@@ -41,9 +41,6 @@
           <td><a href="{{item.link}}" target="_blank">{{item.link}}</a></td>
           <td><a href="javascript:void(0)" ng-click="viewThumbnail(item)">View thumbnail</a></td>
           <td class="text-right action">
-            <a ng-if="!item.notifiedOnPublish && item.status === 'published'" href="javascript:void(0)" title="Send Notification" class="table-icon" ng-click="sendNotification(item)">
-              <i class="fa fa-bell"></i>
-            </a>
             <a title="Edit Show" class="table-icon" href="javascript:void(0)" ng-click="editShow(item)">
               <i class="fa fa-pencil"></i>
             </a>
