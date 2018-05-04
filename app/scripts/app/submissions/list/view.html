@@ -30,6 +30,7 @@
           <td class="text-left">Avatar</td>
           <td>Name</td>
           <td>Submission Video</td>
+          <td>Submission Date</td>
           <td>Total of likes</td>
           <td>Percent of pro-score</td>
           <td>Prize(s)</td>
@@ -42,6 +43,7 @@
           <td class="text-left"><img class="user-avatar" src="{{item.user.avatar || 'assets/images/avatar-placeholder.png'}}"></td>
           <td class="td-item">{{item.user.name}}</td>
           <td class="td-item"><a href="javascript:void(0)" ng-click="viewVideo(item)">View video</a></td>
+          <td class="td-item">{{item.createdAt | date: 'dd MMM yyyy'}}</td>
           <td class="td-item">{{item.content.numberOfLikes}}</td>
           <td class="td-item">
             <div ng-if="!item.approved">&nbsp;</div>
