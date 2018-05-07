@@ -3,18 +3,34 @@
   angular.module('measureApp').controller('SettingsController', SettingsController);
 
   /* @ngInject */
-  function SettingsController($scope, growl, TestService) {
+  function SettingsController($scope, growl, ConfigService) {
     $scope.submitted = false;
-    $scope.data = null;
 
-    $scope.testPartnerHook = function() {
+    $scope.pagination = {
+      page: 1,
+      limit: 20
+    };
+
+    function search() {
+      var params = angular.copy($scope.pagination);
+      params.page--;
+      params.category = 'SITE';
+      ConfigService.list(params).$promise.then(function(resp) {
+        $scope.data = resp.items[0];
+      });
+    }
+
+    search();
+
+    $scope.submit = function() {
       $scope.submitted = true;
-      TestService.testPartnerHook().$promise.then(function(resp) {
-        growl.success('Test partner hook successfully');
-        $scope.data = resp;
-      }).catch(function(err) {
-        growl.error('Error when test partner hook');
-        $scope.data = err;
+      var data = _.pick($scope.data, ['value']);
+      ConfigService.update({id: $scope.data._id}, data).$promise.then(function() {
+        $scope.submitted = false;
+        growl.success('Updated setting successfully');
+      }).catch(function() {
+        $scope.submitted = false;
+        growl.error('Error when update setting');
       });
     };
   }
