@@ -28,6 +28,10 @@ app.get('/tos', function(req, res) {
   res.sendFile(path.join(__dirname + '/dist/tos.html'));
 });
 
+app.get('/pro-tips', function(req, res) {
+  res.sendFile(path.join(__dirname + '/dist/pro-tips.html'));
+});
+
 app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname + '/dist/index.html'));
 });

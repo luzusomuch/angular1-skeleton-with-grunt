@@ -48,7 +48,7 @@ module.exports = function (grunt) {
     },
     wiredep: {
       app: {
-        src: ['app/index.html', 'app/tos.html'],
+        src: ['app/index.html', 'app/tos.html', 'app/pro-tips.html'],
         ignorePath: /\.\.\/bower_components\//, // remove ../bower_components/ from paths of injected sass files
       },
       test: {
