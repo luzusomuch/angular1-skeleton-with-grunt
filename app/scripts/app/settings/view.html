@@ -1,10 +1,19 @@
 <div class="content">
   <div class="row">
-    <div class="col-md-4 col-sm-6 col-md-offset-4">
+    <div class="col-md-8 col-sm-6 col-md-offset-2 col-sm-offset-3">
       <h1>Settings</h1>
-      <div class="test-partner-hook">
-        <button class="btn btn-primary" ng-click="testPartnerHook()">Test Partner Hook</button>
-        <p>{{data}}</p>
+      <div class="setting-page">
+        <form ng-submit="submit(form)" name="form" novalidate>
+          <div class="form-group">
+            <label>
+              <input type="checkbox" name="byPassEmailVerification" ng-model="data.value['byPassEmailVerification']">
+              By pass email verification
+            </label>
+          </div>
+          <div>
+            <button class="btn btn-primary" ng-disabled="submitted">Save</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>

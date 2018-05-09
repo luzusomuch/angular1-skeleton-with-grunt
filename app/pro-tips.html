@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pro Tips</title>
+  <style type="text/css">
+    body {
+      padding: 0 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    #en, #tr {
+      display: none;
+    }
+    #en.active, #tr.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div id="en">
+    <h1>Pro Tips</h1>
+
+    <p>See what you can do!</p>
+    <p>Record yourself imitating the main person in the challenge video. This includes movements and emotions!</p>
+    <p>Please keep your recording to less than 15 seconds. The shorter, the better.</p>
+    <p>Scoring works best when video is recorded in portrait mode (phone is held vertically).</p>
+    <p>You must be the only or primary person in the video, and be at least 16 years old. </p>
+    <p>Make sure your video is not shaky, as that will reduce your Pro-Score.</p>
+  </div>
+  <div id="tr">
+    <h1>Profesyonel ipuçları</h1>
+
+    <p>Ne yapabildiğini gör!</p>
+    <p>Kendinizi, challenge videosunda ana kişiyi taklit ederek kaydedin. Bu hareketler ve duygular içerir!</p>
+    <p>Lütfen kaydınızı 15 saniyeden daha kısa tutun. Ne kadar kısa, o kadar iyi.</p>
+    <p>Puanlama, video portre modunda kaydedilirken en iyi şekilde çalışır (telefon dikey olarak tutulur).</p>
+    <p>Videodaki tek veya birincil kişi olmanız ve en az 16 yaşında olmanız gerekir.</p>
+    <p>Pro-Skorunuzu azaltacağından videonuzun titrek olmadığından emin olun.</p>
+  </div>
+
+  <script type="text/javascript">
+    function getParameterByName(name, url) {
+      if (!url) url = window.location.href;
+      name = name.replace(/[\[\]]/g, "\\$&");
+      var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+          results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+    var lang = getParameterByName('lang') || 'en';
+    document.getElementById(lang).classList.add('active');
+  </script>
+</body>
+</html>

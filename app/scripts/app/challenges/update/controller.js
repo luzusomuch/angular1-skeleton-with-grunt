@@ -144,7 +144,7 @@
           return growl.error('Please wait until upload process done');
         }
         $scope.submitted = true;
-        var data = _.pick($scope.data, ['title', 'announcement', 'description', 'prizes', 'expiresAt', 'videoUrl', 'videoId', 'thumbnailUrl']);
+        var data = _.pick($scope.data, ['title', 'announcement', 'description', 'prizes', 'expiresAt', 'videoUrl', 'videoId', 'thumbnailUrl', 'campaignId']);
         if (!$scope.data.videoUrl || $scope.data.videoUrl === $scope.originalVideoUrl) {
           delete data.videoUrl;
         }
